@@ -1,4 +1,4 @@
-# Product Marketing Manager- Technical Content at Nvidia
+# Technical Content: Product Marketing Manager @Nvidia
 
 ## Description
 

@@ -58,11 +58,11 @@ a:link {
 }
 
 a:visited {
-  color: darkgray;
+  color: black;
 }
 
 a:hover {
-  color: lightgray;
+  color: blue;
 }
 
 a:active {

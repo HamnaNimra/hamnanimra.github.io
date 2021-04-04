@@ -1,0 +1,70 @@
+@import url("bignav.css") screen and (min-width: 481px);
+@import url("bigAside.css") screen and (min-width: 481px);
+@import url("mobnav.css") screen and (max-width: 480px);
+@import url("mobAside.css") screen and (max-width: 480px);
+@import url("cardstyle.css");
+@import url("headstyle.css");
+
+@media (max-width: 480px) {
+  body {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: auto 30px auto auto auto;
+    grid-template-areas:
+    "hd"
+    "nav"
+    "sd"
+    "main"
+    "ft";
+    font-family: Avenir Next, Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    max-width: 480px;
+  }
+}
+
+@media (min-width: 481px) {
+  body {
+    display: grid;
+    grid-template-columns: auto 205px;
+    grid-template-rows: auto 30px auto;
+    grid-template-areas:
+        "hd hd"
+        "nav nav"
+        "main sd"
+        "ft ft";
+    font-family: Avenir Next, Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+    min-width: 481px;
+  }
+}
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+footer {
+  grid-area: ft;
+  text-align: center;
+  padding: 20px;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: darkgray;
+}
+
+a:hover {
+  color: lightgray;
+}
+
+a:active {
+  color: black;
+}

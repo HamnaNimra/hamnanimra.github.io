@@ -1,0 +1,107 @@
+@import url("mobnav.css") screen and (max-width: 480px);
+@import url("bignav.css") screen and (min-width: 481px);
+@import url("headstyle.css");
+
+body {
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: auto 30px auto;
+  grid-template-areas:
+      "hd"
+      "nav"
+      "main";
+  justify-items: center;
+  min-width: 400px;
+  font-family: Avenir Next, Arial, sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+
+h3 {
+  letter-spacing: 0px;
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: solid black 1px;
+}
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 26px;
+  max-width: 750px;
+  justify-content: center;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin: 1.5rem;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 3px solid lightgray;
+  transition: 0.3s;
+  outline: none;
+  font-size: 1em;
+}
+
+input[type=text]:focus {
+  border: 3px solid rgb(92, 25, 47);
+  background: rgb(92, 25, 47, 0.1);
+}
+
+input[type=submit] {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(92, 25, 47);
+}
+
+input[type=submit]:active {
+  background-color: lightgray;
+  color: rgb(92, 25, 47);
+  box-shadow: 0px 0px 5px rgb(92, 25, 47);
+  outline: none;
+}
+
+#fname-container {
+  width: 48%;
+}
+
+#lname-container {
+  width: 48%;
+}
+
+#email-container {
+  width: 100%;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: darkgray;
+}
+
+a:hover {
+  color: lightgray;
+}
+
+a:active {
+  color: black;
+}

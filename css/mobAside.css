@@ -1,0 +1,28 @@
+aside {
+  grid-area: sd;
+  font-style: italic;
+  background-color: whitesmoke;
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.about {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.about img {
+  height: 28vw;
+}
+
+.about p {
+  margin: 0px;
+  font-size: 15px;
+  flex-basis: 66%;
+  flex-grow: 1;
+  padding: 5px;
+}

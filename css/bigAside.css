@@ -1,0 +1,22 @@
+aside {
+  grid-area: sd;
+  font-style: italic;
+  background-color: whitesmoke;
+  overflow: hidden;
+  padding: 10px;
+}
+
+.about {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.about img {
+  width: 100%;
+}
+
+.about p {
+  font-size: 15px;
+}

@@ -1,0 +1,42 @@
+header {
+  grid-area: hd;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px;
+}
+@media (min-width: 481px) {
+  h1 {
+    letter-spacing: 10px;
+    margin: 3px 0px;
+    font-size: 50px;
+    font-weight: 640;
+    line-height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    letter-spacing: 8px;
+    margin: 3px 0px;
+    font-size: 2rem;
+    font-weight: 640;
+    line-height: 100%;
+  }
+}
+
+h2 {
+  font-weight: 250;
+  margin: auto;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: #b1b1b1;
+}
+
+h3 {
+  text-decoration: underline;
+  font-size: 1.3em;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  width: 100%;
+  text-align: center;
+}

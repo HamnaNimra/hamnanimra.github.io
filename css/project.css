@@ -1,0 +1,85 @@
+@import url("mobnav.css") screen and (max-width: 480px);
+@import url("bignav.css") screen and (min-width: 481px);
+@import url("headstyle.css");
+
+@media (min-width: 481px) {
+  body {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 30px auto;
+    grid-template-areas:
+        "hd"
+        "nav"
+        "main"
+        "ft";
+    justify-items: center;
+    font-family: Avenir Next, Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: auto 30px auto;
+    grid-template-areas:
+        "hd"
+        "nav"
+        "main"
+        "ft";
+    justify-items: center;
+    font-family: Avenir Next, Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+h3 {
+  letter-spacing: 0px;
+  font-style: italic;
+  text-decoration: none;
+  border-bottom: solid black 1px;
+}
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 26px;
+  max-width: 750px;
+  justify-content: center;
+  padding: 20px;
+}
+
+main a {
+  flex: 45%;
+  margin: 10px;
+}
+
+img {
+  width: 100%;
+}
+
+footer {
+  grid-area: ft;
+  text-align: center;
+  padding: 20px;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: darkgray;
+}
+
+a:hover {
+  color: lightgray;
+}
+
+a:active {
+  color: black;
+}

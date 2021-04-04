@@ -1,0 +1,101 @@
+
+@media (max-width: 799px) {
+  .card {
+    border: solid rgb(92, 25, 47);
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px lightgray;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px 0px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 800px) {
+  .card {
+    border: solid rgb(92, 25, 47);
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px lightgray;
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 10px 5%;
+    background: #2f4f4f30;
+    display: flex;
+  }
+}
+
+figure {
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0.5rem;
+  flex: 1 0 40%;
+  max-width: 500px;
+  position: relative;
+  background-color: darkslategray;
+}
+
+figure img {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+figcaption {
+  font-size: x-small;
+  padding: 2px 8px;
+  text-align: left;
+  background: darkslategray;
+  color: white;
+  font-style: italic;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.teaser {
+  overflow: hidden;
+  margin: 0.5rem;
+}
+
+.teaser h3 {
+  font-size: inherit;
+  text-align: inherit;
+  text-overflow: ellipsis;
+  color: #242222;
+  padding: 3px 0px;
+  margin: 0px;
+}
+
+.date {
+  color: #242222;
+  width: 100%;
+  text-shadow: 1px 1px 3px grey;
+}
+
+.teaser p {
+  overflow: hidden;
+  color: #242222;
+  margin: 5px 0px;
+}
+
+.card button {
+  background-color: black;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  position: absolute;
+  right: 3%;
+  bottom: 6px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: rgb(92, 25, 47);
+}

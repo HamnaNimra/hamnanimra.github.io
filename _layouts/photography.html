@@ -1,6 +1,20 @@
 ---
 layout: base
 ---
+{% assign photos = site.photography | sort: 'path' %}
+{% for photo in photos %}
+  {% if photo.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+    {% assign total_photos = forloop.length %}
+  {% endif %}
+{% endfor %}
+{% assign prev_index = current_index | minus: 1 %}
+{% assign next_index = current_index | plus: 1 %}
+{% for photo in photos %}
+  {% if forloop.index0 == prev_index %}{% assign prev_photo = photo %}{% endif %}
+  {% if forloop.index0 == next_index %}{% assign next_photo = photo %}{% endif %}
+{% endfor %}
+
 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
   <a href="{{ '/photography/' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline transition-colors mb-8">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
@@ -21,4 +35,48 @@ layout: base
     </header>
     {{ content }}
   </article>
+
+  <nav class="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700 flex flex-wrap items-center justify-between gap-4" aria-label="Photo navigation">
+    <div class="flex items-center gap-2">
+      {% if prev_photo %}
+      <a href="{{ prev_photo.url | relative_url }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent-100 dark:hover:bg-accent-900/30 hover:text-accent-700 dark:hover:text-accent-300 transition-colors" aria-label="Previous photo: {{ prev_photo.title }}">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Previous
+      </a>
+      {% else %}
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-neutral-400 dark:text-neutral-500 cursor-not-allowed" aria-disabled="true">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Previous
+      </span>
+      {% endif %}
+    </div>
+    <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+      {{ current_index | plus: 1 }} of {{ total_photos }}
+    </p>
+    <div class="flex items-center gap-2">
+      {% if next_photo %}
+      <a href="{{ next_photo.url | relative_url }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent-100 dark:hover:bg-accent-900/30 hover:text-accent-700 dark:hover:text-accent-300 transition-colors" aria-label="Next photo: {{ next_photo.title }}">
+        Next
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"/></svg>
+      </a>
+      {% else %}
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm text-neutral-400 dark:text-neutral-500 cursor-not-allowed" aria-disabled="true">
+        Next
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"/></svg>
+      </span>
+      {% endif %}
+    </div>
+  </nav>
 </div>
+
+<script>
+(function() {
+  document.addEventListener('keydown', function(e) {
+    if (e.target.closest('input') || e.target.closest('textarea') || e.target.isContentEditable) return;
+    var prev = document.querySelector('nav[aria-label="Photo navigation"] a[aria-label^="Previous"]');
+    var next = document.querySelector('nav[aria-label="Photo navigation"] a[aria-label^="Next"]');
+    if (e.key === 'ArrowLeft' && prev) { e.preventDefault(); prev.click(); }
+    if (e.key === 'ArrowRight' && next) { e.preventDefault(); next.click(); }
+  });
+})();
+</script>

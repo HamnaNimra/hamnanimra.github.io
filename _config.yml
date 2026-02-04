@@ -39,7 +39,7 @@ defaults:
       path: ""
       type: photography
     values:
-      layout: base
+      layout: photography
   - scope:
       path: ""
       type: pages

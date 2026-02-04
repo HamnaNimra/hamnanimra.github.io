@@ -127,6 +127,11 @@
   padding-top: 0.5rem;
 }
 
+/* In-page nav: scroll margin so section isn’t under sticky header */
+.resume-section[id] {
+  scroll-margin-top: 6rem;
+}
+
 .resume-section::before {
   content: '';
   position: absolute;
@@ -352,15 +357,26 @@
 /* ——— Print: clean and professional ——— */
 @media print {
   .no-print,
-  .no-print-fun,
   .print-cta,
   .print-button,
   .site-header,
   .site-footer,
   header,
   footer,
-  .resume-nav {
+  .resume-nav,
+  .resume-section-nav {
     display: none !important;
+  }
+
+  /* Show resume content; strip card styling from .no-print-fun wrapper */
+  .no-print-fun.resume-container {
+    display: block !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   body, .resume-page {

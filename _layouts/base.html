@@ -448,6 +448,30 @@
       color: #e5e7eb !important;
     }
 
+    /* Primary CTA buttons: forced contrast in light and dark (override any gradient/section styles) */
+    .cta-primary {
+      background: #1f2937 !important;
+      color: #ffffff !important;
+    }
+    .cta-primary:hover {
+      background: #374151 !important;
+      color: #ffffff !important;
+    }
+    .cta-primary svg {
+      color: #ffffff !important;
+    }
+    .dark .cta-primary {
+      background: #f3f4f6 !important;
+      color: #111827 !important;
+    }
+    .dark .cta-primary:hover {
+      background: #ffffff !important;
+      color: #111827 !important;
+    }
+    .dark .cta-primary svg {
+      color: #111827 !important;
+    }
+
     /* Colorful accent dots */
     .accent-dot {
       width: 8px;

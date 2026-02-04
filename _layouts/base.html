@@ -489,6 +489,7 @@
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
   {% endif %}
+  <link rel="stylesheet" href="{{ '/css/nav.css' | relative_url }}">
   {% seo %}
 </head>
 <body class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 min-h-screen flex flex-col transition-colors duration-200">
@@ -503,27 +504,40 @@
   </script>
 
   <header class="no-print border-b border-neutral-200/50 dark:border-neutral-700/50 glass sticky top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between" aria-label="Main navigation">
       <a href="{{ '/' | relative_url }}" class="font-display text-2xl font-bold text-neutral-900 dark:text-white hover:opacity-90 transition-opacity relative group">
         <span class="gradient-text">Hamna Nimra</span>
         <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
-      <ul class="flex items-center gap-6">
-        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
-          About
-        </a></li>
-        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
-          Portfolio
-        </a></li>
-        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
-          Resume
-        </a></li>
-        <li><a href="{{ '/photography/' | relative_url }}" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
-          Photography
-        </a></li>
-        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
-          GitHub
-        </a></li>
+
+      <!-- Desktop: nested nav -->
+      <ul class="nav-desktop items-center gap-6">
+        {% for item in site.data.navigation %}
+          {% if item.children %}
+            <li class="nav-item-with-children">
+              <a href="{{ item.url | relative_url }}" class="nav-link text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:bg-accent-50 dark:hover:bg-accent-900/20" aria-haspopup="true" aria-expanded="false">{{ item.title }}</a>
+              <ul class="nav-dropdown" role="menu">
+                {% for child in item.children %}
+                  <li role="none"><a href="{{ child.url | relative_url }}" role="menuitem">{{ child.title }}</a></li>
+                {% endfor %}
+                {% if item.title == 'Portfolio' and site.case_studies.size > 0 %}
+                  <li class="dropdown-divider" role="separator"></li>
+                  {% for case in site.case_studies %}
+                    <li role="none"><a href="{{ case.url | relative_url }}" role="menuitem">{{ case.title }}</a></li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
+          {% else %}
+            <li>
+              {% if item.external %}
+                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="nav-link text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:bg-accent-50 dark:hover:bg-accent-900/20">{{ item.title }}</a>
+              {% else %}
+                <a href="{{ item.url | relative_url }}" class="nav-link text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:bg-accent-50 dark:hover:bg-accent-900/20">{{ item.title }}</a>
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
         <li>
           <button type="button" id="theme-toggle" class="p-2.5 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 hover:bg-gradient-to-br hover:from-fun-pink/10 hover:to-accent-500/10 dark:hover:from-fun-purple/10 dark:hover:to-fun-pink/10 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-300 transform hover:scale-110" aria-label="Toggle dark mode">
             <span class="dark:hidden text-xl">🌙</span>
@@ -531,8 +545,60 @@
           </button>
         </li>
       </ul>
+
+      <!-- Mobile: menu button -->
+      <div class="flex items-center gap-2 md:hidden">
+        <button type="button" id="theme-toggle-mobile" class="p-2.5 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors" aria-label="Toggle dark mode">
+          <span class="dark:hidden text-xl">🌙</span>
+          <span class="hidden dark:inline text-xl">☀️</span>
+        </button>
+        <button type="button" class="nav-mobile-toggle border-neutral-300 dark:border-neutral-600 text-neutral-700 dark:text-neutral-300" id="nav-mobile-open" aria-label="Open menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </nav>
   </header>
+
+  <!-- Mobile menu overlay + drawer -->
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay" aria-hidden="true"></div>
+  <div class="nav-mobile-drawer" id="nav-mobile-drawer" aria-hidden="true">
+    <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Close menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <p class="font-display text-lg font-bold text-neutral-900 dark:text-white mb-4 pt-2">Menu</p>
+    <ul class="space-y-0">
+      {% for item in site.data.navigation %}
+        {% if item.children %}
+          <li>
+            <button type="button" class="nav-mobile-sub-toggle text-accent-700 dark:text-accent-300" data-nav-sub-toggle aria-expanded="false">
+              <span>{{ item.title }}</span>
+              <svg class="w-5 h-5 transition-transform" data-nav-sub-icon fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-mobile-sub-content" data-nav-sub-content>
+              <div class="nav-submenu">
+                {% for child in item.children %}
+                  <a href="{{ child.url | relative_url }}">{{ child.title }}</a>
+                {% endfor %}
+                {% if item.title == 'Portfolio' and site.case_studies.size > 0 %}
+                  {% for case in site.case_studies %}
+                    <a href="{{ case.url | relative_url }}">{{ case.title }}</a>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </li>
+        {% else %}
+          <li>
+            {% if item.external %}
+              <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="nav-link text-accent-700 dark:text-accent-300">{{ item.title }}</a>
+            {% else %}
+              <a href="{{ item.url | relative_url }}" class="nav-link text-accent-700 dark:text-accent-300">{{ item.title }}</a>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 
   <main class="flex-1 relative z-10">
     {{ content }}
@@ -560,10 +626,54 @@
 
   <script src="{{ '/js/animations.js' | relative_url }}"></script>
   <script>
-    document.getElementById('theme-toggle')?.addEventListener('click', function() {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-    });
+    (function() {
+      function applyTheme(isDark) {
+        document.documentElement.classList.toggle('dark', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      }
+      function toggleTheme() {
+        applyTheme(!document.documentElement.classList.contains('dark'));
+      }
+      document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+      var overlay = document.getElementById('nav-mobile-overlay');
+      var drawer = document.getElementById('nav-mobile-drawer');
+      var openBtn = document.getElementById('nav-mobile-open');
+      var closeBtn = document.getElementById('nav-mobile-close');
+      function openNav() {
+        overlay.classList.add('is-open');
+        drawer.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        drawer.setAttribute('aria-hidden', 'false');
+        openBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        overlay.classList.remove('is-open');
+        drawer.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        drawer.setAttribute('aria-hidden', 'true');
+        openBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+      openBtn?.addEventListener('click', openNav);
+      closeBtn?.addEventListener('click', closeNav);
+      overlay?.addEventListener('click', closeNav);
+      drawer.querySelectorAll('a[href]').forEach(function(a) {
+        a.addEventListener('click', function() { closeNav(); });
+      });
+
+      document.querySelectorAll('[data-nav-sub-toggle]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !expanded);
+          this.parentElement.querySelector('[data-nav-sub-content]').classList.toggle('is-open', !expanded);
+          var icon = this.querySelector('[data-nav-sub-icon]');
+          if (icon) icon.style.transform = expanded ? '' : 'rotate(180deg)';
+        });
+      });
+    })();
   </script>
 </body>
 </html>

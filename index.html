@@ -6,24 +6,28 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
 <div class="min-h-screen">
   <!-- Hero: minimal and personal (inspired by Chester, Brian, Tania) -->
-  <section class="relative py-20 sm:py-28 px-4 sm:px-6 gradient-bg-1 isolate">
-    <div class="max-w-3xl mx-auto text-center sm:text-left">
-      <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-3">Hey, I'm</p>
-      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-900 dark:text-white mb-4 leading-tight">
+  <section class="relative py-20 sm:py-28 px-4 sm:px-6 gradient-bg-1 isolate overflow-hidden">
+    <!-- Floating blobs (decorative) -->
+    <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob-3" aria-hidden="true"></div>
+    <div class="max-w-3xl mx-auto text-center sm:text-left relative z-10">
+      <p class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-3 hero-greeting">Hey, I'm</p>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight hero-name gradient-text">
         Hamna Nimra
       </h1>
       <p class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
         Software engineer. Explorer. Maker. This is where I share projects and ideas I care about.
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="/work/" class="cta-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm hover:shadow-lg transition-all duration-200">
+        <a href="/work/" class="cta-primary cta-fun inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
           View work
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          <svg class="w-4 h-4 cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </a>
-        <a href="/resume/" class="inline-flex items-center px-6 py-3 border-2 border-accent-500 dark:border-accent-400 text-accent-700 dark:text-accent-300 bg-white dark:bg-neutral-800 rounded-lg font-semibold text-sm hover:bg-accent-50 dark:hover:bg-accent-900/20 hover:border-accent-600 dark:hover:border-accent-300 transition-colors">
+        <a href="/resume/" class="cta-secondary inline-flex items-center px-6 py-3 border-2 border-accent-500 dark:border-accent-400 text-accent-700 dark:text-accent-300 bg-white dark:bg-neutral-800 rounded-xl font-semibold text-sm hover:bg-accent-50 dark:hover:bg-accent-900/20 hover:border-accent-600 dark:hover:border-accent-300 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
           Resume
         </a>
-        <a href="#about" class="inline-flex items-center px-6 py-3 text-accent-700 dark:text-accent-300 font-medium text-sm hover:text-accent-800 dark:hover:text-accent-200 transition-colors">
+        <a href="#about" class="inline-flex items-center px-6 py-3 text-accent-700 dark:text-accent-300 font-medium text-sm hover:text-accent-800 dark:hover:text-accent-200 hover:underline transition-colors">
           About me
         </a>
       </div>
@@ -42,26 +46,26 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
   </section>
 
   <!-- About Me: readable, personal (digital garden style) -->
-  <section id="about" class="py-16 sm:py-24 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800">
+  <section id="about" class="py-16 sm:py-24 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800 scroll-reveal">
     <div class="max-w-2xl mx-auto">
       <h2 class="font-display text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-8">About me</h2>
       <div class="about-prose text-neutral-700 dark:text-neutral-300 space-y-5 leading-relaxed">
         <p><strong class="text-neutral-900 dark:text-white">Hi, I'm Hamna.</strong></p>
         <p>By trade I am a software engineer, but I spend the rest of my time exploring, taking photos, and finding small ways to be creative. I love making things that just work and solving problems that are fun to figure out.</p>
-        <p>When I'm not doing that, you'll find me watching something move fast, pausing to notice small details, wandering somewhere new, or capturing moments through my camera. Motorsports give me a rush, quiet corners give me peace, and I love both.</p>
+        <p>When I'm not doing that, you'll find me watching something move fast, pausing to notice small details, wandering somewhere new, or capturing moments through my camera. Cars and Sports give me a rush, quiet corners give me peace, and I love both fast and slow moments.</p>
         <p>I notice patterns everywhere, pay attention to nature and communities, and I pause often for reasons that usually make sense later. I get distracted by shiny things… literally or metaphorically.</p>
         <p>I've lived in a few countries, which made me curious, adaptable, and comfortable starting fresh. I like learning as I go and asking why things work the way they do.</p>
-        <p>I share my life with a cat named Mimo. She is almost nine and fully convinced she is in charge.</p>
+        <p>I share my life with a cat named <span class="mimo-highlight" title="She runs the house.">Mimo</span>. She is almost nine and fully convinced she is in charge.</p>
         <p>This is where I share projects and ideas I care about. Some are technical, some are creative, all are honest. If you like thoughtful work with personality, and people who enjoy both speed and quiet moments, you'll feel at home here.</p>
       </div>
     </div>
   </section>
 
   <!-- Featured Portfolio -->
-  <section class="py-20 px-4 sm:px-6 gradient-bg-2 relative isolate">
+  <section class="py-20 px-4 sm:px-6 gradient-bg-2 relative isolate scroll-reveal">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text-animate bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent bg-[length:200%_auto]">
           Portfolio
         </h2>
         <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
@@ -72,7 +76,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% assign featured_case_studies = site.case_studies | where: "featured", true | limit: 3 %}
         {% for case in featured_case_studies %}
-        <a href="{{ case.url | relative_url }}" class="group fun-card block bg-white dark:bg-neutral-800 rounded-3xl border-2 border-neutral-200 dark:border-neutral-700 p-8 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-500 transform hover:-translate-y-3 relative overflow-hidden shadow-xl hover:shadow-2xl isolate">
+        <a href="{{ case.url | relative_url }}" class="group fun-card scroll-reveal-card block bg-white dark:bg-neutral-800 rounded-3xl border-2 border-neutral-200 dark:border-neutral-700 p-8 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-500 transform hover:-translate-y-3 hover:rotate-1 relative overflow-hidden shadow-xl hover:shadow-2xl isolate" style="--reveal-order: {{ forloop.index }};">
           <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
           <div class="relative z-10">
             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg">
@@ -106,9 +110,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       </div>
       
       <div class="mt-12 text-center">
-        <a href="/work/" class="cta-primary inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all duration-200">
+        <a href="/work/" class="cta-primary cta-fun inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
           View all work
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
         </a>
@@ -177,10 +181,10 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
   </section>
 
   <!-- GitHub Projects -->
-  <section class="py-20 px-4 sm:px-6 gradient-bg-1 relative isolate">
+  <section class="py-20 px-4 sm:px-6 gradient-bg-1 relative isolate scroll-reveal">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-accent-500 via-fun-purple to-fun-pink bg-clip-text text-transparent">
+        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text-animate bg-gradient-to-r from-accent-500 via-fun-purple to-fun-pink bg-clip-text text-transparent bg-[length:200%_auto]">
           GitHub Projects
         </h2>
         <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300">Open source projects</p>
@@ -232,9 +236,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       </div>
       
       <div class="mt-12 text-center">
-        <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="cta-primary inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all duration-200">
+        <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="cta-primary cta-fun inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
           View on GitHub
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
         </a>

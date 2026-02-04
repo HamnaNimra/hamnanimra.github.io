@@ -485,6 +485,148 @@
     .accent-dot:nth-child(2) { background: #ec4899; animation-delay: 0.2s; }
     .accent-dot:nth-child(3) { background: #a855f7; animation-delay: 0.4s; }
     .accent-dot:nth-child(4) { background: #0ea5e9; animation-delay: 0.6s; }
+
+    /* ——— More fun ——— */
+    /* Hero: floating blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .dark .hero-blob { opacity: 0.2; }
+    .hero-blob-1 {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(135deg, #f472b6, #a78bfa);
+      top: 10%;
+      right: 10%;
+      animation: blob-float 12s ease-in-out infinite;
+    }
+    .hero-blob-2 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #38bdf8, #34d399);
+      bottom: 20%;
+      left: 5%;
+      animation: blob-float 10s ease-in-out infinite 2s;
+    }
+    .hero-blob-3 {
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      top: 50%;
+      left: 30%;
+      animation: blob-float 14s ease-in-out infinite 1s;
+    }
+    @keyframes blob-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -30px) scale(1.05); }
+      66% { transform: translate(-15px, 20px) scale(0.95); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-blob-1, .hero-blob-2, .hero-blob-3 { animation: none; }
+    }
+
+    /* Hero greeting: subtle wave */
+    .hero-greeting {
+      display: inline-block;
+      animation: wave-subtle 3s ease-in-out infinite;
+    }
+    @keyframes wave-subtle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      75% { transform: rotate(-2deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-greeting { animation: none; }
+    }
+
+    /* Hero name: gentle hover wiggle */
+    .hero-name {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .hero-name:hover {
+      transform: scale(1.02);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name:hover { transform: none; }
+    }
+
+    /* Gradient heading animation (Portfolio / GitHub) */
+    .gradient-text-animate {
+      animation: gradient-flow 6s ease infinite;
+    }
+    @keyframes gradient-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gradient-text-animate { animation: none; }
+    }
+
+    /* Mimo highlight (cat name) */
+    .mimo-highlight {
+      display: inline-block;
+      padding: 0.1em 0.4em;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.2));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      font-weight: 600;
+      color: #b45309;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dark .mimo-highlight {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.15));
+      border-color: rgba(251, 191, 36, 0.35);
+      color: #fcd34d;
+    }
+    .mimo-highlight:hover {
+      transform: scale(1.05);
+      box-shadow: 0 2px 12px rgba(251, 191, 36, 0.3);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mimo-highlight:hover { transform: none; }
+    }
+
+    /* CTA arrow bounce on hover */
+    .cta-fun:hover .cta-arrow {
+      animation: arrow-bounce 0.6s ease infinite;
+    }
+    @keyframes arrow-bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cta-fun:hover .cta-arrow { animation: none; }
+    }
+
+    /* Scroll reveal: initial state */
+    .scroll-reveal,
+    .scroll-reveal-card {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.5s ease;
+    }
+    .scroll-reveal.revealed,
+    .scroll-reveal-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scroll-reveal-card.revealed { transition-delay: calc(0.1s * var(--reveal-order, 1)); }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-reveal,
+      .scroll-reveal-card {
+        opacity: 1;
+        transform: none;
+      }
+      .scroll-reveal.revealed,
+      .scroll-reveal-card.revealed { transform: none; }
+    }
+
   </style>
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">

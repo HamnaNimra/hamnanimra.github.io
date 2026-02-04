@@ -5,11 +5,11 @@ description: Product case studies demonstrating product thinking through impleme
 ---
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 gradient-bg-1">
   <div class="text-center mb-16">
-    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
       Case Studies
     </h1>
-    <p class="text-xl sm:text-2xl text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-      Product case studies demonstrating product thinking through implementation 🎨
+    <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+      Product case studies demonstrating product thinking through implementation
     </p>
     <a href="{{ '/work/' | relative_url }}" class="inline-block mt-6 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:underline">&larr; Back to Portfolio</a>
   </div>
@@ -19,9 +19,9 @@ description: Product case studies demonstrating product thinking through impleme
     <a href="{{ case.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
       <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <div class="relative z-10">
-        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ case.title }}</h3>
+        <h3 class="font-display text-lg font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ case.title }}</h3>
         {% if case.subtitle %}
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">{{ case.subtitle }}</p>
+        <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3">{{ case.subtitle }}</p>
         {% endif %}
         {% if case.meta %}
         <div class="text-xs text-neutral-500 dark:text-neutral-500">{{ case.meta }}</div>

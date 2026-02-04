@@ -4,29 +4,29 @@ title: Portfolio
 description: Case studies, product documentation, and GitHub projects
 ---
 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 gradient-bg-1">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 gradient-bg-1 relative isolate">
   <div class="text-center mb-16">
-    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
       Portfolio
     </h1>
-    <p class="text-xl sm:text-2xl text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-      Case studies, product documentation, and GitHub projects 🎨
+    <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
+      Case studies, product documentation, and GitHub projects
     </p>
   </div>
 
   <!-- Case Studies Section -->
-  <section class="mb-16">
-    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Case Studies</h2>
-    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">Product case studies demonstrating product thinking through implementation</p>
+  <section class="mb-16 relative isolate">
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Case Studies</h2>
+    <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">Product case studies demonstrating product thinking through implementation</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <a href="{{ '/case-studies/' | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-8 card-hover relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <a href="{{ '/case-studies/' | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-8 card-hover relative overflow-hidden isolate">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
         <div class="relative z-10">
           <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-4 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
             📚
           </div>
-          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-fun-pink dark:group-hover:text-fun-purple transition-colors">View All Case Studies</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400">Explore detailed product case studies showcasing product thinking and implementation</p>
+          <h3 class="font-display text-lg font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-fun-pink dark:group-hover:text-fun-purple transition-colors">View All Case Studies</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300">Explore detailed product case studies showcasing product thinking and implementation</p>
           <div class="mt-4 flex items-center gap-2 text-sm font-bold text-fun-pink dark:text-fun-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             View case studies
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -39,50 +39,50 @@ description: Case studies, product documentation, and GitHub projects
   </section>
 
   <!-- Product Documentation Section -->
-  <section class="mb-16">
-    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Product Documentation</h2>
-    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">PM artifacts and product thinking documents</p>
+  <section class="mb-16 relative isolate">
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Product Documentation</h2>
+    <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">PM artifacts and product thinking documents</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% if site.pm_docs.size > 0 %}
         {% for doc in site.pm_docs %}
         <a href="{{ doc.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
           <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100/50 to-accent-100/50 dark:from-primary-900/10 dark:to-accent-900/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           <div class="relative z-10">
-            <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ doc.title }}</h3>
+            <h3 class="font-display text-lg font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ doc.title }}</h3>
             {% if doc.description %}
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ doc.description }}</p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-300">{{ doc.description }}</p>
             {% endif %}
           </div>
         </a>
         {% endfor %}
       {% else %}
         <div class="col-span-3 text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-          <p class="text-neutral-500 dark:text-neutral-400">Product documentation coming soon...</p>
+          <p class="text-neutral-500 dark:text-neutral-300">Product documentation coming soon...</p>
         </div>
       {% endif %}
     </div>
   </section>
 
   <!-- GitHub Projects -->
-  <section class="mb-16">
-    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">GitHub Projects</h2>
-    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">Open source contributions and repositories</p>
+  <section class="mb-16 relative isolate">
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">GitHub Projects</h2>
+    <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">Open source contributions and repositories</p>
     {% if site.data.github_projects.repositories.size > 0 %}
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for repo in site.data.github_projects.repositories limit: 9 %}
-      <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100/50 to-accent-100/50 dark:from-primary-900/10 dark:to-accent-900/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden isolate">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100/50 to-accent-100/50 dark:from-primary-900/10 dark:to-accent-900/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
         <div class="relative z-10">
           <div class="flex items-center gap-2 mb-2">
             <svg class="w-5 h-5 text-neutral-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C17.14 18.197 20 14.442 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
             </svg>
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+            <h3 class="font-semibold text-base text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
               {{ repo.name }}
             </h3>
           </div>
           {% if repo.description %}
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3 line-clamp-2">{{ repo.description }}</p>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3 line-clamp-2">{{ repo.description }}</p>
           {% endif %}
           <div class="flex gap-4 text-xs text-neutral-500 dark:text-neutral-400">
             {% if repo.stargazers_count > 0 %}
@@ -101,7 +101,7 @@ description: Case studies, product documentation, and GitHub projects
     </div>
     {% else %}
     <div class="text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-      <p class="text-neutral-500 dark:text-neutral-400">GitHub projects will sync automatically via GitHub Action</p>
+      <p class="text-neutral-500 dark:text-neutral-300">GitHub projects will sync automatically via GitHub Action</p>
     </div>
     {% endif %}
   </section>

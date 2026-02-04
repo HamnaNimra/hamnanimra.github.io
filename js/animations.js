@@ -117,7 +117,16 @@
       "Mimo says: I'm the real boss here.",
       "Mimo says: Treats, then we talk.",
       "Mimo says: This human writes code. I run the house.",
-      "Mimo says: *stares* You're still here?"
+      "Mimo says: *stares* You're still here?",
+      "Mimo says: I'm not a fan of loud noises.",
+      "Mimo purrs: Hello hooman bean",
+      "Mimo says: Salmon is my favorite food.",
+      "Mimo says: Give me scratchies, then I'll be your best friend.",
+      "fun cat facts: Mimo's birthday is in May",
+      "fun cat facts: Mimo is a girl cat.",
+      "fun cat facts: Mimo's favorite toy is her laser pointer",
+      "fun cat facts: Mimo's favorite place to eat is on the couch",
+      "fun cat facts: Mimo's favorite place to sleep is on the bed",
     ];
     const msg = messages[Math.floor(Math.random() * messages.length)];
     const toast = document.createElement('div');
@@ -132,7 +141,7 @@
       s.textContent = '@keyframes mimoToast{0%{opacity:0;transform:translateX(-50%) translateY(12px)}100%{opacity:1;transform:translateX(-50%) translateY(0)}}';
       document.head.appendChild(s);
     }
-    toast.style.animation = 'mimoToast 0.3s ease forwards';
+    toast.style.animation = 'mimoToast 0.1s ease forwards';
     document.body.appendChild(toast);
     setTimeout(() => {
       if (toast.parentNode) toast.remove();

@@ -1,0 +1,213 @@
+/* Nested top nav: dropdowns + mobile menu */
+
+/* Menu bar: consistent height and alignment across all pages (including resume) */
+.site-header .nav-bar {
+  min-height: 3.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: color 0.2s, background 0.2s;
+}
+
+/* Desktop: dropdown */
+.nav-item-with-children {
+  position: relative;
+}
+
+.nav-item-with-children > .nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  margin-top: 4px;
+  padding: 8px 0;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  z-index: 100;
+}
+
+.dark .nav-item-with-children > .nav-dropdown {
+  background: rgba(23, 23, 23, 0.98);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-item-with-children:hover > .nav-dropdown,
+.nav-item-with-children:focus-within > .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0369a1;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dark .nav-dropdown a {
+  color: #7dd3fc;
+}
+
+.nav-dropdown a:hover {
+  background: rgba(0, 149, 233, 0.08);
+  color: #0284c7;
+}
+
+.dark .nav-dropdown a:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: #bae6fd;
+}
+
+.nav-dropdown .dropdown-divider {
+  height: 1px;
+  margin: 6px 12px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dark .nav-dropdown .dropdown-divider {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile menu button (hidden on desktop) */
+.nav-mobile-toggle {
+  padding: 0.625rem;
+  border-radius: 0.75rem;
+  border: 2px solid;
+  transition: background 0.2s;
+}
+
+@media (min-width: 768px) {
+  .nav-mobile-toggle { display: none; }
+}
+
+/* Desktop nav list: visibility via Tailwind (hidden md:flex); gap/spacing here */
+.nav-desktop {
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .nav-desktop {
+    gap: 1.25rem;
+  }
+}
+
+/* Mobile overlay + drawer */
+.nav-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.nav-mobile-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 90vw);
+  height: 100vh;
+  background: white;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  z-index: 70;
+  padding: 24px 20px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+}
+
+.dark .nav-mobile-drawer {
+  background: #171717;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav-mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.nav-mobile-drawer .nav-link {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dark .nav-mobile-drawer .nav-link {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-mobile-drawer .nav-submenu {
+  padding-left: 16px;
+  margin-bottom: 12px;
+}
+
+.nav-mobile-drawer .nav-submenu a {
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0369a1;
+}
+
+.dark .nav-mobile-drawer .nav-submenu a {
+  color: #7dd3fc;
+}
+
+.nav-mobile-sub-toggle {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-weight: 700;
+}
+
+.nav-mobile-sub-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.nav-mobile-sub-content.is-open {
+  max-height: 600px;
+}
+
+.nav-mobile-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.nav-mobile-close:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dark .nav-mobile-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

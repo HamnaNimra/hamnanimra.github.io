@@ -1,39 +1,12 @@
 ---
-layout: null
+layout: base
 ---
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume — Hamna Nimra</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
-  <style>
-    .resume-page {
-      font-family: 'Inter', system-ui, sans-serif;
-    }
-    .resume-name {
-      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-    }
-  </style>
-</head>
-<body class="resume-page bg-gradient-to-br from-neutral-50 via-white to-neutral-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
-  <header class="no-print site-header sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-700">
-    <nav class="resume-nav flex items-center justify-between">
-      <div class="flex items-center gap-6">
-        <a href="{{ '/' | relative_url }}" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">← Home</a>
-        <a href="{{ '/work/' | relative_url }}" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">Work</a>
-      </div>
-      <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">GitHub</a>
-    </nav>
-  </header>
-
-  <div class="resume-container no-print-fun">
-    {{ content }}
+<div class="resume-container no-print-fun">
+  {{ content }}
+  <div class="print-cta no-print flex flex-wrap items-center justify-center gap-4 mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+    <button type="button" class="print-button" onclick="window.print();" aria-label="Print resume">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2h-6a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+      Print resume
+    </button>
   </div>
-</body>
-</html>
+</div>

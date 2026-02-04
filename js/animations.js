@@ -65,6 +65,11 @@
     const currentlyEl = document.getElementById('currently-rotating');
     if (currentlyEl) {
       const phrases = [
+        'added easter eggs to the website',
+        'suggest you try to click on the footer name 7 times',
+        'suggest you try to click on the name "Hamna Nimra" 3 times',
+        'suggest you try to press the Konami code',
+        'suggest you try to click on the Mimo highlight',
         'build things because I like them',
         'have fun doing what I do',
         'love cars and sports',

@@ -1,14 +1,21 @@
 /* Resume page: screen + print */
 .resume-page {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #fff;
+  background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
   color: #111;
+  min-height: 100vh;
 }
 
 .resume-nav, .site-footer {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 2rem;
+}
+
+.resume-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .resume-nav a, .site-footer a {
@@ -16,65 +23,103 @@
   color: #374151;
   text-decoration: none;
   font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .resume-nav a:hover, .site-footer a:hover {
+  color: #111;
   text-decoration: underline;
 }
 
 .resume-container {
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 3rem 2rem 4rem;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* Resume typography (classic 1-pager) */
 .resume-name {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #111 0%, #374151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
 }
 
 .resume-contact {
   font-size: 11px;
-  color: #374151;
-  margin-bottom: 1.25rem;
+  color: #4b5563;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .resume-contact a {
-  color: #374151;
+  color: #4b5563;
   text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
 .resume-contact a:hover {
-  text-decoration: underline;
+  color: #111;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .resume-section {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
+.resume-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #111, transparent);
+  opacity: 0.1;
 }
 
 .resume-section-title {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid #111;
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #111;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+  color: #111;
+  position: relative;
 }
 
 .resume-item-title {
   font-size: 12px;
   font-weight: 700;
+  color: #111;
+  margin-bottom: 0.15rem;
 }
 
 .resume-item-meta {
   font-size: 11px;
   color: #6b7280;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
 }
 
 .resume-item-desc {
@@ -85,39 +130,61 @@
 
 .resume-skills {
   font-size: 11px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #374151;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.resume-skills strong {
+  color: #111;
+  font-weight: 600;
 }
 
 .resume-item {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
+  padding: 0.5rem 0;
+  transition: transform 0.2s ease;
+}
+
+.resume-item:hover {
+  transform: translateX(2px);
 }
 
 .resume-bullets {
   list-style: none;
   padding-left: 0;
-  margin: 0.2rem 0 0.25rem 0;
+  margin: 0.35rem 0 0.35rem 0;
 }
 
 .resume-bullets li {
   font-size: 11px;
-  line-height: 1.4;
+  line-height: 1.5;
   color: #374151;
-  padding-left: 1em;
-  text-indent: -1em;
-  margin-bottom: 0.15rem;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+  margin-bottom: 0.2rem;
+  position: relative;
 }
 
 .resume-bullets li::before {
-  content: "• ";
+  content: "▸ ";
   font-weight: 700;
+  color: #111;
+  margin-right: 0.3em;
 }
 
 .resume-keywords {
   font-size: 10px;
   color: #6b7280;
-  margin-top: 0.2rem;
+  margin-top: 0.35rem;
   font-style: italic;
+  padding: 0.4rem 0.6rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 3px;
+  display: inline-block;
 }
 
 /* ——— Print: perfect 1-page resume ——— */
@@ -141,6 +208,8 @@
     max-width: 100%;
     padding: 0;
     margin: 0;
+    box-shadow: none;
+    border-radius: 0;
   }
 
   .resume-name {

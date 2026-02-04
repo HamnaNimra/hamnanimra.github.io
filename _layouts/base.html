@@ -7,7 +7,7 @@
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,32 +16,39 @@
         extend: {
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Playfair Display', 'serif'],
+            display: ['Space Grotesk', 'system-ui', 'sans-serif'],
           },
           colors: {
             primary: {
-              50: '#f0f4ff',
-              100: '#e0e9ff',
-              200: '#c7d7fe',
-              300: '#a5b8fc',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              800: '#3730a3',
-              900: '#312e81',
+              50: '#fef2f2',
+              100: '#fee2e2',
+              200: '#fecaca',
+              300: '#fca5a5',
+              400: '#f87171',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+              800: '#991b1b',
+              900: '#7f1d1d',
             },
             accent: {
-              50: '#fdf4ff',
-              100: '#fae8ff',
-              200: '#f5d0fe',
-              300: '#f0abfc',
-              400: '#e879f9',
-              500: '#d946ef',
-              600: '#c026d3',
-              700: '#a21caf',
-              800: '#86198f',
-              900: '#701a75',
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            fun: {
+              pink: '#ec4899',
+              purple: '#a855f7',
+              orange: '#f97316',
+              yellow: '#eab308',
+              teal: '#14b8a6',
             },
           },
           animation: {
@@ -49,6 +56,9 @@
             'float': 'float 6s ease-in-out infinite',
             'fade-in': 'fadeIn 0.6s ease-out',
             'slide-up': 'slideUp 0.6s ease-out',
+            'bounce-slow': 'bounce 3s infinite',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 20s linear infinite',
           },
           keyframes: {
             gradient: {
@@ -57,14 +67,14 @@
             },
             float: {
               '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '50%': { transform: 'translateY(-15px)' },
             },
             fadeIn: {
               '0%': { opacity: '0' },
               '100%': { opacity: '1' },
             },
             slideUp: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
           },
@@ -79,9 +89,9 @@
       -moz-osx-font-smoothing: grayscale;
     }
     h1, h2, .font-display { 
-      font-family: 'Playfair Display', serif;
+      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
     
     /* Smooth scrolling */
@@ -104,12 +114,29 @@
       background: rgba(99, 102, 241, 0.5);
     }
     
-    /* Gradient text */
+    /* Gradient text - vibrant and fun */
     .gradient-text {
-      background: linear-gradient(135deg, #6366f1 0%, #d946ef 100%);
+      background: linear-gradient(135deg, #ef4444 0%, #ec4899 25%, #a855f7 50%, #0ea5e9 75%, #14b8a6 100%);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: gradient 8s ease infinite;
+    }
+    
+    /* Fun gradient backgrounds */
+    .gradient-bg-1 {
+      background: linear-gradient(135deg, #fef2f2 0%, #f0f9ff 50%, #f0fdf4 100%);
+    }
+    .dark .gradient-bg-1 {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
+    }
+    
+    .gradient-bg-2 {
+      background: linear-gradient(135deg, #fef2f2 0%, #fef3c7 50%, #fce7f3 100%);
+    }
+    .dark .gradient-bg-2 {
+      background: linear-gradient(135deg, #1f2937 0%, #1e293b 50%, #312e81 100%);
     }
     
     /* Glass morphism effect */
@@ -122,14 +149,48 @@
       background: rgba(17, 24, 39, 0.7);
     }
     
-    /* Card hover effect */
+    /* Card hover effect - more playful */
     .card-hover {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
+    
+    /* Fun card styles */
+    .fun-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .fun-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .fun-card:hover::before {
+      opacity: 1;
+    }
+    
+    /* Colorful accent dots */
+    .accent-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 4px;
+      animation: pulse-slow 2s ease-in-out infinite;
+    }
+    .accent-dot:nth-child(1) { background: #ef4444; animation-delay: 0s; }
+    .accent-dot:nth-child(2) { background: #ec4899; animation-delay: 0.2s; }
+    .accent-dot:nth-child(3) { background: #a855f7; animation-delay: 0.4s; }
+    .accent-dot:nth-child(4) { background: #0ea5e9; animation-delay: 0.6s; }
   </style>
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
@@ -149,31 +210,31 @@
 
   <header class="no-print border-b border-neutral-200/50 dark:border-neutral-700/50 glass sticky top-0 z-50 transition-all duration-300">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-      <a href="{{ '/' | relative_url }}" class="font-display text-xl font-bold text-neutral-900 dark:text-white hover:opacity-80 transition-opacity relative group">
+      <a href="{{ '/' | relative_url }}" class="font-display text-2xl font-bold text-neutral-900 dark:text-white hover:opacity-90 transition-opacity relative group">
         <span class="gradient-text">Hamna Nimra</span>
-        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></span>
+        <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
       <ul class="flex items-center gap-6">
-        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative group">
-          Work
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+          Portfolio
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink to-fun-purple group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative group">
+        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-500/10 dark:hover:bg-accent-500/10">
           Resume
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-accent-500 to-fun-teal group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative group">
+        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-purple dark:hover:text-fun-purple transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-purple/10 dark:hover:bg-fun-purple/10">
           GitHub
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-purple to-fun-pink group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="{{ '/photography/' | relative_url }}" class="text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors relative group">
+        <li><a href="{{ '/photography/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-teal dark:hover:text-fun-teal transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-teal/10 dark:hover:bg-fun-teal/10">
           Photography
-          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
+          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-teal to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
         <li>
-          <button type="button" id="theme-toggle" class="p-2 rounded-lg border border-neutral-300 dark:border-neutral-600 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-200" aria-label="Toggle dark mode">
-            <span class="dark:hidden text-lg">🌙</span>
-            <span class="hidden dark:inline text-lg">☀️</span>
+          <button type="button" id="theme-toggle" class="p-2.5 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 hover:bg-gradient-to-br hover:from-fun-pink/10 hover:to-accent-500/10 dark:hover:from-fun-purple/10 dark:hover:to-fun-pink/10 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-300 transform hover:scale-110" aria-label="Toggle dark mode">
+            <span class="dark:hidden text-xl">🌙</span>
+            <span class="hidden dark:inline text-xl">☀️</span>
           </button>
         </li>
       </ul>

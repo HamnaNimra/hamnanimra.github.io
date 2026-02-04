@@ -1,0 +1,33 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume — Hamna Nimra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
+</head>
+<body class="resume-page">
+  <header class="no-print site-header">
+    <nav class="resume-nav">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/work/' | relative_url }}">Work</a>
+      <a href="{{ '/photography/' | relative_url }}">Photography</a>
+      <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="resume-container">
+    {{ content }}
+  </div>
+
+  <footer class="no-print site-footer">
+    <a href="{{ '/' | relative_url }}">Back to portfolio</a>
+  </footer>
+</body>
+</html>

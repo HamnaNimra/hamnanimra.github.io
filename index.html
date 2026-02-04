@@ -1,63 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: base
+title: Home
+description: Portfolio — Software Engineer & Product Thinking
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Hamna's Porfolio</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-<header>
-    <a name="top"></a>
-    <h1>Hamna Nimra</h1>
-    <h2>Get to know me better</h2>
-</header>
-<div id="navbar">
-    <nav>
-        <a href="javascript:void(0);" id="profile" onclick="navigationMenu()">
-            <img src="images/menu-outline.svg" alt="menu">
+<div class="min-h-screen">
+  <!-- Hero Section -->
+  <section class="py-20 px-4 sm:px-6 bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
+    <div class="max-w-5xl mx-auto text-center">
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-neutral-900 dark:text-white">
+        Hamna Nimra
+      </h1>
+      <p class="text-xl sm:text-2xl text-neutral-600 dark:text-neutral-300 mb-8 max-w-2xl mx-auto">
+        Software Engineer transitioning to Product Management. Building products through code and strategy.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/work/" class="px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-lg font-medium hover:opacity-90 transition">
+          View Work
         </a>
-        <div id="pageName">
-            My Portfolio
-        </div>
-        <div id="social">
-            <a href="https://www.linkedin.com/in/hamnanimra/" target="_blank">
-                <img src="images/linkedin.png" alt="linkedin">
-            </a>
-            <a href="https://www.github.com/HamnaNImra/"
-               target="_blank">
-                <img src="images/github.png" alt="github">
-            </a>
-            <a href="https://www.instagram.com/hamnanimra/" target="_blank">
-                <img src="images/instagram.png" alt="instagram">
-            </a>
-        </div>
-    </nav>
-    <div id="menu">
-        <a class="active">Home</a>
-        <a href="html/project.html">Projects</a>
-        <a href="html/contact.html">Contact</a>
+        <a href="/resume/" class="px-6 py-3 border-2 border-neutral-900 dark:border-white rounded-lg font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">
+          Resume
+        </a>
+      </div>
     </div>
+  </section>
+
+  <!-- Featured Case Studies -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">Featured Case Studies</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">Product thinking through implementation</p>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% assign featured_case_studies = site.case_studies | where: "featured", true | limit: 3 %}
+        {% for case in featured_case_studies %}
+        <a href="{{ case.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">
+            {{ case.title }}
+          </h3>
+          {% if case.subtitle %}
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">{{ case.subtitle }}</p>
+          {% endif %}
+          {% if case.meta %}
+          <div class="text-xs text-neutral-500 dark:text-neutral-500">{{ case.meta }}</div>
+          {% endif %}
+        </a>
+        {% endfor %}
+        
+        {% if featured_case_studies.size == 0 %}
+        <!-- Fallback: Link to existing case studies -->
+        <a href="/work/case-studies/pit-strategy/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">Pit Strategy Optimizer</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Data-driven decision support for Formula 1 pit stop strategy</p>
+        </a>
+        <a href="/work/case-studies/microhelp/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">MicroHelp</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Rebuilding community, one small favor at a time</p>
+        </a>
+        <a href="/work/case-studies/autoperfpy/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">AutoPerfPy</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Democratizing performance engineering for edge AI</p>
+        </a>
+        {% endif %}
+      </div>
+      
+      <div class="mt-8 text-center">
+        <a href="/work/" class="text-neutral-700 dark:text-neutral-300 hover:underline font-medium">View all case studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Strategy Documents -->
+  <section class="py-16 px-4 sm:px-6 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">Product Strategy Documents</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">PM artifacts and product thinking</p>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        {% for doc in site.pm_docs limit: 4 %}
+        <a href="{{ doc.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">
+            {{ doc.title }}
+          </h3>
+          {% if doc.description %}
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ doc.description }}</p>
+          {% endif %}
+        </a>
+        {% endfor %}
+        
+        {% if site.pm_docs.size == 0 %}
+        <div class="text-neutral-500 dark:text-neutral-500 text-sm">PM documents coming soon...</div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photography Gallery (Masonry) -->
+  <section class="py-16 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">Photography</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">Visual storytelling</p>
+      
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4">
+        {% for photo in site.photography limit: 9 %}
+        <a href="{{ photo.url | relative_url }}" class="block mb-4 break-inside-avoid">
+          {% if photo.image %}
+          <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" class="w-full rounded-lg shadow-sm hover:shadow-md transition">
+          {% endif %}
+        </a>
+        {% endfor %}
+        
+        {% if site.photography.size == 0 %}
+        <div class="text-neutral-500 dark:text-neutral-500 text-sm">Photography gallery coming soon...</div>
+        {% endif %}
+      </div>
+      
+      {% if site.photography.size > 9 %}
+      <div class="mt-8 text-center">
+        <a href="/photography/" class="text-neutral-700 dark:text-neutral-300 hover:underline font-medium">View all photography →</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- GitHub Projects -->
+  <section class="py-16 px-4 sm:px-6 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">GitHub Projects</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">Open source contributions</p>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for repo in site.data.github_projects.repositories limit: 6 %}
+        <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+          <h3 class="font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">
+            {{ repo.name }}
+          </h3>
+          {% if repo.description %}
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3 line-clamp-2">{{ repo.description }}</p>
+          {% endif %}
+          <div class="flex gap-4 text-xs text-neutral-500 dark:text-neutral-500">
+            {% if repo.stargazers_count > 0 %}
+            <span>⭐ {{ repo.stargazers_count }}</span>
+            {% endif %}
+            {% if repo.language %}
+            <span>{{ repo.language }}</span>
+            {% endif %}
+          </div>
+        </a>
+        {% endfor %}
+        
+        {% if site.data.github_projects.repositories.size == 0 %}
+        <div class="text-neutral-500 dark:text-neutral-500 text-sm">GitHub projects will sync automatically via GitHub Action</div>
+        {% endif %}
+      </div>
+      
+      <div class="mt-8 text-center">
+        <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-neutral-700 dark:text-neutral-300 hover:underline font-medium">View on GitHub →</a>
+      </div>
+    </div>
+  </section>
 </div>
-<aside>
-    <div class="about">
-        <img src="images/HamnaNimraProfile.jpg" alt="Hamna's profile picture">
-        <p>
-            Hiii
-        </p>
-    </div>
-</aside>
-<main>
-
-</main>
-<footer>
-    <a href="#top">Back to top</a>
-</footer>
-
-<script src="js/app.js"></script>
-
-</body>
-
-</html>

@@ -1,1 +1,63 @@
-theme: jekyll-theme-dinky
+# Jekyll config for Hamna Nimra Portfolio (GitHub Pages)
+title: "Hamna Nimra"
+description: "Portfolio — Software Engineer & Product Thinking"
+baseurl: ""
+url: "https://hamnanimra.github.io"
+
+# No theme — custom layouts and Tailwind
+# theme: null
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Collections
+collections:
+  case_studies:
+    output: true
+    permalink: /work/case-studies/:name/
+  pm_docs:
+    output: true
+    permalink: /work/pm-docs/:name/
+  photography:
+    output: true
+    permalink: /photography/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: case_studies
+    values:
+      layout: case_study
+  - scope:
+      path: ""
+      type: pm_docs
+    values:
+      layout: base
+  - scope:
+      path: ""
+      type: photography
+    values:
+      layout: base
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: base
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - .git
+  - .github
+
+# Plugins (GitHub Pages supports these)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag

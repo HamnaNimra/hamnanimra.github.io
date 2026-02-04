@@ -65,11 +65,23 @@
     const currentlyEl = document.getElementById('currently-rotating');
     if (currentlyEl) {
       const phrases = [
-        'building things that just work',
-        'exploring fast and slow moments',
-        'paying attention to small details',
-        'occasionally distracted by shiny things',
-        'sharing projects I care about'
+        'build things because I like them',
+        'have fun doing what I do',
+        'love cars and sports',
+        'find peace in quiet corners',
+        'notice patterns everywhere',
+        'learn as I go',
+        'ask why things work the way they do',
+        'explore new places',
+        'pay attention to small details',
+        'get distracted by shiny things',
+        'share projects I care about',
+        'get lost in my own thoughts',
+        'pause for reasons that usually make sense later',
+        'find joy in simple things',
+        'love to eat and sleep',
+        'love my cat Mimo',
+        'balance imbalanced situations',
       ];
       let idx = 0;
       currentlyEl.textContent = phrases[0];

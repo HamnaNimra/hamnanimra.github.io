@@ -65,11 +65,23 @@
     const currentlyEl = document.getElementById('currently-rotating');
     if (currentlyEl) {
       const phrases = [
-        'building things that just work',
-        'exploring fast and slow moments',
-        'paying attention to small details',
-        'occasionally distracted by shiny things',
-        'sharing projects I care about'
+        'build things because I like them',
+        'have fun doing what I do',
+        'love cars and sports',
+        'find peace in quiet corners',
+        'notice patterns everywhere',
+        'learn as I go',
+        'ask why things work the way they do',
+        'explore new places',
+        'pay attention to small details',
+        'get distracted by shiny things',
+        'share projects I care about',
+        'get lost in my own thoughts',
+        'pause for reasons that usually make sense later',
+        'find joy in simple things',
+        'love to eat and sleep',
+        'love my cat Mimo',
+        'balance imbalanced situations',
       ];
       let idx = 0;
       currentlyEl.textContent = phrases[0];
@@ -93,7 +105,86 @@
       el.addEventListener('click', showMimoMessage);
       el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showMimoMessage(e); } });
     });
+
+    // Easter egg: 7 clicks on footer name
+    const footerName = document.getElementById('footer-name');
+    if (footerName) {
+      let footerClicks = 0;
+      let footerReset = null;
+      footerName.addEventListener('click', (e) => {
+        e.preventDefault();
+        footerClicks++;
+        clearTimeout(footerReset);
+        footerReset = setTimeout(() => { footerClicks = 0; }, 1500);
+        if (footerClicks >= 7) {
+          footerClicks = 0;
+          showEasterEggToast([
+            "You found the secret! 🎉",
+            "Nice clicking. Have a great day! ✨",
+            "Welcome to the inner circle. 🫡",
+            "Plot twist: you're the real boss here.",
+            "7/7 would click again."
+          ]);
+        }
+      });
+    }
+
+    // Easter egg: triple-click on hero name
+    const heroName = document.querySelector('h1.hero-name');
+    if (heroName) {
+      let heroClicks = 0;
+      let heroReset = null;
+      heroName.addEventListener('click', () => {
+        heroClicks++;
+        clearTimeout(heroReset);
+        heroReset = setTimeout(() => { heroClicks = 0; }, 600);
+        if (heroClicks >= 3) {
+          heroClicks = 0;
+          showEasterEggToast([
+            "Hey, that's me! 👋",
+            "Thanks for visiting!",
+            "You've got a sharp cursor."
+          ]);
+        }
+      });
+    }
+
+    // Easter egg: Konami code (↑↑↓↓←→←→BA)
+    const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+      konamiIndex = e.code === konami[konamiIndex] ? konamiIndex + 1 : 0;
+      if (konamiIndex === konami.length) {
+        konamiIndex = 0;
+        showEasterEggToast([
+          "+30 lives. Just kidding. 🎮",
+          "Konami code activated! You're a legend.",
+          "Cheat code: good taste in websites. ✅"
+        ]);
+      }
+    });
   });
+
+  function showEasterEggToast(messages) {
+    const existing = document.getElementById('easter-egg-toast');
+    if (existing) existing.remove();
+    const msg = Array.isArray(messages) ? messages[Math.floor(Math.random() * messages.length)] : messages;
+    const toast = document.createElement('div');
+    toast.id = 'easter-egg-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = msg;
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1f2937;color:#f3f4f6;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 10px 40px rgba(0,0,0,0.2);z-index:9999;max-width:90vw;text-align:center;opacity:0;';
+    if (!document.getElementById('mimo-toast-style')) {
+      const s = document.createElement('style');
+      s.id = 'mimo-toast-style';
+      s.textContent = '@keyframes mimoToast{0%{opacity:0;transform:translateX(-50%) translateY(12px)}100%{opacity:1;transform:translateX(-50%) translateY(0)}}';
+      document.head.appendChild(s);
+    }
+    toast.style.animation = 'mimoToast 0.3s ease forwards';
+    document.body.appendChild(toast);
+    setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3500);
+  }
 
   function showMimoMessage() {
     const existing = document.getElementById('mimo-toast');
@@ -105,7 +196,16 @@
       "Mimo says: I'm the real boss here.",
       "Mimo says: Treats, then we talk.",
       "Mimo says: This human writes code. I run the house.",
-      "Mimo says: *stares* You're still here?"
+      "Mimo says: *stares* You're still here?",
+      "Mimo says: I'm not a fan of loud noises.",
+      "Mimo purrs: Hello hooman bean",
+      "Mimo says: Salmon is my favorite food.",
+      "Mimo says: Give me scratchies, then I'll be your best friend.",
+      "fun cat facts: Mimo's birthday is in May",
+      "fun cat facts: Mimo is a girl cat.",
+      "fun cat facts: Mimo's favorite toy is her laser pointer",
+      "fun cat facts: Mimo's favorite place to eat is on the couch",
+      "fun cat facts: Mimo's favorite place to sleep is on the bed",
     ];
     const msg = messages[Math.floor(Math.random() * messages.length)];
     const toast = document.createElement('div');
@@ -120,7 +220,7 @@
       s.textContent = '@keyframes mimoToast{0%{opacity:0;transform:translateX(-50%) translateY(12px)}100%{opacity:1;transform:translateX(-50%) translateY(0)}}';
       document.head.appendChild(s);
     }
-    toast.style.animation = 'mimoToast 0.3s ease forwards';
+    toast.style.animation = 'mimoToast 0.1s ease forwards';
     document.body.appendChild(toast);
     setTimeout(() => {
       if (toast.parentNode) toast.remove();

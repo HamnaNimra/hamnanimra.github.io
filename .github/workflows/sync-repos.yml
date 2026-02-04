@@ -69,7 +69,7 @@ jobs:
           "
           echo "YAML file generated successfully"
 
-      - name: Commit changes
+      - name: Commit and create PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -77,20 +77,44 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Ensure we're on main branch and fetch latest
-          git checkout main
-          git pull origin main
-          
           # Check if there are any changes
           if git diff --quiet _data/github_projects.yml; then
             echo "No changes to commit - repositories are up to date"
             exit 0
           fi
           
-          # Commit and push directly to main branch
-          # Using [skip ci] to prevent workflow from triggering on this commit
-          git add _data/github_projects.yml
-          git commit -m "chore: sync github_projects.yml from API [skip ci]"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
+          # Create a branch for the update
+          BRANCH_NAME="sync-github-repos-$(date +%s)"
+          git checkout -b ${BRANCH_NAME}
           
-          echo "Successfully updated github_projects.yml"
+          # Commit changes
+          git add _data/github_projects.yml
+          git commit -m "chore: sync github_projects.yml from API"
+          
+          # Push to the branch
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH_NAME}
+          
+          # Create new PR
+          PR_RESPONSE=$(curl -X POST \
+            -H "Authorization: token ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls \
+            -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${BRANCH_NAME}\",\"base\":\"main\",\"body\":\"🤖 Auto-sync of GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\"}")
+          
+          PR_NUMBER=$(echo $PR_RESPONSE | jq -r '.number // empty')
+          ERROR_MSG=$(echo $PR_RESPONSE | jq -r '.message // empty')
+          
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Created PR #${PR_NUMBER}"
+            echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
+            echo "PR will be merged after GitHub Pages deployment completes"
+          elif [[ "$ERROR_MSG" == *"already exists"* ]]; then
+            echo "PR already exists for this update - repositories are up to date"
+          else
+            echo "Failed to create PR: $ERROR_MSG"
+            echo "Response: $PR_RESPONSE"
+            # Don't fail the workflow - the data is still updated in the branch
+            echo "Changes are available in branch ${BRANCH_NAME}"
+          fi
+          
+          echo "Successfully updated github_projects.yml in branch ${BRANCH_NAME}"

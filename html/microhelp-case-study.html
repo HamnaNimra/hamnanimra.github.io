@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroHelp | Product Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #A8E6CF 0%, #FFD3B6 50%, #FFAAA5 100%);
+            color: #1a1a1a;
+            padding: 140px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🏘️';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-15deg); }
+            50% { transform: translate(-50%, -60%) rotate(-10deg); }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            position: relative;
+            z-index: 1;
+            animation: bounceIn 1s ease-out;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            line-height: 1.1;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) rotate(2deg);
+            }
+            70% {
+                transform: scale(0.95) rotate(-1deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 18px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+            flex-wrap: wrap;
+        }
+
+        .hero .meta span {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.7s backwards;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 42px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: #A8E6CF;
+            border: 3px solid #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) rotate(-2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        section:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        section h2 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #A8E6CF, #FFD3B6, #FFAAA5);
+            border-radius: 4px;
+        }
+
+        section .section-subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 64px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #ffffff;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .problem-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .problem-card:nth-child(1) { border-color: #A8E6CF; }
+        .problem-card:nth-child(2) { border-color: #FFD3B6; }
+        .problem-card:nth-child(3) { border-color: #FFAAA5; }
+
+        .problem-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .problem-card h3 {
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .emoji-large {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Insight Section */
+        .insight {
+            background: #fafafa;
+        }
+
+        .insight-box {
+            background: #ffffff;
+            padding: 60px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.1);
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .insight-box .quote {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+        }
+
+        .insight-box .attribution {
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Solution Section */
+        .solution {
+            background: #ffffff;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .feature-card {
+            padding: 36px;
+            background: #ffffff;
+            border: 4px solid #1a1a1a;
+            border-radius: 24px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #A8E6CF, #FFD3B6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border: 3px solid #1a1a1a;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, #FFD3B6, #FFAAA5); }
+        .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, #FFAAA5, #A8E6CF); }
+        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, #A8E6CF, #FFAAA5); }
+        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, #FFD3B6, #A8E6CF); }
+        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, #FFAAA5, #FFD3B6); }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* User Journey */
+        .journey {
+            background: #fafafa;
+        }
+
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .journey-step {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .journey-step:nth-child(1) { border-color: #A8E6CF; }
+        .journey-step:nth-child(2) { border-color: #FFD3B6; }
+        .journey-step:nth-child(3) { border-color: #FFAAA5; }
+        .journey-step:nth-child(4) { border-color: #A8E6CF; }
+        .journey-step:nth-child(5) { border-color: #FFD3B6; }
+
+        .journey-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .journey-step .step-number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .journey-step h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .journey-step p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Trust & Safety */
+        .trust {
+            background: #ffffff;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .trust-card {
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .trust-card:first-child { border-color: #A8E6CF; }
+        .trust-card:last-child { border-color: #FFAAA5; }
+
+        .trust-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .trust-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 900;
+        }
+
+        .trust-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .trust-card li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .trust-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #A8E6CF;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        /* Metrics Section */
+        .metrics {
+            background: #fafafa;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:nth-child(1) { background: #A8E6CF; }
+        .metric-card:nth-child(2) { background: #FFD3B6; }
+        .metric-card:nth-child(3) { background: #FFAAA5; }
+        .metric-card:nth-child(4) { background: #A8E6CF; }
+
+        .metric-card:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.2);
+        }
+
+        .metric-card .label {
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .metric-card .description {
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            background: #ffffff;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .roadmap-card {
+            background: #ffffff;
+            padding: 36px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .roadmap-card:nth-child(1) { border-color: #A8E6CF; }
+        .roadmap-card:nth-child(2) { border-color: #FFD3B6; }
+        .roadmap-card:nth-child(3) { border-color: #FFAAA5; }
+
+        .roadmap-card:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .roadmap-card .phase {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            background: #FFD3B6;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+        }
+
+        .roadmap-card:nth-child(1) .phase { background: #A8E6CF; }
+        .roadmap-card:nth-child(3) .phase { background: #FFAAA5; }
+
+        .roadmap-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .roadmap-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-card li {
+            padding: 10px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .roadmap-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #1a1a1a;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #A8E6CF 0%, #FFD3B6 50%, #FFAAA5 100%);
+            color: #1a1a1a;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .footer-cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .footer-cta h2::after {
+            display: none;
+        }
+
+        .footer-cta p {
+            font-size: 22px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .footer-cta .contact {
+            font-size: 18px;
+            margin-top: 32px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .subtitle {
+                font-size: 20px;
+            }
+
+            .hero .meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .insight-box {
+                padding: 40px 24px;
+            }
+
+            .insight-box .quote {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>MicroHelp</h1>
+            <p class="subtitle">Rebuilding community, one small favor at a time</p>
+            <div class="meta">
+                <span>📱 Product Case Study</span>
+                <span>👤 Hamna Nimra</span>
+                <span>📅 February 2026</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Story Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>Why I'm Building This</h2>
+            <p class="section-subtitle">The real reason, not the pitch version</p>
+
+            <div style="margin-top: 64px;">
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>Everyone Scattered</h3>
+                        <p>COVID hit and suddenly everyone I knew was gone. Friends moved for jobs or to be near family. The people who used to be walking distance away were suddenly in different cities, different countries. I stayed. My community didn't.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Life Happened to Everyone Else</h3>
+                        <p>The friends who stayed got busy with their own stuff. Kids, careers, partners. Which is totally fine, but it meant the casual hangouts disappeared. "Let me check my calendar three weeks from now" became the default response.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>I Remember It Being Different</h3>
+                        <p>When I was a kid, we knew our neighbors. Not as best friends, just as people who were there. You'd borrow stuff, chat on the street, wave. No pressure to be close, just casual connection. That's gone now.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">What I'm Actually Trying to Do</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">Bring back the world where people knew their neighbors. When things felt safer because you knew someone was looking out. When communities actually functioned like communities.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">Right now? Someone gets deported, their pet is stuck in an apartment, and nobody notices until it's too late. That's not theoretical, that's happening. Or someone's struggling with depression and goes weeks without anyone checking in because we don't even know who lives next door anymore.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">Tech gave us convenience but took away the safety net of actual community. Depression rates go up as screen time goes up. We're more "connected" than ever and more isolated than ever. That's broken.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">I'm trying to fix that. Not with forced friendships or fake community features. Just bring back the basics: knowing who lives around you, being able to ask for help without it being weird, having people who notice if something's wrong.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>The Problem</h2>
+            <p class="section-subtitle">We're more connected than ever, but somehow lonelier than before</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <span class="emoji-large">🏠</span>
+                    <h3>Nobody Knows Their Neighbors Anymore</h3>
+                    <p>I don't know most of my neighbors' names. Maybe you don't either. We live 10 feet apart, separated by drywall, but we might as well be in different cities. When did that become normal?</p>
+                </div>
+                <div class="problem-card">
+                    <span class="emoji-large">📱</span>
+                    <h3>Tech Solved Everything (And Nothing)</h3>
+                    <p>Need eggs? DoorDash. Car won't start? AAA. Bored? Netflix. We fixed every inconvenience and accidentally eliminated every reason to interact with the people around us.</p>
+                </div>
+                <div class="problem-card">
+                    <span class="emoji-large">😰</span>
+                    <h3>Asking For Help Feels Weird Now</h3>
+                    <p>Remember when asking to borrow something was normal? Now it feels awkward. What if they think I'm weird? What if they say no? So we just... don't ask. And the gap gets wider.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insight Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>Core Insight</h2>
+            <p class="section-subtitle">What if we used the thing that broke it to fix it?</p>
+            
+            <div class="insight-box">
+                <p class="quote">"Technology killed community. So let's use technology to bring it back — but do it in a way that feels human, not transactional."</p>
+                <p class="attribution">The idea behind MicroHelp</p>
+            </div>
+
+            <div style="margin-top: 64px;">
+                <h3 style="font-size: 32px; margin-bottom: 24px; text-align: center; font-weight: 800;">Here's What I Realized</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>❌ Right Now</h3>
+                        <p>People need small help all the time. But they'd rather drive to a store, pay for a service, or just suffer through it than knock on a neighbor's door. The friction is too high. The awkwardness is too real.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>✨ What I Believe</h3>
+                        <p>Most people actually want to help. They're just waiting for permission. If I could make asking as easy as texting a friend, and helping as simple as saying yes, maybe we'd remember how good it feels to be needed.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>🎯 The Bet</h3>
+                        <p>An app that makes asking effortless and helping visible. Not "hire your neighbor" — just "hey, can you help real quick?" The way it used to work when we were kids.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p class="section-subtitle">Like knocking on your neighbor's door, but without the awkwardness</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Actually Nearby</h3>
+                    <p>Default shows people within walking distance. Not across town, not in another neighborhood — your actual neighbors. You can expand the radius if you want, but local is the whole point.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Keep It Small</h3>
+                    <p>200 characters max. This is for borrowing eggs, jumping cars, watering plants while you're away. Not moving furniture or painting houses. Small asks only.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Stay Anonymous If You Want</h3>
+                    <p>Feeling shy? Post without your name. Reveal yourself in chat if it goes well. Sometimes asking is easier when you're not putting your face out there first.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Chat Without Phone Numbers</h3>
+                    <p>Accept a request, start chatting instantly. Work out the details. No need to hand out your phone number to a stranger. Privacy matters.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Safety First</h3>
+                    <p>See gender, age range, and verification status before accepting anything. As a woman, I need this info to feel safe. I'm guessing you do too.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Trust Score & Gamification</h3>
+                    <p>Build reputation by helping. Earn badges for streaks. Make generosity visible and rewarding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Expiration Timestamps</h3>
+                    <p>Requests auto-expire. No stale posts cluttering the feed. Keeps community active and responsive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="journey">
+        <div class="container">
+            <h2>What It Actually Looks Like</h2>
+            <p class="section-subtitle">From "crap I need help" to "thanks, neighbor" in about 5 minutes</p>
+            
+            <div class="journey-grid">
+                <div class="journey-step">
+                    <div class="step-number">1</div>
+                    <h3>Post It</h3>
+                    <p>"Need jumper cables — my car won't start and I'm gonna be late for work"</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">2</div>
+                    <h3>Someone Nearby Sees It</h3>
+                    <p>Gets a notification: "Someone 0.2 miles away needs help"</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">3</div>
+                    <h3>They Accept & Chat</h3>
+                    <p>"I've got cables, gimme 3 minutes"</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">4</div>
+                    <h3>Help Happens</h3>
+                    <p>Jump the car. Maybe introduce yourself properly for the first time.</p>
+                </div>
+                <div class="journey-step">
+                    <div class="step-number">5</div>
+                    <h3>Mark It Done</h3>
+                    <p>Both people confirm completion. Helper gets trust score. Maybe grab coffee next time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Safety -->
+    <section class="trust">
+        <div class="container">
+            <h2>Trust & Safety</h2>
+            <p class="section-subtitle">Building community requires building trust — especially for women's safety</p>
+            
+            <div style="margin-top: 48px; background: #FFAAA5; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1); margin-bottom: 64px;">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800; color: #1a1a1a;">Why Safety Matters Especially for Women</h3>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">As a woman, I understand the safety concerns that come with meeting strangers — even neighbors. A man might not think twice about accepting "help me move a couch" from an unknown person. A woman does mental calculus: Is this safe? Who will know where I am? What if something goes wrong?</p>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>We can't ignore this reality.</strong> If women don't feel safe using MicroHelp, we've failed. Half the community won't participate, and the whole concept falls apart.</p>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px;">That's why safety isn't a "nice-to-have" feature. It's the foundation.</p>
+            </div>
+
+            <h3 style="font-size: 32px; margin-bottom: 32px; text-align: center; font-weight: 800;">Safety Features</h3>
+            
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <h3>🔐 Verification System</h3>
+                    <ul>
+                        <li>Phone number verification required (prevents bots/spam)</li>
+                        <li>Optional ID verification for "Verified" badge</li>
+                        <li>Email confirmation required</li>
+                        <li>Social media linking (optional but adds trust)</li>
+                        <li>New users start with probationary period</li>
+                    </ul>
+                </div>
+                <div class="trust-card">
+                    <h3>👤 Profile Transparency</h3>
+                    <ul>
+                        <li>Gender visible to helpers before accepting</li>
+                        <li>Age range visible (18-25, 26-35, etc.)</li>
+                        <li>Trust score visible (completed helps)</li>
+                        <li>Account age visible (new vs established)</li>
+                        <li>Neighborhood tenure visible</li>
+                        <li>Posts can be anonymous, but profile isn't</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 48px;">
+                <h3 style="font-size: 28px; margin-bottom: 32px; text-align: center; font-weight: 800;">Active Safety Measures</h3>
+                <div class="trust-grid">
+                    <div class="trust-card">
+                        <h3>🚨 Safety Check-Ins</h3>
+                        <ul>
+                            <li>"Share My Location" button in chat (optional)</li>
+                            <li>Emergency contact notification system</li>
+                            <li>Expected completion time → auto check-in if overdue</li>
+                            <li>"Mark Safe" button after task completion</li>
+                            <li>In-app panic button → alerts emergency contact + admin</li>
+                        </ul>
+                    </div>
+                    <div class="trust-card">
+                        <h3>🛡️ Community Moderation</h3>
+                        <ul>
+                            <li>Report button on every profile/post/chat</li>
+                            <li>Manual admin review of flagged users</li>
+                            <li>Automatic suspension after 2 reports (pending review)</li>
+                            <li>Permanent ban for verified safety violations</li>
+                            <li>Background check integration for high-trust tier (Phase 3)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 48px;">
+                <h3 style="font-size: 28px; margin-bottom: 32px; text-align: center; font-weight: 800;">Design Choices for Safety</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>Public vs Private Info</h3>
+                        <p><strong>Public:</strong> Gender, age range, trust score, account age, verification status<br><br>
+                        <strong>Private:</strong> Exact age, exact address, phone number, last name (until you choose to share)</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Gender-Aware Matching</h3>
+                        <p>Optional filter: "Only show me requests from women" or "Only show me helpers who are women." Some women only feel safe helping other women. That's valid.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Daylight Hours Priority</h3>
+                        <p>Algorithm prioritizes showing posts during daylight (8am-6pm). Nighttime requests flagged as "after dark" so users can decide their comfort level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #A8E6CF; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800; color: #1a1a1a;">Balancing Anonymity with Safety</h3>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">Here's the tension: we want low-friction asking (anonymity) but also safe helping (transparency). The compromise:</p>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px; margin-bottom: 12px;"><strong>Posts can be anonymous</strong> (name hidden), but basic safety info is always visible: gender, age range, trust score, verification status.</p>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px; margin-bottom: 12px;"><strong>Once accepted</strong>, chat reveals full name/profile so helper knows who they're meeting.</p>
+                <p style="color: #1a1a1a; line-height: 1.8; font-size: 16px;">This lets shy people ask for help without feeling exposed, while giving helpers enough info to make safe decisions.</p>
+            </div>
+
+            <div style="margin-top: 64px;">
+                <h3 style="font-size: 28px; margin-bottom: 32px; text-align: center; font-weight: 800;">Open Questions Still Solving</h3>
+                <div class="trust-grid">
+                    <div class="trust-card">
+                        <h3>Trust Score Validation</h3>
+                        <ul>
+                            <li>How to prevent fake "completions"? (Both parties must confirm + time-based validation)</li>
+                            <li>What if helper/poster colludes to game score? (Rate limiting + manual review of suspicious patterns)</li>
+                            <li>Should we add photo proof requirement? (Optional but encouraged)</li>
+                        </ul>
+                    </div>
+                    <div class="trust-card">
+                        <h3>Edge Cases</h3>
+                        <ul>
+                            <li>What if helper accepts but doesn't show? (Release back to feed + ding trust score)</li>
+                            <li>What if task takes longer than expected? (Auto check-in notifications)</li>
+                            <li>How to handle disputes? (Admin mediation + evidence review)</li>
+                            <li>Background checks: required or optional? (Optional at launch, explore tiered trust system)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics">
+        <div class="container">
+            <h2>How I'll Know If This Works</h2>
+            <p class="section-subtitle">The numbers that actually matter, not vanity metrics</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="label">Time to Help</div>
+                    <div class="description">From posting to done. If it takes longer than calling AAA, we've failed. Target: under 15 minutes.</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Repeat Helpers</div>
+                    <div class="description">How many people help the same neighbor twice? That's when it stops being transactional and starts being community.</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Requests That Get Answered</div>
+                    <div class="description">If people post and nobody responds, the app is useless. Target: 80%+ get help within 30 minutes.</div>
+                </div>
+                <div class="metric-card">
+                    <div class="label">Weekly Active Helpers</div>
+                    <div class="description">Not just people who browse — people who actually help. This is the real health check.</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 16px;">The One Metric That Matters</h3>
+                <p style="color: #555; margin-bottom: 32px; font-size: 18px;">Everything else is noise. Here's what actually tells me if MicroHelp is working:</p>
+                <div style="text-align: center;">
+                    <div style="font-size: 48px; font-weight: 900; color: #A8E6CF; margin-bottom: 12px;">Completed Helps Per Week</div>
+                    <p style="color: #666; font-size: 16px;">If neighbors are helping each other regularly, I'm rebuilding community. If they're not, I'm building another dead social app. It's that simple.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Integration Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Social Media Integration</h2>
+            <p class="section-subtitle">Making help viral and community visible</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>📱 Share Your Helps</h3>
+                    <p>Completed a task? Share to Instagram/Twitter with auto-generated card: "Just helped my neighbor jump their car! 🚗⚡ #MicroHelp #GoodNeighbor". Social proof drives adoption.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🔗 Deep Linking</h3>
+                    <p>Every post has a shareable link. Opens app if installed, falls back to web version. "Help me move a couch" → click → app opens → accept. Frictionless viral loop.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🌐 Web Version + Widgets</h3>
+                    <p>Flutter Web means same app runs in browser. Community websites can embed "Nearby Requests" widget. Neighborhood portals become distribution channels.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>📧 Email Digests</h3>
+                    <p>Daily summary: "3 neighbors need help nearby". Reaches people who don't check the app daily. Cloud Functions send via Firebase.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🤖 Bot Integrations</h3>
+                    <p>Optional Telegram/Discord bots post local requests in community channels. "New request in [neighborhood]: Need jumper cables, 0.3 mi away." Multi-platform reach.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🏆 Shareable Achievements</h3>
+                    <p>"I've helped 50 neighbors this year!" auto-generates shareable graphics. Trust scores and badges become social currency. Gamification meets virality.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Why Social Integration Matters</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">Community apps live or die by network effects. Social sharing solves two problems:</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 12px;"><strong>1. Awareness:</strong> Friends see you helping, they download the app. Organic growth through social proof.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;"><strong>2. Retention:</strong> Public accountability keeps people engaged. "I posted about my 10-help streak, can't break it now." Social pressure as a feature, not a bug.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap">
+        <div class="container">
+            <h2>Product Roadmap</h2>
+            <p class="section-subtitle">From MVP to movement</p>
+            
+            <div class="roadmap-grid">
+                <div class="roadmap-card">
+                    <div class="phase">🚧 Phase 1 (Current)</div>
+                    <h3>MVP Launch</h3>
+                    <ul>
+                        <li>Core posting & accepting flow</li>
+                        <li>Real-time chat</li>
+                        <li>Trust score basics</li>
+                        <li>Firebase auth & security rules</li>
+                        <li>iOS/Android apps (Flutter)</li>
+                        <li>Launch in 1 test neighborhood</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="phase">📅 Phase 2 (3 Months)</div>
+                    <h3>Social & Viral Growth</h3>
+                    <ul>
+                        <li>Share posts to Instagram, Twitter/X, Facebook</li>
+                        <li>Deep linking (open app or web from social)</li>
+                        <li>Web version for desktop users</li>
+                        <li>Embeddable "Nearby Requests" widget</li>
+                        <li>Email digests of nearby posts</li>
+                        <li>Badges & gamification</li>
+                        <li>Push notifications (FCM)</li>
+                        <li>Neighborhood leaderboards</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="phase">🎯 Phase 3 (6+ Months)</div>
+                    <h3>Scale & Extensions</h3>
+                    <ul>
+                        <li>Community challenges (help streaks)</li>
+                        <li>Embeddable widgets for local websites</li>
+                        <li>Telegram/Discord bot integrations</li>
+                        <li>Event coordination (block parties, clean-ups)</li>
+                        <li>Partnerships with local orgs</li>
+                        <li>City-wide expansion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go-to-Market Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>How I'll Actually Launch This</h2>
+            <p class="section-subtitle">Real strategy, not startup theater</p>
+            
+            <div style="margin-top: 48px;">
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>🎯 One Neighborhood at a Time</h3>
+                        <p>Not launching citywide. Not going viral on day one. Pick ONE walkable neighborhood, get 50-100 people using it, prove it works, then expand. Network effects only work if there's density.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>📣 Old-School Tactics</h3>
+                        <p>Door hangers. Coffee shop flyers. Facebook groups. Neighborhood association meetings. You build local community with local tactics, not TikTok ads.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>🔥 Make Early Users Feel Special</h3>
+                        <p>First 10 people get "Founding Neighbor" badge. Refer 5 friends, unlock features early. Give them something to brag about.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Why Hyperlocal Matters</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">Most community apps die because they launch too big. They get 1,000 users spread across 50 square miles, and nobody ever helps because nobody is actually nearby. I'm doing the opposite: own one square mile completely before touching the next one. 100 users in one neighborhood beats 1,000 scattered users every time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Decisions Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Trade-offs I Made</h2>
+            <p class="section-subtitle">The decisions that shaped the product</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Why 200 Characters?</h3>
+                    <p>If you can't explain it in 200 characters, it's too big of an ask. This keeps it casual, fast, low-commitment. TaskRabbit is for big tasks. MicroHelp is for the tiny stuff.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Let People Be Anonymous?</h3>
+                    <p>Some people are shy. Some people don't want to be "that neighbor who always needs stuff." Let them ask without putting their name on it. Lower the barrier. Reveal yourself later if you want.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Only One Person Can Accept?</h3>
+                    <p>If 10 people can help, nobody does. (Bystander effect is real.) One person accepts, clear ownership. If they flake, release it back to the feed. Simple.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Firebase Instead of Building Everything?</h3>
+                    <p>I want to launch fast and prove this works. Firebase gives me auth, database, push notifications, all out of the box. I can always build custom stuff later if I need to. Ship first, optimize never (or later).</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Trust Score Instead of Reviews?</h3>
+                    <p>Yelp-style ratings feel gross for neighbors. "1 star, showed up 10 minutes late" — c'mon. Trust score = helps completed, consistency, time in community. Way less transactional.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Location, Not Interests?</h3>
+                    <p>Interest-based communities stay online. Location forces you to meet IRL. The whole point is knowing your actual neighbors, not finding people who also like cats.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Configurable Radius?</h3>
+                    <p>Default is walking distance because that's community. But rural people need wider range, apartment buildings might want just their building. Give people options, default to local.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Social Sharing?</h3>
+                    <p>Nobody downloads an app because they need it. They download it because 5 friends posted about it. Make helping visible. Make it something people want to show off.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Why Show Gender/Age Before Accepting?</h3>
+                    <p>As a woman, I won't help a random stranger without basic info. Period. Show me gender, age range, verification status. Let people make informed safety calls. Anonymity for requests, transparency for safety.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Let's Rebuild Community Together</h2>
+            <p>Want to discuss the product strategy, technical architecture, or go-to-market approach?</p>
+            <div class="cta-buttons">
+                <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-primary">Get in Touch</a>
+            </div>
+            <p class="contact">📧 hamnanimramirza@outlook.com | 💼 linkedin.com/in/hamnanimra</p>
+        </div>
+    </section>
+</body>
+</html>

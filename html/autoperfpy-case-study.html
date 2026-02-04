@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPerfPy | Product Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #76B947 0%, #4A90E2 50%, #9013FE 100%);
+            color: #1a1a1a;
+            padding: 140px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⚡';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-15deg); }
+            50% { transform: translate(-50%, -60%) rotate(-10deg); }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            position: relative;
+            z-index: 1;
+            animation: bounceIn 1s ease-out;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            line-height: 1.1;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) rotate(2deg);
+            }
+            70% {
+                transform: scale(0.95) rotate(-1deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 18px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+            flex-wrap: wrap;
+        }
+
+        .hero .meta span {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.7s backwards;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 42px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: #76B947;
+            border: 3px solid #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) rotate(-2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a1a;
+            border: 3px solid #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #1a1a1a;
+            color: #76B947;
+            transform: translateY(-5px) rotate(2deg);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        section:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        section h2 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #76B947, #4A90E2, #9013FE);
+            border-radius: 4px;
+        }
+
+        section .section-subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 64px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #ffffff;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .problem-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .problem-card:nth-child(1) { border-color: #76B947; }
+        .problem-card:nth-child(2) { border-color: #4A90E2; }
+        .problem-card:nth-child(3) { border-color: #9013FE; }
+
+        .problem-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .problem-card h3 {
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .emoji-large {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .stat {
+            font-size: 64px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            letter-spacing: -3px;
+        }
+
+        .problem-card:nth-child(1) .stat { color: #76B947; }
+        .problem-card:nth-child(2) .stat { color: #4A90E2; }
+        .problem-card:nth-child(3) .stat { color: #9013FE; }
+
+        /* Insight Section */
+        .insight {
+            background: #fafafa;
+        }
+
+        .insight-box {
+            background: #ffffff;
+            padding: 60px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.1);
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .insight-box .quote {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+        }
+
+        .insight-box .attribution {
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Solution Section */
+        .solution {
+            background: #ffffff;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .feature-card {
+            padding: 36px;
+            background: #ffffff;
+            border: 4px solid #1a1a1a;
+            border-radius: 24px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #76B947, #4A90E2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border: 3px solid #1a1a1a;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, #4A90E2, #9013FE); }
+        .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, #9013FE, #76B947); }
+        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, #76B947, #9013FE); }
+        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, #4A90E2, #76B947); }
+        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, #9013FE, #4A90E2); }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            background: #fafafa;
+        }
+
+        .arch-diagram {
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            margin-top: 48px;
+        }
+
+        .arch-layer {
+            margin-bottom: 32px;
+            padding: 24px;
+            border-radius: 12px;
+            border: 3px solid #1a1a1a;
+        }
+
+        .arch-layer:nth-child(1) {
+            background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(74, 144, 226, 0.1));
+            border-color: #76B947;
+        }
+
+        .arch-layer:nth-child(2) {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(144, 19, 254, 0.1));
+            border-color: #9013FE;
+        }
+
+        .arch-layer h4 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .arch-layer p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .arch-layer ul {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .arch-layer li {
+            color: #555;
+            padding-left: 24px;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .arch-layer li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #4A90E2;
+            font-weight: 900;
+        }
+
+        /* Metrics Section */
+        .metrics {
+            background: #ffffff;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:nth-child(1) { background: #76B947; color: white; }
+        .metric-card:nth-child(2) { background: #4A90E2; color: white; }
+        .metric-card:nth-child(3) { background: #9013FE; color: white; }
+        .metric-card:nth-child(4) { background: #76B947; color: white; }
+
+        .metric-card:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.2);
+        }
+
+        .metric-card .number {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -3px;
+        }
+
+        .metric-card .label {
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        /* Tradeoffs Section */
+        .tradeoffs {
+            background: #fafafa;
+        }
+
+        .tradeoff-table {
+            width: 100%;
+            margin-top: 48px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+        }
+
+        .tradeoff-table th {
+            background: #1a1a1a;
+            color: #76B947;
+            padding: 24px;
+            text-align: left;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .tradeoff-table td {
+            padding: 24px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 15px;
+        }
+
+        .tradeoff-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tradeoff-table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .tradeoff-table tbody tr:hover {
+            background: #f8fffe;
+        }
+
+        .tradeoff-table .chosen {
+            color: #76B947;
+            font-weight: 800;
+        }
+
+        .tradeoff-table .rejected {
+            color: #9013FE;
+            font-weight: 700;
+        }
+
+        /* Learnings Section */
+        .learnings {
+            background: #ffffff;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .learning-card {
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .learning-card:first-child {
+            border-color: #76B947;
+        }
+
+        .learning-card:last-child {
+            border-color: #9013FE;
+        }
+
+        .learning-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .learning-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 900;
+        }
+
+        .learning-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learning-card li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .learning-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #76B947;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        .learning-card:last-child li::before {
+            content: '→';
+            color: #9013FE;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background: #fafafa;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 48px;
+            margin-top: 48px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, #76B947 0%, #4A90E2 50%, #9013FE 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 56px;
+            padding-left: 40px;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #4A90E2;
+            border: 4px solid #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:nth-child(odd)::before { background: #76B947; }
+        .timeline-item:nth-child(even)::before { background: #9013FE; }
+
+        .timeline-item:hover::before {
+            transform: scale(1.4) rotate(180deg);
+        }
+
+        .timeline-item h3 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .timeline-item p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #76B947 0%, #4A90E2 50%, #9013FE 100%);
+            color: #1a1a1a;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .footer-cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .footer-cta h2::after {
+            display: none;
+        }
+
+        .footer-cta p {
+            font-size: 22px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .footer-cta .contact {
+            font-size: 18px;
+            margin-top: 32px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .subtitle {
+                font-size: 20px;
+            }
+
+            .hero .meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .tradeoff-table {
+                font-size: 13px;
+            }
+
+            .tradeoff-table th,
+            .tradeoff-table td {
+                padding: 16px 12px;
+            }
+
+            .timeline {
+                padding-left: 32px;
+            }
+
+            .insight-box {
+                padding: 40px 24px;
+            }
+
+            .insight-box .quote {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>AutoPerfPy</h1>
+            <p class="subtitle">Democratizing performance engineering for edge AI</p>
+            <div class="meta">
+                <span>🛠️ Product Case Study</span>
+                <span>👤 Hamna Nimra</span>
+                <span>📅 February 2026</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="https://github.com/HamnaNimra/AutoPerfPy" class="btn btn-primary" target="_blank">View on GitHub</a>
+                <a href="/cdn-cgi/l/email-protection#4921282427282720243b2824203b332809263c3d25262622672a2624" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Story Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>Why I Built This</h2>
+            <p class="section-subtitle">The real problem behind performance validation for edge AI</p>
+
+            <div style="margin-top: 64px;">
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>Performance Was Always an Afterthought</h3>
+                        <p>In autonomous driving systems, 5G infrastructure, and edge AI deployments, a common pattern emerges: teams build amazing models, deploy them, then discover performance issues weeks later. By then, it's too late—debugging happens in production instead of catching regressions in CI/CD.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Everyone Reinvents the Wheel</h3>
+                        <p>Every project, same story: someone writes custom scripts to parse logs, calculate percentiles, compare baselines. No reusable toolkit. No systematic approach. Teams waste 5-10 hours per week on manual performance analysis that should be automated.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>The Tools That Exist Don't Fit</h3>
+                        <p>MLPerf is too complex for everyday use. Profiling tools are GUI-only and don't automate. Low-level APIs require expert knowledge. There's a massive gap between "quick script" and "enterprise monitoring platform"—nothing production-ready for teams who just need reliable performance validation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">The Vision: Beyond Just Automotive</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">AutoPerfPy started with automotive because that's where the pain is most acute—ADAS systems where P99 latency <33ms isn't a nice-to-have, it's a safety requirement. But the fundamental problem is way bigger than cars.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>LLM inference on edge devices:</strong> Healthcare AI chatbots running on hospital infrastructure need to be fast AND consistent. You can't have P99 latency spikes when a doctor is waiting for a diagnosis suggestion.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>Medical imaging:</strong> Cancer detection models running on edge devices in clinics need rigorous performance validation. Lives depend on these systems being both accurate and fast.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>Industrial IoT:</strong> Predictive maintenance models on factory floors, quality inspection systems, robotics—all need the same thing: automated performance validation with regression detection.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">AutoPerfPy is my attempt to build the tool I wish existed: production-ready, domain-agnostic performance engineering for edge AI. Start with automotive rigor, extend to LLM benchmarking, scale to any latency-critical edge deployment.</p>
+            </div>
+
+            <div style="margin-top: 48px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(144, 19, 254, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #4A90E2; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">What I'm Actually Solving</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>The Core Problem:</strong> Performance validation on edge devices is manual, inconsistent, and lacks systematic rigor. Teams waste 5-10 hours per week running custom scripts. Regressions slip through to production. There's no "pytest for performance engineering."</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>My Solution:</strong> AutoPerfPy is a production-ready toolkit that automates benchmarking, detects regressions in CI/CD, and validates domain-specific requirements (automotive safety, LLM TTFT, medical imaging latency). Think "GitHub Actions for Edge AI Performance."</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;"><strong>Long-term Vision:</strong> Build the de facto standard for performance engineering across edge AI. Start with NVIDIA platforms (80% market share), expand to domain-specific profiles (automotive, healthcare, LLM), eventually support all accelerators. Make performance validation as routine as unit testing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>The Problem</h2>
+            <p class="section-subtitle">Performance validation is broken for edge AI systems</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="stat">5-10hrs</div>
+                    <h3>Wasted Per Week</h3>
+                    <p>Performance engineers manually run benchmarks, parse logs, calculate percentiles, and compare baselines. Custom scripts per project. No reusable toolkit. This is 20-25% of their time.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="stat">2-3 days</div>
+                    <h3>To Debug Regressions</h3>
+                    <p>Regressions caught in production take days to root-cause. Was it the model? The platform? The compiler? No baseline history. No automated detection. Just panic debugging.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="stat">$0</div>
+                    <h3>Budget for Tools</h3>
+                    <p>Teams can't justify $50K for commercial tools. They need open-source, production-ready solutions. But nothing exists for automotive-grade edge AI performance.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px;">
+                <h3 style="font-size: 32px; margin-bottom: 32px; text-align: center; font-weight: 800;">User Pain Points by Segment</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>Performance Engineers</h3>
+                        <p><strong>Pain:</strong> No unified tool for NVIDIA Jetson/DRIVE benchmarking across devices, precisions, and batch sizes.</p>
+                        <p><strong>Workaround:</strong> Custom scripts per project. 5-10 hours/week manual work.</p>
+                        <p><strong>Cost:</strong> 20-25% of engineering time wasted on tooling that should be commoditized.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>MLOps Teams</h3>
+                        <p><strong>Pain:</strong> No regression detection in CI/CD for edge models. Performance drops slip to production.</p>
+                        <p><strong>Workaround:</strong> Manual baseline comparisons in spreadsheets. Hope for the best.</p>
+                        <p><strong>Cost:</strong> Production incidents, customer escalations, emergency debugging sessions.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Automotive Engineers</h3>
+                        <p><strong>Pain:</strong> Can't validate ADAS latency requirements (P99 <33.3ms) systematically.</p>
+                        <p><strong>Workaround:</strong> Manual profiling, ad-hoc testing, fingers crossed at certification.</p>
+                        <p><strong>Cost:</strong> Safety risks, late-cycle failures, re-certification costs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Analysis Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>Market Landscape</h2>
+            <p class="section-subtitle">Why existing solutions don't solve this problem</p>
+            
+            <div class="insight-box">
+                <p class="quote">"MLPerf is cloud-focused, Nsight is GUI-only, TensorRT is too low-level. There's a $0 → $50K gap in edge AI performance tools."</p>
+                <p class="attribution">The AutoPerfPy positioning</p>
+            </div>
+
+            <div style="margin-top: 64px;">
+                <table class="tradeoff-table">
+                    <thead>
+                        <tr>
+                            <th>Solution</th>
+                            <th>Strengths</th>
+                            <th>Weaknesses</th>
+                            <th>AutoPerfPy Advantage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>MLPerf Inference</strong></td>
+                            <td>Industry standard benchmarks</td>
+                            <td>Cloud-focused, complex setup, no edge CI/CD</td>
+                            <td>Lightweight, edge-first, CI-ready in 5 minutes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NVIDIA Nsight Systems</strong></td>
+                            <td>Deep GPU profiling</td>
+                            <td>GUI-only, expert users, no automation</td>
+                            <td>CLI automation, batch analysis, Python API</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custom Scripts</strong></td>
+                            <td>Flexible, project-specific</td>
+                            <td>Fragmented, no regression tracking, reinvent wheel</td>
+                            <td>Production-ready, tested, documented, reusable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TensorRT OSS</strong></td>
+                            <td>Official NVIDIA tools</td>
+                            <td>Low-level APIs, lacks analytics layer</td>
+                            <td>High-level abstractions, visualizations, reports</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Market Opportunity</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px; color: #76B947;">📊 Market Size</strong>
+                        <p style="color: #555;">NVIDIA edge AI market: $10B+ (automotive, robotics, retail, healthcare)</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px; color: #4A90E2;">👥 Total Addressable Users</strong>
+                        <p style="color: #555;">50,000+ Jetson/DRIVE developers (based on NVIDIA GTC attendance, forum activity)</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px; color: #9013FE;">🎯 Immediate Target</strong>
+                        <p style="color: #555;">10,000+ performance engineers and MLOps teams at automotive OEMs and tier-1 suppliers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Vision Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>Product Vision & Strategy</h2>
+            <p class="section-subtitle">"GitHub Actions for Edge AI Performance"</p>
+            
+            <div style="background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(144, 19, 254, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1); margin-bottom: 64px;">
+                <h3 style="font-size: 32px; margin-bottom: 24px; font-weight: 800;">North Star Metric</h3>
+                <div style="text-align: center; margin: 32px 0;">
+                    <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 16px;">Time from model change → validated performance results</div>
+                    <p style="font-size: 24px; color: #555; margin-bottom: 12px;"><strong>Target: 5 minutes</strong></p>
+                    <p style="font-size: 18px; color: #666;">(vs. 2-3 days industry average)</p>
+                </div>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">If we can compress the performance validation cycle from days to minutes, we transform how teams develop edge AI systems. Fast feedback loops = faster iteration, fewer regressions, higher quality.</p>
+            </div>
+
+            <h3 style="font-size: 32px; margin-bottom: 32px; text-align: center; font-weight: 800;">Core Value Propositions</h3>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Automated Benchmarking</h3>
+                    <p>One command runs benchmarks across all devices (GPU, CPU, Jetson), all precisions (FP32, FP16, INT8), all batch sizes. No manual scripting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚨</div>
+                    <h3>Regression Detection</h3>
+                    <p>Configurable thresholds per metric. Fails CI/CD if P99 latency >10% or throughput <5%. Catches regressions before production.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Automotive Profiles</h3>
+                    <p>Pre-built profiles enforce ADAS safety requirements: P99 <33.3ms, 50W power budget, 80°C thermal limit. Validates compliance automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Interactive Reports</h3>
+                    <p>HTML/PDF reports with Plotly visualizations. Light/dark themes. Auto-runs benchmarks if no data provided. Share with stakeholders instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3>Advanced Analytics</h3>
+                    <p>DNN pipeline layer-by-layer analysis. Tegrastats thermal monitoring. Efficiency metrics (perf/watt). Identify bottlenecks in minutes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Extensible Architecture</h3>
+                    <p>Two-layer design: reusable core library (trackiq_core) + application layer (autoperfpy). Use as CLI or Python library.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <h2>Technical Architecture</h2>
+            <p class="section-subtitle">Two-layer design enables flexibility and reusability</p>
+            
+            <div class="arch-diagram">
+                <div class="arch-layer">
+                    <h4>📦 Application Layer: autoperfpy</h4>
+                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> User-facing tools, automotive profiles, specialized analyzers</p>
+                    <ul>
+                        <li>CLI interface (click)</li>
+                        <li>Streamlit dashboard</li>
+                        <li>DNN pipeline analyzer</li>
+                        <li>Tegrastats analyzer</li>
+                        <li>Automotive profiles</li>
+                        <li>HTML/PDF reports</li>
+                        <li>Monitoring tools</li>
+                        <li>Benchmark implementations</li>
+                    </ul>
+                </div>
+                <div class="arch-layer">
+                    <h4>⚙️ Core Library: trackiq_core</h4>
+                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> Reusable components for programmatic use</p>
+                    <ul>
+                        <li>Data collectors (NVML, psutil, synthetic)</li>
+                        <li>Benchmark runners</li>
+                        <li>Config management</li>
+                        <li>Data schemas</li>
+                        <li>Regression detection</li>
+                        <li>Comparison logic</li>
+                        <li>Core analyzers</li>
+                        <li>Utility functions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 48px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #9013FE; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Why This Architecture Matters</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">This two-layer design isn't just good engineering—it's strategic product thinking. Here's why:</p>
+                <div class="problem-grid" style="margin-top: 32px;">
+                    <div class="problem-card">
+                        <h3>Flexibility</h3>
+                        <p><strong>Library users</strong> (advanced): Import trackiq_core for programmatic control. Build custom tools on top.</p>
+                        <p><strong>CLI users</strong> (everyday): Run autoperfpy run --auto for instant results. No code required.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Adoption Strategy</h3>
+                        <p>Start with CLI for quick wins (80% of users). Graduate power users to library for custom workflows. Mirrors kubectl + Kubernetes client libs.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Platform Play</h3>
+                        <p>trackiq_core becomes the de facto performance library for edge AI. Platform teams build custom dashboards, MLOps tools, CI/CD integrations on top.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Stories & Prioritization -->
+    <section class="problem">
+        <div class="container">
+            <h2>User Stories & Prioritization</h2>
+            <p class="section-subtitle">Ruthlessly scoped to deliver value fast</p>
+            
+            <div style="margin-bottom: 64px;">
+                <h3 style="font-size: 28px; margin-bottom: 32px;">P0 - Must Have (MVP)</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>✅ Auto-Benchmarking</h3>
+                        <p><strong>User Story:</strong> "As a performance engineer, I need to run benchmarks across all available devices with one command, so I can quickly identify performance regressions."</p>
+                        <p><strong>Acceptance:</strong> autoperfpy run --auto detects GPUs/CPU, runs 5+ configs in <2 min</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>✅ Regression Detection</h3>
+                        <p><strong>User Story:</strong> "As an MLOps engineer, I need automated regression detection in CI/CD, so I catch performance drops before production."</p>
+                        <p><strong>Acceptance:</strong> autoperfpy compare exits non-zero if P99 >10% regression</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>✅ Automotive Profiles</h3>
+                        <p><strong>User Story:</strong> "As an automotive engineer, I need to validate ADAS latency requirements (P99 <33.3ms, 50W, 80°C), so I meet safety certifications."</p>
+                        <p><strong>Acceptance:</strong> --profile automotive_safety enforces constraints, fails if violated</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 64px;">
+                <h3 style="font-size: 28px; margin-bottom: 32px;">P1 - Should Have (Differentiation)</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>✅ Interactive Reports</h3>
+                        <p><strong>User Story:</strong> "As a technical lead, I need interactive HTML reports with Plotly charts, so I can share results with stakeholders."</p>
+                        <p><strong>Status:</strong> Implemented with dark/light themes</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>✅ DNN Pipeline Analysis</h3>
+                        <p><strong>User Story:</strong> "As a platform engineer, I need DNN pipeline layer-by-layer analysis, so I can identify bottleneck layers."</p>
+                        <p><strong>Status:</strong> Implemented with top-N layer ranking</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>✅ Streamlit Dashboard</h3>
+                        <p><strong>User Story:</strong> "As a data scientist, I need an interactive UI to explore results without CLI, so I can iterate faster."</p>
+                        <p><strong>Status:</strong> Implemented with benchmark execution from browser</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="font-size: 28px; margin-bottom: 32px;">P2 - Nice to Have (Future)</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>🔲 LLM Metrics</h3>
+                        <p><strong>User Story:</strong> "As a data scientist, I need LLM-specific metrics (TTFT, tokens/sec), so I optimize transformer models."</p>
+                        <p><strong>Status:</strong> Partially implemented, needs KV cache monitoring (v0.3.0)</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>🔲 Multi-Run Trends</h3>
+                        <p><strong>User Story:</strong> "As a manager, I need multi-run trend analysis, so I track performance over time."</p>
+                        <p><strong>Status:</strong> Planned for v0.3.0 with time-series charts</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>🔲 Real-Time API</h3>
+                        <p><strong>User Story:</strong> "As a platform team, I need REST API for real-time monitoring, so I integrate with dashboards."</p>
+                        <p><strong>Status:</strong> v1.0.0 feature, requires significant backend work</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Feature Prioritization Framework</h3>
+                <table class="tradeoff-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>User Impact</th>
+                            <th>Dev Effort</th>
+                            <th>Strategic Value</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Auto-benchmarking</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>3 weeks</td>
+                            <td>Critical path blocker removal</td>
+                            <td class="chosen">P0</td>
+                        </tr>
+                        <tr>
+                            <td>Regression detection</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>2 weeks</td>
+                            <td>CI/CD integration = adoption</td>
+                            <td class="chosen">P0</td>
+                        </tr>
+                        <tr>
+                            <td>Automotive profiles</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>1 week</td>
+                            <td>Unique differentiator</td>
+                            <td class="chosen">P0</td>
+                        </tr>
+                        <tr>
+                            <td>HTML reports</td>
+                            <td>⭐⭐⭐⭐</td>
+                            <td>2 weeks</td>
+                            <td>Shareability → virality</td>
+                            <td class="chosen">P1</td>
+                        </tr>
+                        <tr>
+                            <td>Streamlit UI</td>
+                            <td>⭐⭐⭐</td>
+                            <td>1 week</td>
+                            <td>Lower barrier to entry</td>
+                            <td class="chosen">P1</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-run trends</td>
+                            <td>⭐⭐⭐</td>
+                            <td>3 weeks</td>
+                            <td>Nice-to-have, not urgent</td>
+                            <td class="rejected">P2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Decisions Section -->
+    <section class="tradeoffs">
+        <div class="container">
+            <h2>Product Trade-offs</h2>
+            <p class="section-subtitle">Key decisions that shaped the product</p>
+            
+            <table class="tradeoff-table">
+                <thead>
+                    <tr>
+                        <th>Decision</th>
+                        <th>What I Chose</th>
+                        <th>What I Rejected</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Architecture</strong></td>
+                        <td class="chosen">Two-layer (core + app)</td>
+                        <td class="rejected">Monolithic CLI tool</td>
+                        <td>Balances ease-of-use (CLI) with flexibility (library). Mirrors Docker CLI + containerd. Broader use cases.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Demo Data</strong></td>
+                        <td class="chosen">Synthetic data</td>
+                        <td class="rejected">Proprietary automotive data</td>
+                        <td>GitHub repo can't include proprietary data. Synthetic enables reproducible examples without legal issues.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User Interface</strong></td>
+                        <td class="chosen">CLI-first, UI second</td>
+                        <td class="rejected">Web dashboard first</td>
+                        <td>CLI = CI/CD integration (critical for adoption). Streamlit UI = discoverability. 80/20 split is right for DevTools.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Regression Metrics</strong></td>
+                        <td class="chosen">P99 latency + throughput</td>
+                        <td class="rejected">Average latency only</td>
+                        <td>Averages hide tail latency. P99 = SLO standard (Google SRE, AWS). 1/100 failures unacceptable in automotive.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Device Support</strong></td>
+                        <td class="chosen">NVIDIA platforms only</td>
+                        <td class="rejected">All accelerators (AMD, Intel)</td>
+                        <td>80% of edge AI is NVIDIA. Focus on depth > breadth. Multi-vendor = 3x complexity for 20% market.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Testing</strong></td>
+                        <td class="chosen">42+ tests, pytest</td>
+                        <td class="rejected">Manual testing only</td>
+                        <td>Production-ready = comprehensive tests. CI/CD requires test automation. No compromise on quality.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precision Support</strong></td>
+                        <td class="chosen">FP32, FP16, INT8</td>
+                        <td class="rejected">All precisions (FP64, BF16, INT4)</td>
+                        <td>These 3 cover 95% of edge AI use cases. BF16 = NVIDIA Ampere+ only. INT4 = niche. Ship fast, expand later.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 64px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(144, 19, 254, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #4A90E2; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800; color: #1a1a1a;">Biggest Trade-off: Depth vs Breadth</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">I chose to go deep on NVIDIA platforms (Jetson, DRIVE, GPUs) instead of supporting all accelerators (AMD, Intel, Qualcomm). Why? Because 80% of edge AI is NVIDIA, and multi-vendor support would have delayed launch by 6+ months.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">This is classic product strategy: <strong>own a niche completely before expanding</strong>. Better to be the #1 tool for NVIDIA edge AI than a mediocre tool for everything.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">The architecture supports extension (collectors for other platforms can be added), but I'm not building them until NVIDIA adoption proves the model works.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics">
+        <div class="container">
+            <h2>Success Metrics</h2>
+            <p class="section-subtitle">How I measure product success</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="number">42+</div>
+                    <div class="label">Tests (Unit + Integration)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">2-Layer</div>
+                    <div class="label">Architecture (Core + App)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">5 min</div>
+                    <div class="label">Target: Change → Validated Results</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">100%</div>
+                    <div class="label">Open Source (MIT License)</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">The Metrics That Actually Matter</h3>
+                <div class="problem-grid" style="margin-top: 32px;">
+                    <div class="problem-card">
+                        <h3>📊 Adoption Metrics</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 8px 0; color: #555;">▸ GitHub stars/forks (virality signal)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ PyPI downloads (actual usage)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Issues/PRs (community engagement)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ CLI vs Library usage split</li>
+                        </ul>
+                    </div>
+                    <div class="problem-card">
+                        <h3>⚡ Performance Metrics</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 8px 0; color: #555;">▸ Time to run full benchmark suite</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Regression detection accuracy</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Model R² scores (>0.85 target)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ CI/CD integration success rate</li>
+                        </ul>
+                    </div>
+                    <div class="problem-card">
+                        <h3>📈 Product-Market Fit</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 8px 0; color: #555;">▸ User testimonials/case studies</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Enterprise adoption (OEMs, tier-1s)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Feature requests (unmet needs)</li>
+                            <li style="padding: 8px 0; color: #555;">▸ Retention: weekly active users</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 48px; text-align: center; padding: 32px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(74, 144, 226, 0.1)); border-radius: 12px;">
+                    <h4 style="font-size: 24px; margin-bottom: 12px; font-weight: 800;">North Star Metric (Reminder)</h4>
+                    <p style="font-size: 18px; color: #555; line-height: 1.8;">Time from model change to validated performance results: <strong>5 minutes</strong> (vs 2-3 days industry average)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Journey -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2>Product Development Journey</h2>
+            <p class="section-subtitle">From problem to production in 4 months</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Month 1: Problem Validation</h3>
+                    <p>Identified pain points from observing edge AI system development across autonomous driving, 5G infrastructure, and industrial applications. Researched existing tools (MLPerf, Nsight, profiling frameworks). Validated gap through developer forums, Reddit (r/MachineLearning), and conversations with performance engineers. Confirmed: no unified, production-ready tool for edge AI performance validation across domains.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 2: Core Library Build</h3>
+                    <p>Built trackiq_core: collectors (NVML, psutil, synthetic), benchmark runners, config management, regression detection. Chose interpretable models over complexity for trust and explainability. Wrote comprehensive unit tests (pytest). Documented assumptions and design decisions. Focused on automotive use case first (strictest requirements = good baseline).</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 3: Application Layer</h3>
+                    <p>Built autoperfpy CLI (click framework), Streamlit dashboard, domain-specific profiles (automotive safety, edge max performance, low power). Added DNN pipeline analyzer for layer-by-layer bottleneck identification, Tegrastats analyzer for thermal monitoring, HTML/PDF report generators with Plotly visualizations. Started designing LLM-specific metrics (TTFT, tokens/sec).</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Month 4: Polish & Documentation</h3>
+                    <p>Wrote comprehensive README (7,000+ words), CONCEPTS.md (performance engineering principles), CHANGELOG.md, TODO.md for future healthcare and LLM extensions. Created 7 working examples demonstrating different use cases. Built 42+ tests for production readiness. Exported sample outputs. Created case study for PM portfolio. Published to GitHub with roadmap for multi-domain expansion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learnings Section -->
+    <section class="learnings">
+        <div class="container">
+            <h2>Key Learnings</h2>
+            <p class="section-subtitle">What worked, what I'd change</p>
+            
+            <div class="learning-grid">
+                <div class="learning-card">
+                    <h3>✅ What Worked</h3>
+                    <ul>
+                        <li>Two-layer architecture (enabled library + CLI use cases)</li>
+                        <li>Documentation-first approach (README, CONCEPTS, examples)</li>
+                        <li>Domain-specific profiles (automotive = strictest requirements, good starting point)</li>
+                        <li>Synthetic data (enables reproducible demos without legal/NDA issues)</li>
+                        <li>Comprehensive testing (42+ tests = production-ready signal)</li>
+                        <li>CLI-first strategy (DevTools need automation, not just GUIs)</li>
+                        <li>Regression detection (CI/CD integration is critical for adoption)</li>
+                        <li>Starting narrow (NVIDIA platforms) before expanding to all accelerators</li>
+                    </ul>
+                </div>
+                <div class="learning-card">
+                    <h3>→ What I'd Change</h3>
+                    <ul>
+                        <li>Talk to domain experts earlier (validate automotive/healthcare/LLM profile assumptions)</li>
+                        <li>Build Streamlit UI sooner (visual demos help explain value faster)</li>
+                        <li>Document trade-offs in real-time (easy to forget reasoning months later)</li>
+                        <li>Set up user feedback loop earlier (metrics aren't everything, need qualitative)</li>
+                        <li>Create video demos (code alone doesn't sell to non-technical stakeholders)</li>
+                        <li>Build multi-run trends sooner (users asked for this immediately)</li>
+                        <li>Focus more on go-to-market (great product ≠ automatic adoption)</li>
+                        <li>Start LLM-specific features earlier (TTFT, KV cache) given growing market</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: linear-gradient(135deg, #4A90E2, #9013FE); padding: 48px; border-radius: 24px; color: white; text-align: center; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 32px; margin-bottom: 16px; font-weight: 900;">Biggest Lesson</h3>
+                <p style="font-size: 20px; line-height: 1.8; opacity: 0.95;">PM work is 80% communication, 20% building. Too much time optimizing the technical implementation and not enough explaining <em>why AutoPerfPy matters</em> across different domains. The most technically impressive feature is worthless if automotive engineers, ML researchers, and healthcare AI teams don't understand how it solves their specific pain points.</p>
+                <p style="font-size: 18px; line-height: 1.8; opacity: 0.9; margin-top: 24px;">Next time: Build domain-specific pitch decks alongside the code (automotive version, LLM version, healthcare version). Validate messaging with target users in each vertical. Document trade-offs as decisions are made, not after the fact. Test cross-domain applicability earlier.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go-to-Market Section -->
+    <section class="insight">
+        <div class="container">
+            <h2>Go-to-Market Strategy</h2>
+            <p class="section-subtitle">How I plan to get this into users' hands</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>🎯 Phase 1: Developer Community</h3>
+                    <p><strong>Target:</strong> Developer forums (edge AI, MLOps), Reddit (r/MachineLearning, r/embedded, r/LocalLLaMA), Hacker News, Twitter (#EdgeAI, #LLMs)</p>
+                    <p><strong>Tactics:</strong> Technical blog posts, "Show HN" launch, demo videos, GitHub README optimization for SEO, showcase automotive + LLM use cases</p>
+                    <p><strong>Goal:</strong> 100 GitHub stars, 500 PyPI downloads, 10 issues/PRs in first month, feedback from multiple domains</p>
+                </div>
+                <div class="problem-card">
+                    <h3>📣 Phase 2: Platform Ecosystem</h3>
+                    <p><strong>Target:</strong> NVIDIA Developer Program, edge AI conferences (Embedded Vision Summit, tinyML), LLM inference communities, medical AI forums</p>
+                    <p><strong>Tactics:</strong> Conference demos, domain-specific tutorials (automotive benchmarking, LLM TTFT optimization, medical imaging latency), integration guides</p>
+                    <p><strong>Goal:</strong> Featured in platform newsletters, 3+ case studies across domains, community contributions</p>
+                </div>
+                <div class="problem-card">
+                    <h3>🚗 Phase 3: Enterprise Domains</h3>
+                    <p><strong>Target:</strong> Automotive OEMs, healthcare AI companies, LLM inference providers, industrial IoT teams, robotics companies</p>
+                    <p><strong>Tactics:</strong> Direct outreach to performance engineering teams, domain-specific case studies, pilot programs, consulting partnerships</p>
+                    <p><strong>Goal:</strong> 5+ enterprise users across verticals, testimonials, potential support/consulting revenue, domain-specific feature requests</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Distribution Strategy</h3>
+                <div class="problem-grid" style="margin-top: 32px;">
+                    <div class="problem-card">
+                        <h3>Open Source</h3>
+                        <p>MIT license = maximum adoption. No barriers to enterprise use. Build trust through transparency. Community contributions = free R&D + domain-specific features.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Documentation</h3>
+                        <p>7,000+ word README, CONCEPTS guide, 7 working examples across domains. Make onboarding effortless. Searchable, SEO-optimized. Documentation IS marketing for DevTools.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>Viral Loops</h3>
+                        <p>CI/CD integration = team adoption (1 user → entire team). HTML reports = shareable artifacts. Cross-domain success stories = market expansion. GitHub exposure = organic discovery.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(74, 144, 226, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #76B947; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Monetization Path (Long-Term)</h3>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">While AutoPerfPy is open-source, there are several monetization paths once adoption is proven across domains:</p>
+                <ul style="list-style: none; padding-left: 0; margin-top: 24px;">
+                    <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">💼</span>
+                        <strong>Domain-Specific Consulting:</strong> Custom profiles for automotive safety, healthcare compliance, LLM optimization. On-site training, priority support SLAs.
+                    </li>
+                    <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900; font-size: 18px;">☁️</span>
+                        <strong>SaaS Dashboard:</strong> Hosted version with team collaboration, multi-domain benchmarking, historical trending, compliance reporting (FDA, ISO 26262, etc.)
+                    </li>
+                    <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900; font-size: 18px;">🔌</span>
+                        <strong>Platform Partnerships:</strong> Integration with CI/CD platforms (Jenkins, GitLab, GitHub Actions), LLM serving frameworks (vLLM, TensorRT-LLM), medical AI platforms
+                    </li>
+                    <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">📚</span>
+                        <strong>Training & Certification:</strong> "Performance Engineering for Edge AI" courses covering automotive, healthcare, LLM domains. Industry-specific certification programs.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>Product Roadmap</h2>
+            <p class="section-subtitle">From v0.2.0 to production scale</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div style="background: #76B947; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">✅ V0.2.0 - SHIPPED</div>
+                    <h3>Core Features</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            Two-layer architecture (trackiq_core + autoperfpy)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            Auto-benchmarking across devices/precisions
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            Regression detection with configurable thresholds
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            Automotive profiles (ADAS requirements)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            Interactive HTML/PDF reports
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            42+ tests, comprehensive documentation
+                        </li>
+                    </ul>
+                </div>
+                <div class="problem-card">
+                    <div style="background: #4A90E2; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">🚧 V0.3.0 - Next 3 Months</div>
+                    <h3>UX & Analytics</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            Multi-run trend analysis (time-series charts)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            LLM-specific metrics (TTFT, KV cache monitoring)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            Enhanced Streamlit UI (multi-device comparison)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            Additional precisions (BF16, INT4)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            User feedback collection system
+                        </li>
+                    </ul>
+                </div>
+                <div class="problem-card">
+                    <div style="background: #9013FE; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">📅 V1.0.0 - Next 6-12 Months</div>
+                    <h3>Production Scale</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            REST API for real-time monitoring
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            CI/CD platform integrations (Jenkins, GitLab, GitHub Actions)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            Multi-accelerator support (AMD, Intel, Qualcomm)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            SaaS dashboard (hosted version with team collab)
+                        </li>
+                        <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            Enterprise support & consulting offerings
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Let's Discuss This Product</h2>
+            <p>I'm happy to talk about the architecture, product decisions, go-to-market strategy, or anything else</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/HamnaNimra/AutoPerfPy" class="btn btn-primary" target="_blank">View on GitHub</a>
+                <a href="/cdn-cgi/l/email-protection#036b626e6d626d6a6e71626e6a717962436c76776f6c6c682d606c6e" class="btn btn-secondary">Get in Touch</a>
+            </div>
+            <p class="contact">📧 <a href="/cdn-cgi/l/email-protection" cl

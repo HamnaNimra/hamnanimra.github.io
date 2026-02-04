@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pit Strategy Optimizer | Product Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section - Bold & Fun */
+        .hero {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 100%);
+            color: #1a1a1a;
+            padding: 140px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🏎️';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-15deg); }
+            50% { transform: translate(-50%, -60%) rotate(-10deg); }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            position: relative;
+            z-index: 1;
+            animation: bounceIn 1s ease-out;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            line-height: 1.1;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05) rotate(2deg);
+            }
+            70% {
+                transform: scale(0.95) rotate(-1deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .hero .meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            font-size: 18px;
+            margin-bottom: 48px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.5s backwards;
+            flex-wrap: wrap;
+        }
+
+        .hero .meta span {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.7s backwards;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 42px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: #FFE66D;
+            border: 3px solid #1a1a1a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) rotate(-2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a1a;
+            border: 3px solid #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #1a1a1a;
+            color: #FFE66D;
+            transform: translateY(-5px) rotate(2deg);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: #ffffff;
+        }
+
+        section:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        section h2 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            color: #1a1a1a;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #FF6B6B, #FFE66D, #4ECDC4);
+            border-radius: 4px;
+        }
+
+        section .section-subtitle {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 64px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #ffffff;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .problem-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .problem-card:nth-child(1) { border-color: #FF6B6B; }
+        .problem-card:nth-child(2) { border-color: #FFE66D; }
+        .problem-card:nth-child(3) { border-color: #4ECDC4; }
+
+        .problem-card:hover {
+            transform: translateY(-10px) rotate(-2deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .problem-card h3 {
+            font-size: 26px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .problem-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .stat {
+            font-size: 64px;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            letter-spacing: -3px;
+        }
+
+        .problem-card:nth-child(1) .stat { color: #FF6B6B; }
+        .problem-card:nth-child(2) .stat { color: #FFE66D; text-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        .problem-card:nth-child(3) .stat { color: #4ECDC4; }
+
+        /* Solution Section */
+        .solution {
+            background: #fafafa;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .feature-card {
+            padding: 36px;
+            background: #ffffff;
+            border: 4px solid #1a1a1a;
+            border-radius: 24px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #FF6B6B, #FFE66D);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            border: 3px solid #1a1a1a;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, #FFE66D, #4ECDC4); }
+        .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, #4ECDC4, #FF6B6B); }
+        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, #FF6B6B, #4ECDC4); }
+        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, #FFE66D, #FF6B6B); }
+        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, #4ECDC4, #FFE66D); }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Process Section */
+        .process {
+            background: #ffffff;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 48px;
+            margin-top: 48px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 100%);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 56px;
+            padding-left: 40px;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #FFE66D;
+            border: 4px solid #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:nth-child(odd)::before { background: #FF6B6B; }
+        .timeline-item:nth-child(even)::before { background: #4ECDC4; }
+
+        .timeline-item:hover::before {
+            transform: scale(1.4) rotate(180deg);
+        }
+
+        .timeline-item h3 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .timeline-item p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Metrics Section */
+        .metrics {
+            background: #fafafa;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:nth-child(1) { background: #FF6B6B; color: white; }
+        .metric-card:nth-child(2) { background: #FFE66D; }
+        .metric-card:nth-child(3) { background: #4ECDC4; }
+        .metric-card:nth-child(4) { background: #FF6B6B; color: white; }
+
+        .metric-card:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.2);
+        }
+
+        .metric-card .number {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -3px;
+        }
+
+        .metric-card .label {
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+
+        /* Tradeoffs Section */
+        .tradeoffs {
+            background: #ffffff;
+        }
+
+        .tradeoff-table {
+            width: 100%;
+            margin-top: 48px;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+        }
+
+        .tradeoff-table th {
+            background: #1a1a1a;
+            color: #FFE66D;
+            padding: 24px;
+            text-align: left;
+            font-weight: 800;
+            font-size: 16px;
+        }
+
+        .tradeoff-table td {
+            padding: 24px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 15px;
+        }
+
+        .tradeoff-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tradeoff-table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .tradeoff-table tbody tr:hover {
+            background: #fffef5;
+        }
+
+        .tradeoff-table .chosen {
+            color: #4ECDC4;
+            font-weight: 800;
+        }
+
+        .tradeoff-table .rejected {
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+
+        /* Learnings Section */
+        .learnings {
+            background: #fafafa;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .learning-card {
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .learning-card:first-child {
+            border-color: #4ECDC4;
+        }
+
+        .learning-card:last-child {
+            border-color: #FF6B6B;
+        }
+
+        .learning-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .learning-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 900;
+        }
+
+        .learning-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learning-card li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .learning-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4ECDC4;
+            font-weight: 900;
+            font-size: 22px;
+        }
+
+        .learning-card:last-child li::before {
+            content: '→';
+            color: #FF6B6B;
+        }
+
+        /* Roadmap Section */
+        .roadmap {
+            background: #ffffff;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .roadmap-card {
+            background: #ffffff;
+            padding: 36px;
+            border-radius: 24px;
+            border: 4px solid #1a1a1a;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .roadmap-card:nth-child(1) { border-color: #4ECDC4; }
+        .roadmap-card:nth-child(2) { border-color: #FFE66D; }
+        .roadmap-card:nth-child(3) { border-color: #FF6B6B; }
+        .roadmap-card:nth-child(4) { border-color: #4ECDC4; }
+
+        .roadmap-card:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.15);
+        }
+
+        .roadmap-card .phase {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            background: #FFE66D;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+        }
+
+        .roadmap-card:nth-child(1) .phase { background: #4ECDC4; }
+        .roadmap-card:nth-child(3) .phase { background: #FF6B6B; color: white; }
+        .roadmap-card:nth-child(4) .phase { background: #FFE66D; }
+
+        .roadmap-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-weight: 800;
+        }
+
+        .roadmap-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-card li {
+            padding: 10px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .roadmap-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #1a1a1a;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FFE66D 50%, #4ECDC4 100%);
+            color: #1a1a1a;
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .footer-cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .footer-cta h2::after {
+            display: none;
+        }
+
+        .footer-cta p {
+            font-size: 22px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .footer-cta .contact {
+            font-size: 18px;
+            margin-top: 32px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .subtitle {
+                font-size: 20px;
+            }
+
+            .hero .meta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .tradeoff-table {
+                font-size: 13px;
+            }
+
+            .tradeoff-table th,
+            .tradeoff-table td {
+                padding: 16px 12px;
+            }
+
+            .timeline {
+                padding-left: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Pit Strategy Optimizer</h1>
+            <p class="subtitle">Data-driven decision support for Formula 1 pit stop strategy</p>
+            <div class="meta">
+                <span>📍 Product Case Study</span>
+                <span>👤 Hamna Nimra</span>
+                <span>📅 February 2026</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="https://github.com/HamnaNimra/Pit-Strategy-Optimizer" class="btn btn-primary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>The Problem</h2>
+            <p class="section-subtitle">Race engineers make million-dollar decisions in seconds with incomplete information</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="stat">$20M+</div>
+                    <h3>Stakes Per Race</h3>
+                    <p>A single pit stop error can cost championship points worth millions in prize money and sponsorship value.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="stat">5-10s</div>
+                    <h3>Decision Window</h3>
+                    <p>Race engineers have seconds to decide: pit now or wait another lap. No time to model scenarios.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="stat">5M+</div>
+                    <h3>Underserved Users</h3>
+                    <p>Sim racers and F1 content creators need strategy tools but can't access team-level analysis.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px;">
+                <h3 style="font-size: 28px; margin-bottom: 24px;">User Pain Points</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <h3>❌ No Validation</h3>
+                        <p>Teams can't easily validate post-race whether their pit strategy was optimal or if they left time on the table.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>❌ Black Box Tools</h3>
+                        <p>AWS F1 Insights shows predictions but doesn't explain why. Engineers need reasoning, not just answers.</p>
+                    </div>
+                    <div class="problem-card">
+                        <h3>❌ Slow Manual Analysis</h3>
+                        <p>Analyzing lap times, tire degradation, and pit loss manually takes hours. Too slow for real-time decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <h2>The Solution</h2>
+            <p class="section-subtitle">Explainable AI that recommends optimal pit windows with confidence intervals</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tire Degradation Modeling</h3>
+                    <p>Linear regression models predict lap time degradation per track, compound, and fuel load. Interpretable and fast.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Pit Window Optimization</h3>
+                    <p>Simulates pitting on current lap and N future laps, applies pit loss and degradation, ranks by total projected time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Explainable Recommendations</h3>
+                    <p>Explains why pit window opens, when degradation overtakes pit loss, and the cost of delaying or advancing the stop.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Historical Validation</h3>
+                    <p>Tests recommendations against actual F1 team decisions. Measures lap delta and alignment within ±3 laps.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Uncertainty Quantification</h3>
+                    <p>Sensitivity analysis shows how recommendations change with ±2s pit loss or ±0.02s/lap degradation uncertainty.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏎️</div>
+                    <h3>VSC Scenario Modeling</h3>
+                    <p>Models Virtual Safety Car scenarios where pit loss is reduced by ~50%, helping teams capitalize on race interruptions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2>Product Development Process</h2>
+            <p class="section-subtitle">How I built and validated this product</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>1. Problem Discovery</h3>
+                    <p>Identified gap in prosumer F1 analytics market. Teams have $10M internal tools. Fans have nothing actionable. Opportunity: accessible, validated strategy tool for 5M+ sim racers and content creators.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2. Scope Definition</h3>
+                    <p>Ruthlessly scoped to dry races and single-car strategy. Rejected multi-car game theory (exponential complexity), weather transitions (insufficient data), and real-time API (v2 feature). Focus = MVP validation.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>3. Model Development</h3>
+                    <p>Built linear tire degradation models per track and compound using FastF1 historical data. Chose interpretability over deep learning complexity. Fitted models on 2023-2024 seasons with R² > 0.85.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>4. Optimizer Implementation</h3>
+                    <p>Created pit window optimization engine that simulates N future pit scenarios, applies track-specific pit loss, and ranks by total projected race time. Outputs recommended lap with ±3 lap confidence interval.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>5. Explainability Layer</h3>
+                    <p>Added rule-based explanation generation that describes why the pit window opens (degradation > pit loss), optimal timing, and trade-offs of waiting. Users need reasoning, not just lap numbers.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>6. Historical Validation</h3>
+                    <p>Validated recommendations against actual F1 team decisions across 5 races (Bahrain, Monaco, Spain, Silverstone, Monza). Measured lap delta and alignment within ±3 laps to prove model accuracy.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>7. Documentation & Testing</h3>
+                    <p>Wrote comprehensive PRD, assumptions document, and case studies. Built unit and integration test suite. Exported visualizations as PNG/HTML for portfolio presentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics">
+        <div class="container">
+            <h2>Success Metrics</h2>
+            <p class="section-subtitle">How we measure product performance</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="number">±3</div>
+                    <div class="label">Lap Accuracy Target</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">5+</div>
+                    <div class="label">Races Validated</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">0.85+</div>
+                    <div class="label">Model R² Score</div>
+                </div>
+                <div class="metric-card">
+                    <div class="number">100%</div>
+                    <div class="label">Test Coverage</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 64px; background: #f8f9fa; padding: 48px; border-radius: 12px;">
+                <h3 style="font-size: 28px; margin-bottom: 16px;">Product Success Criteria</h3>
+                <p style="color: #555; margin-bottom: 32px;">Validated against real F1 team decisions from the 2023-2024 seasons</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px;">✅ Recommendation Accuracy</strong>
+                        <p style="color: #555;">Alignment within ±3 laps of actual team pit decisions</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px;">✅ Model Performance</strong>
+                        <p style="color: #555;">R² > 0.85 for tire degradation predictions across all tracks</p>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px;">✅ Validation Coverage</strong>
+                        <p style="color: #555;">Tested on 5 diverse circuits: street, permanent, high-speed, high-deg</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tradeoffs Section -->
+    <section class="tradeoffs">
+        <div class="container">
+            <h2>Product Trade-offs</h2>
+            <p class="section-subtitle">Key decisions and why I made them</p>
+            
+            <table class="tradeoff-table">
+                <thead>
+                    <tr>
+                        <th>Decision</th>
+                        <th>What I Chose</th>
+                        <th>What I Rejected</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Model Complexity</strong></td>
+                        <td class="chosen">Linear degradation</td>
+                        <td class="rejected">Deep learning</td>
+                        <td>Interpretability > 2% accuracy gain. Users need to trust recommendations, which requires explainable models.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Race Conditions</strong></td>
+                        <td class="chosen">Dry races only</td>
+                        <td class="rejected">All weather</td>
+                        <td>80% of races are dry. Wet/intermediate modeling adds months of complexity for 20% use case.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Strategy Scope</strong></td>
+                        <td class="chosen">Single-car optimization</td>
+                        <td class="rejected">Multi-car game theory</td>
+                        <td>Single-car covers 80% of value with 20% of effort. Multi-car interactions = exponential complexity.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User Interface</strong></td>
+                        <td class="chosen">CLI + Python API</td>
+                        <td class="rejected">Web dashboard</td>
+                        <td>Developer-first approach enables faster iteration. Web UI is v2 after proving core value.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pit Loss Modeling</strong></td>
+                        <td class="chosen">Track-specific constant</td>
+                        <td class="rejected">Dynamic traffic modeling</td>
+                        <td>Insufficient data to model pit lane traffic accurately. Constant pit loss is good enough for MVP.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 48px; padding: 32px; background: white; border-radius: 12px; border-left: 4px solid #667eea;">
+                <h3 style="font-size: 24px; margin-bottom: 12px; color: #667eea;">Biggest Trade-off: Trust vs Accuracy</h3>
+                <p style="color: #555; line-height: 1.8;">I chose a linear degradation model that achieved R² = 0.85-0.90 instead of a neural network that might have reached 0.92-0.95. Why? Because users (race engineers, strategists) need to understand <em>why</em> the model recommends a certain pit lap. A black-box model that's 3% more accurate but can't explain itself is useless in high-stakes racing decisions. This is the core PM lesson: the best solution isn't always the most technically sophisticated one.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learnings Section -->
+    <section class="learnings">
+        <div class="container">
+            <h2>Key Learnings</h2>
+            <p class="section-subtitle">What I learned building this product</p>
+            
+            <div class="learning-grid">
+                <div class="learning-card">
+                    <h3>What Worked</h3>
+                    <ul>
+                        <li>Starting with historical validation (proof before features)</li>
+                        <li>Documentation-first approach (PRD, assumptions, case studies)</li>
+                        <li>Ruthless scoping (dry races only saved 2 months)</li>
+                        <li>Building explainability layer (users care about "why")</li>
+                        <li>Comprehensive testing (unit + integration tests)</li>
+                    </ul>
+                </div>
+                <div class="learning-card">
+                    <h3>What I'd Change</h3>
+                    <ul>
+                        <li>Talk to race engineers earlier (validated assumptions vs assumed)</li>
+                        <li>Build web UI sooner (CLI limits user testing audience)</li>
+                        <li>More visual design upfront (matplotlib plots aren't portfolio-ready)</li>
+                        <li>Document trade-offs in real-time (easy to forget reasoning later)</li>
+                        <li>Set up user feedback loop earlier (metrics aren't everything)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 48px; padding: 48px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; text-align: center;">
+                <h3 style="font-size: 32px; margin-bottom: 16px;">Biggest Lesson</h3>
+                <p style="font-size: 20px; line-height: 1.8; opacity: 0.95;">PM work is 80% communication, 20% building. I spent too much time optimizing the degradation model and not enough explaining <em>why it matters</em> to users. The most technically impressive feature is worthless if users don't understand the value proposition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap">
+        <div class="container">
+            <h2>Product Roadmap</h2>
+            <p class="section-subtitle">Where this product goes next</p>
+            
+            <div class="roadmap-grid">
+                <div class="roadmap-card">
+                    <div class="phase">✅ V1 - Completed</div>
+                    <h3>Historical Validation</h3>
+                    <ul>
+                        <li>✓ Tire degradation modeling</li>
+                        <li>✓ CLI interface</li>
+                        <li>✓ Validation on 5 races</li>
+                        <li>✓ Explainability layer</li>
+                        <li>✓ Comprehensive docs + tests</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="phase">🚧 V2 - Next 3 Months</div>
+                    <h3>Usability Improvements</h3>
+                    <ul>
+                        <li>Web dashboard for non-technical users</li>
+                        <li>Multi-race comparison view</li>
+                        <li>Shareable race reports (PDF export)</li>
+                        <li>Interactive degradation visualizations</li>
+                        <li>User feedback collection system</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="phase">📅 V3 - Next 6 Months</div>
+                    <h3>Real-time Capability</h3>
+                    <ul>
+                        <li>Live race API integration</li>
+                        <li>VSC/Safety car probability modeling</li>
+                        <li>Multi-driver team coordination</li>
+                        <li>Weather transition modeling</li>
+                        <li>Mobile app for trackside use</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="phase">🎯 V4 - Next 12 Months</div>
+                    <h3>Monetization & Scale</h3>
+                    <ul>
+                        <li>Freemium API model</li>
+                        <li>Integration with iRacing/sim platforms</li>
+                        <li>Content creator partnerships</li>
+                        <li>Team licensing (F2, F3, FE)</li>
+                        <li>Expand to endurance racing (WEC, IMSA)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Let's Talk About This Project</h2>
+            <p>I'm happy to discuss the product decisions, technical trade-offs, or go-to-market strategy</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/HamnaNimra/Pit-Strategy-Optimizer" class="btn btn-primary" target="_blank">View on GitHub</a>
+                <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-secondary">Get in Touch</a>
+            </div>
+            <p class="contact">📧 hamnanimramirza@outlook.com | 💼 linkedin.com/in/hamnanimra</p>
+        </div>
+    </section>
+</body>
+</html>

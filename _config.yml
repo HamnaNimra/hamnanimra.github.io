@@ -55,6 +55,8 @@ exclude:
   - README.md
   - .git
   - .github
+  - html
+  - "*.py"
 
 # Plugins (GitHub Pages supports these)
 plugins:

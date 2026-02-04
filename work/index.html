@@ -19,30 +19,26 @@ description: Case studies, GitHub projects, and other work
     <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Portfolio</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">Product case studies demonstrating product thinking through implementation</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <a href="/case-studies/pit-strategy-case-study.html" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
+      {% for case in site.case_studies %}
+      <a href="{{ case.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="relative z-10">
-          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">Pit Strategy Optimizer</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Data-driven decision support for Formula 1 pit stop strategy</p>
-          <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ case.title }}</h3>
+          {% if case.subtitle %}
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">{{ case.subtitle }}</p>
+          {% endif %}
+          {% if case.meta %}
+          <div class="text-xs text-neutral-500 dark:text-neutral-500">{{ case.meta }}</div>
+          {% endif %}
         </div>
       </a>
-      <a href="/case-studies/microhelp-case-study.html" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="relative z-10">
-          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">MicroHelp</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Rebuilding community, one small favor at a time</p>
-          <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
-        </div>
-      </a>
-      <a href="/case-studies/autoperfpy-case-study.html" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        <div class="relative z-10">
-          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">AutoPerfPy</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Democratizing performance engineering for edge AI</p>
-          <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
-        </div>
-      </a>
+      {% endfor %}
+      
+      {% if site.case_studies.size == 0 %}
+      <div class="col-span-3 text-center py-8">
+        <p class="text-neutral-500 dark:text-neutral-400">Case studies will appear here once added to the collection.</p>
+      </div>
+      {% endif %}
     </div>
   </section>
 

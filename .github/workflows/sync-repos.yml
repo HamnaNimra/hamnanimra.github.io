@@ -4,9 +4,14 @@ name: Sync GitHub Repos
 
 on:
   schedule:
-    # Run weekly (Monday 00:00 UTC)
-    - cron: '0 0 * * 1'
+    # Run daily at 00:00 UTC to keep repositories synced
+    - cron: '0 0 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/sync-repos.yml'
 
 jobs:
   sync:
@@ -63,26 +68,7 @@ jobs:
           "
           echo "YAML file generated successfully"
 
-      - name: Check for existing PR
-        id: check_pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          # Check if there's already an open PR for syncing repos
-          EXISTING_PR=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${GITHUB_REPOSITORY}:sync-github-repos" \
-            | jq -r '.[0].number // empty')
-          
-          if [ -n "$EXISTING_PR" ]; then
-            echo "pr_number=${EXISTING_PR}" >> $GITHUB_OUTPUT
-            echo "Found existing PR #${EXISTING_PR}"
-          else
-            echo "No existing PR found"
-          fi
-
-      - name: Commit and create PR
+      - name: Commit changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -90,47 +76,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # Ensure we're on main branch and fetch latest
+          git checkout main
+          git pull origin main
+          
+          # Check if there are any changes
           if git diff --quiet _data/github_projects.yml; then
-            echo "No changes to commit"
+            echo "No changes to commit - repositories are up to date"
             exit 0
           fi
           
+          # Commit and push directly to main branch
           git add _data/github_projects.yml
-          git commit -m "chore: sync github_projects.yml from API"
+          git commit -m "chore: sync github_projects.yml from API [skip ci]"
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main
           
-          # Create or update branch
-          BRANCH_NAME="sync-github-repos"
-          git checkout -B ${BRANCH_NAME}
-          git push -f https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH_NAME}
-          
-          # Check if PR already exists
-          EXISTING_PR=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${GITHUB_REPOSITORY}:${BRANCH_NAME}" \
-            | jq -r '.[0].number // empty')
-          
-          if [ -n "$EXISTING_PR" ]; then
-            echo "PR #${EXISTING_PR} already exists and has been updated"
-          else
-            # Create new PR
-            PR_RESPONSE=$(curl -X POST \
-              -H "Authorization: token ${GITHUB_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls \
-              -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${BRANCH_NAME}\",\"base\":\"main\",\"body\":\"🤖 Auto-generated PR to sync GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\"}")
-            
-            PR_NUMBER=$(echo $PR_RESPONSE | jq -r '.number // empty')
-            if [ -n "$PR_NUMBER" ]; then
-              echo "Created PR #${PR_NUMBER}"
-              # Optionally auto-merge (uncomment if you want auto-merge)
-              # curl -X PUT \
-              #   -H "Authorization: token ${GITHUB_TOKEN}" \
-              #   -H "Accept: application/vnd.github.v3+json" \
-              #   https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/merge \
-              #   -d '{"merge_method":"squash"}'
-            else
-              echo "Failed to create PR"
-              echo $PR_RESPONSE
-              exit 1
-            fi
-          fi
+          echo "Successfully updated github_projects.yml"

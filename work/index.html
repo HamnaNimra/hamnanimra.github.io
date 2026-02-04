@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Portfolio
-description: Case studies, GitHub projects, and other work
+description: Case studies, product documentation, and GitHub projects
 ---
 
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 gradient-bg-1">
@@ -10,34 +10,55 @@ description: Case studies, GitHub projects, and other work
       Portfolio
     </h1>
     <p class="text-xl sm:text-2xl text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-      Case studies, GitHub projects, and other work 🎨
+      Case studies, product documentation, and GitHub projects 🎨
     </p>
   </div>
 
-  <!-- Portfolio Section -->
+  <!-- Case Studies Section -->
   <section class="mb-16">
-    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Portfolio</h2>
+    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Case Studies</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">Product case studies demonstrating product thinking through implementation</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for case in site.case_studies %}
-      <a href="{{ case.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <a href="{{ '/case-studies/' | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-8 card-hover relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <div class="relative z-10">
-          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ case.title }}</h3>
-          {% if case.subtitle %}
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">{{ case.subtitle }}</p>
-          {% endif %}
-          {% if case.meta %}
-          <div class="text-xs text-neutral-500 dark:text-neutral-500">{{ case.meta }}</div>
-          {% endif %}
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-4 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+            📚
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-fun-pink dark:group-hover:text-fun-purple transition-colors">View All Case Studies</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">Explore detailed product case studies showcasing product thinking and implementation</p>
+          <div class="mt-4 flex items-center gap-2 text-sm font-bold text-fun-pink dark:text-fun-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            View case studies
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </div>
         </div>
       </a>
-      {% endfor %}
-      
-      {% if site.case_studies.size == 0 %}
-      <div class="col-span-3 text-center py-8">
-        <p class="text-neutral-500 dark:text-neutral-400">Case studies will appear here once added to the collection.</p>
-      </div>
+    </div>
+  </section>
+
+  <!-- Product Documentation Section -->
+  <section class="mb-16">
+    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Product Documentation</h2>
+    <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-6">PM artifacts and product thinking documents</p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% if site.pm_docs.size > 0 %}
+        {% for doc in site.pm_docs %}
+        <a href="{{ doc.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100/50 to-accent-100/50 dark:from-primary-900/10 dark:to-accent-900/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ doc.title }}</h3>
+            {% if doc.description %}
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ doc.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+        {% endfor %}
+      {% else %}
+        <div class="col-span-3 text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
+          <p class="text-neutral-500 dark:text-neutral-400">Product documentation coming soon...</p>
+        </div>
       {% endif %}
     </div>
   </section>
@@ -79,46 +100,9 @@ description: Case studies, GitHub projects, and other work
       <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-neutral-700 dark:text-neutral-300 hover:underline font-medium">View all repositories on GitHub →</a>
     </div>
     {% else %}
-    <p class="text-neutral-500 dark:text-neutral-500">GitHub projects will sync automatically via GitHub Action</p>
-    {% endif %}
-  </section>
-
-  <!-- Other Works -->
-  <section class="mb-16">
-    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Other Works</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <!-- Photography -->
-      <a href="/photography/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
-        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">Photography</h3>
-        <p class="text-sm text-neutral-600 dark:text-neutral-400">Visual storytelling and creative work</p>
-      </a>
-      
-      <!-- PM Docs -->
-      {% if site.pm_docs.size > 0 %}
-      {% for doc in site.pm_docs %}
-      <a href="{{ doc.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
-        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">{{ doc.title }}</h3>
-        {% if doc.description %}
-        <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ doc.description }}</p>
-        {% endif %}
-      </a>
-      {% endfor %}
-      {% endif %}
-      
-      <!-- Other Projects from data -->
-      {% if site.data.other_projects.size > 0 %}
-      {% for project in site.data.other_projects %}
-      <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
-        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">{{ project.title }}</h3>
-        {% if project.description %}
-        <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ project.description }}</p>
-        {% endif %}
-        {% if project.year %}
-        <div class="text-xs text-neutral-500 dark:text-neutral-500 mt-2">{{ project.year }}</div>
-        {% endif %}
-      </a>
-      {% endfor %}
-      {% endif %}
+    <div class="text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
+      <p class="text-neutral-500 dark:text-neutral-400">GitHub projects will sync automatically via GitHub Action</p>
     </div>
+    {% endif %}
   </section>
 </div>

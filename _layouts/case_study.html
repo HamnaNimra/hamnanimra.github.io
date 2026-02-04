@@ -1,6 +1,84 @@
 ---
 layout: base
 ---
+<style>
+  /* Dark mode support for case studies */
+  .dark .case-study-content {
+    background: #111827;
+  }
+  
+  .dark .case-study-content h1,
+  .dark .case-study-content h2,
+  .dark .case-study-content h3,
+  .dark .case-study-content h4,
+  .dark .case-study-content h5,
+  .dark .case-study-content h6 {
+    color: #f3f4f6 !important;
+  }
+  
+  /* Specific h3 selectors for better coverage */
+  .dark .case-study-content .problem-card h3,
+  .dark .case-study-content .feature-card h3,
+  .dark .case-study-content .learning-card h3,
+  .dark .case-study-content .timeline-item h3,
+  .dark .case-study-content .roadmap-card h3,
+  .dark .case-study-content h3 {
+    color: #f3f4f6 !important;
+  }
+  
+  .dark .case-study-content p,
+  .dark .case-study-content li,
+  .dark .case-study-content td,
+  .dark .case-study-content th,
+  .dark .case-study-content .problem-card p,
+  .dark .case-study-content .feature-card p,
+  .dark .case-study-content .learning-card li,
+  .dark .case-study-content .timeline-item p {
+    color: #d1d5db !important;
+  }
+  
+  .dark .case-study-content .problem-card,
+  .dark .case-study-content .feature-card,
+  .dark .case-study-content .learning-card,
+  .dark .case-study-content .roadmap-card,
+  .dark .case-study-content .metric-card {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+  }
+  
+  .dark .case-study-content section {
+    background: #111827 !important;
+  }
+  
+  .dark .case-study-content section:nth-child(even) {
+    background: #1f2937 !important;
+  }
+  
+  .dark .case-study-content .tradeoff-table {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+  }
+  
+  .dark .case-study-content .tradeoff-table th {
+    background: #111827 !important;
+    color: #f3f4f6 !important;
+  }
+  
+  .dark .case-study-content .tradeoff-table td {
+    color: #d1d5db !important;
+    border-color: #374151 !important;
+  }
+  
+  .dark .case-study-content .insight-box,
+  .dark .case-study-content .container {
+    background: #1f2937 !important;
+    border-color: #374151 !important;
+  }
+  
+  .dark .case-study-content .stat {
+    color: #f3f4f6 !important;
+  }
+</style>
 <div class="no-print border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
     <a href="{{ '/work/' | relative_url }}" class="text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:underline">&larr; Back to Work</a>

@@ -24,10 +24,16 @@ layout: null
 
   <div class="resume-container">
     {{ content }}
+    
+    <div class="no-print" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1); text-align: center;">
+      <button type="button" onclick="window.print()" class="px-6 py-3 bg-neutral-900 text-white rounded-lg font-medium hover:bg-neutral-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+        📄 Print to PDF
+      </button>
+    </div>
   </div>
 
   <footer class="no-print site-footer">
-    <a href="{{ '/' | relative_url }}">Back to portfolio</a>
+    <a href="{{ '/' | relative_url }}">← Back to portfolio</a>
   </footer>
 </body>
 </html>

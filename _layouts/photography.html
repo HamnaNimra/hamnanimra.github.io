@@ -1,0 +1,24 @@
+---
+layout: base
+---
+<div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+  <a href="{{ '/photography/' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline transition-colors mb-8">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Back to Photography
+  </a>
+
+  <article class="space-y-6">
+    {% if page.image %}
+    <div class="rounded-2xl overflow-hidden shadow-xl bg-neutral-100 dark:bg-neutral-800">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="w-full h-auto block">
+    </div>
+    {% endif %}
+    <header>
+      <h1 class="font-display text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white">{{ page.title }}</h1>
+      {% if page.caption %}
+      <p class="mt-2 text-neutral-600 dark:text-neutral-300">{{ page.caption }}</p>
+      {% endif %}
+    </header>
+    {{ content }}
+  </article>
+</div>

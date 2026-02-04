@@ -1,0 +1,9 @@
+# Resume section IDs and labels for in-page nav (must match id on each <section> in resume.html)
+- id: experience
+  title: Experience
+- id: education
+  title: Education
+- id: skills
+  title: Skills
+- id: volunteering
+  title: Volunteering

@@ -72,6 +72,7 @@
   color: #f1f5f9 !important;
 }
 
+/* Body text and labels: high-contrast for dark mode (consistent with headings) */
 .dark .case-study-content p,
 .dark .case-study-content li,
 .dark .case-study-content td,
@@ -82,8 +83,9 @@
 .dark .case-study-content .attribution,
 .dark .case-study-content .number,
 .dark .case-study-content .label,
-.dark .case-study-content .step-number {
-  color: #cbd5e1 !important;
+.dark .case-study-content .step-number,
+.dark .case-study-content .description {
+  color: #e2e8f0 !important;
 }
 
 /* Cards and boxes */
@@ -110,14 +112,12 @@
   border-color: #475569 !important;
 }
 
-/* Metric card number/label (often on colored bg; ensure readable) */
+/* Metric card: titles and body text high-contrast white */
 .dark .case-study-content .metric-card .number,
-.dark .case-study-content .metric-card .label {
+.dark .case-study-content .metric-card .label,
+.dark .case-study-content .metric-card .description,
+.dark .case-study-content .metric-card p {
   color: #f1f5f9 !important;
-}
-
-.dark .case-study-content .metric-card .label {
-  color: #cbd5e1 !important;
 }
 
 /* Phase badges on roadmap cards */
@@ -147,7 +147,7 @@
 .dark .case-study-content .journey-step {
   background: #1e293b !important;
   border-color: #334155 !important;
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
 }
 
 .dark .case-study-content .timeline-item::before,
@@ -164,7 +164,7 @@
 }
 
 .dark .case-study-content .journey-step .step-number {
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
   background: #334155 !important;
   border-color: #475569 !important;
 }
@@ -177,7 +177,7 @@
 }
 
 .dark .case-study-content .tradeoff-table td {
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
   border-color: #334155 !important;
 }
 
@@ -205,7 +205,7 @@
 
 .dark .case-study-content .contact,
 .dark .case-study-content .contact a {
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
 }
 
 /* Links */
@@ -249,7 +249,7 @@
 .dark .case-study-content [style*="color:#333"],
 .dark .case-study-content [style*="color: #1a1a1a"],
 .dark .case-study-content [style*="color:#1a1a1a"] {
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
 }
 
 /* Inline style overrides: light backgrounds -> dark */
@@ -267,7 +267,7 @@
 .dark .case-study-content [style*="background:#fffef5"] {
   background: #1e293b !important;
   border-color: #334155 !important;
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
 }
 
 /* Inline boxes with colored backgrounds (pastels): make dark and readable */
@@ -317,7 +317,7 @@
 .dark .case-study-content .roadmap-card ul,
 .dark .case-study-content .trust-card ul,
 .dark .case-study-content .arch-layer ul {
-  color: #cbd5e1 !important;
+  color: #e2e8f0 !important;
 }
 
 .dark .case-study-content em {

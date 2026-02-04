@@ -1,16 +1,16 @@
 # Jekyll config for Hamna Nimra Portfolio (GitHub Pages)
+# Custom theme: _layouts (base, case_study, resume) + Tailwind; no remote theme.
 title: "Hamna Nimra"
 description: "Portfolio — Software Engineer & Product Thinking"
 baseurl: ""
 url: "https://hamnanimra.github.io"
-
-# No theme — custom layouts and Tailwind
-# theme: null
+author: "Hamna Nimra"
 
 # Build
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
+future: false
 
 # Collections
 collections:

@@ -151,7 +151,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-8">Additional projects and creative work</p>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for project in site.data.other_projects limit: 6 %}
+        {% assign other_projects = site.data.other_projects %}
+        {% for project in other_projects limit: 6 %}
         <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/10 dark:to-accent-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="relative z-10">
@@ -162,10 +163,15 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           </div>
         </a>
         {% endfor %}
+        {% if other_projects.size == 0 %}
+        <div class="md:col-span-2 lg:col-span-3 text-center py-10 rounded-xl border-2 border-neutral-200 dark:border-neutral-600 bg-neutral-50/50 dark:bg-neutral-800/50">
+          <p class="text-neutral-600 dark:text-neutral-400">More projects coming soon. Add entries in <code class="text-sm">_data/other_projects.yml</code> to list them here.</p>
+        </div>
+        {% endif %}
       </div>
       
       <div class="mt-8 text-center">
-        <a href="/work/" class="text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline font-medium transition-colors">View all work →</a>
+        <a href="{{ '/work/' | relative_url }}" class="text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline font-medium transition-colors">View all work →</a>
       </div>
     </div>
   </section>
@@ -180,8 +186,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300">Open source projects</p>
       </div>
       
+      {% assign repos = site.data.github_projects.repositories | where_exp: "item", "item.name != 'hamnanimra.github.io'" %}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for repo in site.data.github_projects.repositories limit: 6 %}
+        {% for repo in repos limit: 6 %}
         <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group fun-card block bg-white dark:bg-neutral-800 rounded-2xl border-2 border-neutral-200 dark:border-neutral-700 p-6 hover:border-accent-400 dark:hover:border-accent-500 transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden shadow-lg hover:shadow-2xl isolate">
           <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-accent-400/20 to-fun-teal/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
           <div class="relative z-10">
@@ -214,7 +221,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         </a>
         {% endfor %}
         
-        {% if site.data.github_projects.repositories.size == 0 %}
+        {% if repos.size == 0 %}
         <div class="col-span-3 text-center py-16">
           <div class="inline-block p-6 rounded-3xl bg-gradient-to-br from-accent-100/50 to-fun-pink/50 dark:from-accent-900/20 dark:to-fun-pink/20 border-2 border-dashed border-accent-300 dark:border-accent-700">
             <p class="text-base font-semibold text-neutral-700 dark:text-neutral-300 mb-2">GitHub projects syncing</p>

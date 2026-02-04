@@ -10,8 +10,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '.github/workflows/sync-repos.yml'
+    paths-ignore:
+      - '.gitignore'
+      - 'LICENSE'
 
 jobs:
   sync:
@@ -87,6 +88,7 @@ jobs:
           fi
           
           # Commit and push directly to main branch
+          # Using [skip ci] to prevent workflow from triggering on this commit
           git add _data/github_projects.yml
           git commit -m "chore: sync github_projects.yml from API [skip ci]"
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:main

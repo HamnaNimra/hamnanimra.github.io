@@ -1,5 +1,13 @@
 /* Nested top nav: dropdowns + mobile menu */
 
+/* Menu bar: consistent height and alignment across all pages (including resume) */
+.site-header .nav-bar {
+  min-height: 3.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  align-items: center;
+}
+
 .nav-link {
   font-size: 0.875rem;
   font-weight: 700;
@@ -89,15 +97,16 @@
   .nav-mobile-toggle { display: none; }
 }
 
-/* Desktop nav list (hidden on mobile) */
+/* Desktop nav list: visibility via Tailwind (hidden md:flex); gap/spacing here */
 .nav-desktop {
-  display: none;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .nav-desktop { display: flex; }
+@media (min-width: 1024px) {
+  .nav-desktop {
+    gap: 1.25rem;
+  }
 }
 
 /* Mobile overlay + drawer */

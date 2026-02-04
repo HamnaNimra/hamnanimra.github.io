@@ -627,6 +627,11 @@
       .scroll-reveal-card.revealed { transform: none; }
     }
 
+    /* "Currently" rotating line: smooth fade */
+    .currently-rotating {
+      transition: opacity 0.25s ease;
+    }
+
   </style>
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">

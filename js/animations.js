@@ -60,7 +60,72 @@
         setTimeout(typeWriter, 400);
       }
     }
+
+    // "Currently" rotating line (hero) – only on home
+    const currentlyEl = document.getElementById('currently-rotating');
+    if (currentlyEl) {
+      const phrases = [
+        'building things that just work',
+        'exploring fast and slow moments',
+        'paying attention to small details',
+        'occasionally distracted by shiny things',
+        'sharing projects I care about'
+      ];
+      let idx = 0;
+      currentlyEl.textContent = phrases[0];
+      if (!prefersReducedMotion()) {
+        setInterval(() => {
+          idx = (idx + 1) % phrases.length;
+          currentlyEl.style.opacity = '0';
+          setTimeout(() => {
+            currentlyEl.textContent = phrases[idx];
+            currentlyEl.style.opacity = '1';
+          }, 200);
+        }, 3200);
+      }
+    }
+
+    // Mimo easter egg: click to show a fun message
+    document.querySelectorAll('.mimo-highlight').forEach(el => {
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', 'Mimo says something');
+      el.addEventListener('click', showMimoMessage);
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showMimoMessage(e); } });
+    });
   });
+
+  function showMimoMessage() {
+    const existing = document.getElementById('mimo-toast');
+    if (existing) {
+      existing.remove();
+      return;
+    }
+    const messages = [
+      "Mimo says: I'm the real boss here.",
+      "Mimo says: Treats, then we talk.",
+      "Mimo says: This human writes code. I run the house.",
+      "Mimo says: *stares* You're still here?"
+    ];
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    const toast = document.createElement('div');
+    toast.id = 'mimo-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.textContent = msg;
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1f2937;color:#f3f4f6;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:500;box-shadow:0 10px 40px rgba(0,0,0,0.2);z-index:9999;max-width:90vw;text-align:center;opacity:0;';
+    if (!document.getElementById('mimo-toast-style')) {
+      const s = document.createElement('style');
+      s.id = 'mimo-toast-style';
+      s.textContent = '@keyframes mimoToast{0%{opacity:0;transform:translateX(-50%) translateY(12px)}100%{opacity:1;transform:translateX(-50%) translateY(0)}}';
+      document.head.appendChild(s);
+    }
+    toast.style.animation = 'mimoToast 0.3s ease forwards';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 4000);
+  }
 
   const style = document.createElement('style');
   style.textContent = `

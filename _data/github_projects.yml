@@ -1,0 +1,3 @@
+# Populated by GitHub Action .github/workflows/sync-repos.yml
+# Format: list of { name, description, html_url, stargazers_count, updated_at, ... }
+repositories: []

@@ -1,0 +1,51 @@
+---
+layout: base
+title: Work
+description: Case studies and product strategy documents
+---
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+  <h1 class="font-display text-4xl sm:text-5xl font-bold mb-4 text-neutral-900 dark:text-white">Work</h1>
+  <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-12">Product case studies and strategy documents</p>
+
+  <!-- Case Studies -->
+  <section class="mb-16">
+    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Case Studies</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="/work/case-studies/pit-strategy/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">Pit Strategy Optimizer</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Data-driven decision support for Formula 1 pit stop strategy</p>
+        <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
+      </a>
+      <a href="/work/case-studies/microhelp/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">MicroHelp</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Rebuilding community, one small favor at a time</p>
+        <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
+      </a>
+      <a href="/work/case-studies/autoperfpy/" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">AutoPerfPy</h3>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3">Democratizing performance engineering for edge AI</p>
+        <div class="text-xs text-neutral-500 dark:text-neutral-500">Product Case Study · February 2026</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PM Docs -->
+  <section>
+    <h2 class="font-display text-2xl font-semibold mb-6 text-neutral-900 dark:text-white">Product Strategy Documents</h2>
+    {% if site.pm_docs.size > 0 %}
+    <div class="grid md:grid-cols-2 gap-6">
+      {% for doc in site.pm_docs %}
+      <a href="{{ doc.url | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-lg border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-lg transition">
+        <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:underline">{{ doc.title }}</h3>
+        {% if doc.description %}
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ doc.description }}</p>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-neutral-500 dark:text-neutral-500">PM documents coming soon...</p>
+    {% endif %}
+  </section>
+</div>

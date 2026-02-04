@@ -1,0 +1,24 @@
+---
+layout: base
+title: Photography
+description: Visual storytelling
+---
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+  <h1 class="font-display text-4xl sm:text-5xl font-bold mb-4 text-neutral-900 dark:text-white">Photography</h1>
+  <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-12">Visual storytelling</p>
+
+  {% if site.photography.size > 0 %}
+  <div class="columns-1 sm:columns-2 lg:columns-3 gap-4">
+    {% for photo in site.photography %}
+    <a href="{{ photo.url | relative_url }}" class="block mb-4 break-inside-avoid">
+      {% if photo.image %}
+      <img src="{{ photo.image | relative_url }}" alt="{{ photo.title }}" class="w-full rounded-lg shadow-sm hover:shadow-md transition">
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-neutral-500 dark:text-neutral-500">Photography gallery coming soon...</p>
+  {% endif %}
+</div>

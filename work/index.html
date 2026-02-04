@@ -7,7 +7,7 @@ description: Case studies, product documentation, and GitHub projects
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 gradient-bg-1 relative isolate">
   <div class="text-center mb-16">
     <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 bg-clip-text text-transparent">
-      Portfolio
+      Portfolio 🚀
     </h1>
     <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
       Case studies, product documentation, and GitHub projects
@@ -16,7 +16,7 @@ description: Case studies, product documentation, and GitHub projects
 
   <!-- Case Studies Section -->
   <section class="mb-16 relative isolate">
-    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Case Studies</h2>
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Case Studies 📂</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">Product case studies demonstrating product thinking through implementation</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for case in site.case_studies %}
@@ -43,7 +43,7 @@ description: Case studies, product documentation, and GitHub projects
 
   <!-- Product Documentation Section -->
   <section class="mb-16 relative isolate">
-    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Product Documentation</h2>
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Product Documentation 📄</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">PM artifacts and product thinking documents</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% if site.pm_docs.size > 0 %}
@@ -60,7 +60,7 @@ description: Case studies, product documentation, and GitHub projects
         {% endfor %}
       {% else %}
         <div class="col-span-3 text-center py-10 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800/90">
-          <p class="text-neutral-800 dark:text-neutral-100 font-semibold text-base">Product documentation coming soon...</p>
+          <p class="text-neutral-800 dark:text-neutral-100 font-semibold text-base">📄 Product documentation coming soon...</p>
         </div>
       {% endif %}
     </div>
@@ -69,7 +69,7 @@ description: Case studies, product documentation, and GitHub projects
   <!-- GitHub Projects -->
   <section class="mb-16 relative isolate">
     <div class="relative z-10">
-      <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">GitHub Projects</h2>
+      <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">GitHub Projects ⭐</h2>
       <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6 relative z-10">Open source contributions and repositories</p>
     </div>
     {% assign repos = site.data.github_projects.repositories | where_exp: "item", "item.name != 'hamnanimra.github.io'" %}
@@ -114,7 +114,7 @@ description: Case studies, product documentation, and GitHub projects
 
   <!-- Other Work -->
   <section class="mb-16 relative isolate">
-    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Other Work</h2>
+    <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Other Work 🛠️</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">Additional projects and creative work</p>
     {% assign other_projects = site.data.other_projects %}
     {% if other_projects.size > 0 %}

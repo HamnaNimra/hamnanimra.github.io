@@ -83,38 +83,57 @@ jobs:
             exit 0
           fi
           
-          # Create a branch for the update
-          BRANCH_NAME="sync-github-repos-$(date +%s)"
-          git checkout -b ${BRANCH_NAME}
+          # Use a consistent branch name to update the same PR
+          BRANCH_NAME="sync-github-repos"
+          
+          # Check if branch exists, create or checkout
+          if git ls-remote --heads origin ${BRANCH_NAME} | grep -q ${BRANCH_NAME}; then
+            git fetch origin ${BRANCH_NAME}:${BRANCH_NAME} 2>/dev/null || true
+            git checkout ${BRANCH_NAME}
+            git reset --hard origin/main
+          else
+            git checkout -b ${BRANCH_NAME}
+          fi
           
           # Commit changes
           git add _data/github_projects.yml
-          git commit -m "chore: sync github_projects.yml from API"
+          git commit -m "chore: sync github_projects.yml from API [skip ci]"
           
-          # Push to the branch
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH_NAME}
+          # Push to the branch (force push to update)
+          git push -f https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH_NAME}
           
-          # Create new PR
-          PR_RESPONSE=$(curl -X POST \
-            -H "Authorization: token ${GITHUB_TOKEN}" \
+          # Check if PR already exists
+          EXISTING_PR=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls \
-            -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${BRANCH_NAME}\",\"base\":\"main\",\"body\":\"🤖 Auto-sync of GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\"}")
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${GITHUB_REPOSITORY}:${BRANCH_NAME}" \
+            | jq -r '.[0].number // empty')
           
-          PR_NUMBER=$(echo $PR_RESPONSE | jq -r '.number // empty')
-          ERROR_MSG=$(echo $PR_RESPONSE | jq -r '.message // empty')
-          
-          if [ -n "$PR_NUMBER" ]; then
-            echo "Created PR #${PR_NUMBER}"
-            echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
-            echo "PR will be merged after GitHub Pages deployment completes"
-          elif [[ "$ERROR_MSG" == *"already exists"* ]]; then
-            echo "PR already exists for this update - repositories are up to date"
+          if [ -n "$EXISTING_PR" ]; then
+            echo "Updated existing PR #${EXISTING_PR}"
+            echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${EXISTING_PR}"
+            echo "PR can be merged manually. Since this is a data-only update, you can bypass the deployment requirement."
           else
-            echo "Failed to create PR: $ERROR_MSG"
-            echo "Response: $PR_RESPONSE"
-            # Don't fail the workflow - the data is still updated in the branch
-            echo "Changes are available in branch ${BRANCH_NAME}"
+            # Create new PR
+            PR_RESPONSE=$(curl -X POST \
+              -H "Authorization: token ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls \
+              -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${BRANCH_NAME}\",\"base\":\"main\",\"body\":\"🤖 Auto-sync of GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\\n\\n**Note:** This is a data-only update. You can merge this PR manually and bypass the deployment requirement if needed, as it only updates repository metadata.\"}")
+            
+            PR_NUMBER=$(echo $PR_RESPONSE | jq -r '.number // empty')
+            ERROR_MSG=$(echo $PR_RESPONSE | jq -r '.message // empty')
+            
+            if [ -n "$PR_NUMBER" ]; then
+              echo "Created PR #${PR_NUMBER}"
+              echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
+              echo "PR can be merged manually. Since this is a data-only update, you can bypass the deployment requirement."
+            elif [[ "$ERROR_MSG" == *"already exists"* ]]; then
+              echo "PR already exists for this update"
+            else
+              echo "Failed to create PR: $ERROR_MSG"
+              echo "Response: $PR_RESPONSE"
+              exit 1
+            fi
           fi
           
-          echo "Successfully updated github_projects.yml in branch ${BRANCH_NAME}"
+          echo "Successfully updated github_projects.yml"

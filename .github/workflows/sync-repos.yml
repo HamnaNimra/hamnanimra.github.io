@@ -78,7 +78,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Check if there are any changes
+          # Check if there are any changes (we're on main with freshly built YAML)
           if git diff --quiet _data/github_projects.yml; then
             echo "No changes to commit - repositories are up to date"
             exit 0
@@ -87,16 +87,13 @@ jobs:
           # Use a consistent branch name to update the same PR
           BRANCH_NAME="sync-github-repos"
           
-          # Check if branch exists, create or checkout
-          if git ls-remote --heads origin ${BRANCH_NAME} | grep -q ${BRANCH_NAME}; then
-            git fetch origin ${BRANCH_NAME}:${BRANCH_NAME} 2>/dev/null || true
-            git checkout ${BRANCH_NAME}
-            git reset --hard origin/main
-          else
-            git checkout -b ${BRANCH_NAME}
-          fi
+          # Create or reset branch to current HEAD but KEEP working tree (preserves new YAML)
+          git checkout -B ${BRANCH_NAME}
           
-          # Commit changes
+          # Remove build artifact so it's not committed or reported as untracked
+          rm -f repos.json
+          
+          # Commit and push
           git add _data/github_projects.yml
           git commit -m "chore: sync github_projects.yml from API [skip ci]"
           

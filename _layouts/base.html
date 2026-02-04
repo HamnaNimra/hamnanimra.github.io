@@ -93,6 +93,7 @@
     }
     .dark body {
       color: #e5e7eb;
+      font-family: 'Inter', system-ui, sans-serif;
     }
     h1, h2, .font-display { 
       font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -242,7 +243,7 @@
       background: rgba(99, 102, 241, 0.5);
     }
     
-    /* Gradient text - vibrant and fun */
+    /* Gradient text - vibrant and fun; brighter in dark mode for readability */
     .gradient-text {
       background: linear-gradient(135deg, #ef4444 0%, #ec4899 25%, #a855f7 50%, #0ea5e9 75%, #14b8a6 100%);
       background-size: 200% 200%;
@@ -250,6 +251,13 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: gradient 8s ease infinite;
+    }
+    .dark .gradient-text {
+      background: linear-gradient(135deg, #f87171 0%, #f472b6 25%, #c084fc 50%, #38bdf8 75%, #2dd4bf 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     /* Fun gradient backgrounds */
@@ -362,6 +370,24 @@
       contain: layout style paint;
     }
     
+    /* Landing page hero: ensure font and contrast in dark mode */
+    .dark .gradient-bg-1 .font-display,
+    .dark .gradient-bg-2 .font-display {
+      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    }
+    .dark .gradient-bg-1 h1,
+    .dark .gradient-bg-2 h1,
+    .dark .gradient-bg-1 h2,
+    .dark .gradient-bg-2 h2 {
+      color: #f9fafb;
+    }
+    .dark .gradient-bg-1 p,
+    .dark .gradient-bg-2 p,
+    .dark .gradient-bg-1 .text-neutral-700,
+    .dark .gradient-bg-2 .text-neutral-700 {
+      color: #e5e7eb !important;
+    }
+
     /* Colorful accent dots */
     .accent-dot {
       width: 8px;

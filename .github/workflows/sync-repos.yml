@@ -8,8 +8,6 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
   push:
-    branches:
-      - main
     paths-ignore:
       - '.gitignore'
       - 'LICENSE'
@@ -19,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
       pull-requests: write
     steps:
       - name: Checkout

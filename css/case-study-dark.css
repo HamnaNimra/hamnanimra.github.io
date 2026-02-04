@@ -1,0 +1,325 @@
+/* Case study dark mode overrides. Load after case study content. Scoped to .dark .case-study-content. */
+
+.dark body {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+.dark .case-study-content {
+  background: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+/* Sections: override alternating light backgrounds */
+.dark .case-study-content section,
+.dark .case-study-content section:nth-child(even),
+.dark .case-study-content section:nth-child(odd) {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .hero {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%) !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .hero h1,
+.dark .case-study-content .hero .subtitle,
+.dark .case-study-content .hero .meta,
+.dark .case-study-content .hero .meta span {
+  color: #f1f5f9 !important;
+}
+
+.dark .case-study-content .hero .meta span {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid #475569 !important;
+}
+
+.dark .case-study-content .insight,
+.dark .case-study-content .problem,
+.dark .case-study-content .solution,
+.dark .case-study-content .architecture,
+.dark .case-study-content .process,
+.dark .case-study-content .metrics,
+.dark .case-study-content .tradeoffs,
+.dark .case-study-content .learnings,
+.dark .case-study-content .roadmap,
+.dark .case-study-content .footer-cta {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #334155 !important;
+}
+
+/* Headings and typography */
+.dark .case-study-content h1,
+.dark .case-study-content h2,
+.dark .case-study-content h3,
+.dark .case-study-content h4,
+.dark .case-study-content h5,
+.dark .case-study-content h6,
+.dark .case-study-content .hero h1,
+.dark .case-study-content .problem-card h3,
+.dark .case-study-content .feature-card h3,
+.dark .case-study-content .stat,
+.dark .case-study-content .learning-card h3,
+.dark .case-study-content .roadmap-card h3,
+.dark .case-study-content .trust-card h3,
+.dark .case-study-content .timeline-item h3,
+.dark .case-study-content .journey-step h3,
+.dark .case-study-content .arch-layer h4 {
+  color: #f1f5f9 !important;
+}
+
+.dark .case-study-content p,
+.dark .case-study-content li,
+.dark .case-study-content td,
+.dark .case-study-content th,
+.dark .case-study-content .subtitle,
+.dark .case-study-content .section-subtitle,
+.dark .case-study-content .quote,
+.dark .case-study-content .attribution,
+.dark .case-study-content .number,
+.dark .case-study-content .label,
+.dark .case-study-content .step-number {
+  color: #cbd5e1 !important;
+}
+
+/* Cards and boxes */
+.dark .case-study-content .container,
+.dark .case-study-content .problem-card,
+.dark .case-study-content .feature-card,
+.dark .case-study-content .insight-box,
+.dark .case-study-content .learning-card,
+.dark .case-study-content .roadmap-card,
+.dark .case-study-content .trust-card,
+.dark .case-study-content .metric-card,
+.dark .case-study-content .arch-diagram,
+.dark .case-study-content .arch-layer,
+.dark .case-study-content .tradeoff-table {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .problem-card:hover,
+.dark .case-study-content .feature-card:hover,
+.dark .case-study-content .learning-card:hover,
+.dark .case-study-content .roadmap-card:hover,
+.dark .case-study-content .trust-card:hover {
+  border-color: #475569 !important;
+}
+
+/* Metric card number/label (often on colored bg; ensure readable) */
+.dark .case-study-content .metric-card .number,
+.dark .case-study-content .metric-card .label {
+  color: #f1f5f9 !important;
+}
+
+.dark .case-study-content .metric-card .label {
+  color: #cbd5e1 !important;
+}
+
+/* Phase badges on roadmap cards */
+.dark .case-study-content .roadmap-card .phase {
+  background: #334155 !important;
+  color: #f1f5f9 !important;
+  border-color: #475569 !important;
+}
+
+/* Feature icon (keep visible in dark) */
+.dark .case-study-content .feature-icon {
+  background: linear-gradient(135deg, #334155, #475569) !important;
+  border-color: #475569 !important;
+}
+
+/* Timeline */
+.dark .case-study-content .timeline,
+.dark .case-study-content .timeline-section {
+  background: transparent !important;
+}
+
+.dark .case-study-content .timeline::before {
+  background: #475569 !important;
+}
+
+.dark .case-study-content .timeline-item,
+.dark .case-study-content .journey-step {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+.dark .case-study-content .timeline-item::before,
+.dark .case-study-content .timeline-item:nth-child(odd)::before,
+.dark .case-study-content .timeline-item:nth-child(even)::before {
+  background: #64748b !important;
+}
+
+.dark .case-study-content .timeline-item h3,
+.dark .case-study-content .timeline-item p,
+.dark .case-study-content .journey-step h3,
+.dark .case-study-content .journey-step p {
+  color: #f1f5f9 !important;
+}
+
+.dark .case-study-content .journey-step .step-number {
+  color: #cbd5e1 !important;
+  background: #334155 !important;
+  border-color: #475569 !important;
+}
+
+/* Tradeoff table */
+.dark .case-study-content .tradeoff-table th {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .tradeoff-table td {
+  color: #cbd5e1 !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .tradeoff-table .chosen {
+  background: #334155 !important;
+  color: #86efac !important;
+  border-color: #475569 !important;
+}
+
+.dark .case-study-content .tradeoff-table .rejected {
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+  border-color: #334155 !important;
+}
+
+/* Top bar (inside case study content if present) */
+.dark .case-study-content .top-bar {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .case-study-content .back-link {
+  color: #93c5fd !important;
+}
+
+.dark .case-study-content .contact,
+.dark .case-study-content .contact a {
+  color: #cbd5e1 !important;
+}
+
+/* Links */
+.dark .case-study-content a:not(.btn) {
+  color: #93c5fd !important;
+}
+
+.dark .case-study-content a:hover {
+  color: #bfdbfe !important;
+}
+
+/* Buttons: visible in dark */
+.dark .case-study-content .btn-primary {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.dark .case-study-content .btn-primary:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.dark .case-study-content .btn-secondary {
+  background: transparent !important;
+  color: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+}
+
+.dark .case-study-content .btn-secondary:hover {
+  background: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Inline style overrides: light text colors -> dark mode readable */
+.dark .case-study-content [style*="color: #555"],
+.dark .case-study-content [style*="color:#555"],
+.dark .case-study-content [style*="color: #666"],
+.dark .case-study-content [style*="color:#666"],
+.dark .case-study-content [style*="color: #333"],
+.dark .case-study-content [style*="color:#333"],
+.dark .case-study-content [style*="color: #1a1a1a"],
+.dark .case-study-content [style*="color:#1a1a1a"] {
+  color: #cbd5e1 !important;
+}
+
+/* Inline style overrides: light backgrounds -> dark */
+.dark .case-study-content [style*="background: #ffffff"],
+.dark .case-study-content [style*="background:#ffffff"],
+.dark .case-study-content [style*="background: #fff"],
+.dark .case-study-content [style*="background:#fff"],
+.dark .case-study-content [style*="background: white"],
+.dark .case-study-content [style*="background:white"],
+.dark .case-study-content [style*="background: #fafafa"],
+.dark .case-study-content [style*="background:#fafafa"],
+.dark .case-study-content [style*="background: #f8f9fa"],
+.dark .case-study-content [style*="background:#f8f9fa"],
+.dark .case-study-content [style*="background: #fffef5"],
+.dark .case-study-content [style*="background:#fffef5"] {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Inline boxes with colored backgrounds (pastels): make dark and readable */
+.dark .case-study-content [style*="background: #A8E6CF"],
+.dark .case-study-content [style*="background:#A8E6CF"],
+.dark .case-study-content [style*="background: #FFAAA5"],
+.dark .case-study-content [style*="background:#FFAAA5"],
+.dark .case-study-content [style*="background: #FFD3B6"],
+.dark .case-study-content [style*="background:#FFD3B6"] {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Purple gradient callout (e.g. Biggest Lesson): keep or force text white */
+.dark .case-study-content [style*="linear-gradient(135deg, #667eea"],
+.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] {
+  color: #f1f5f9 !important;
+}
+
+.dark .case-study-content [style*="linear-gradient(135deg, #667eea"] h3,
+.dark .case-study-content [style*="linear-gradient(135deg, #667eea"] p,
+.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] h3,
+.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] p {
+  color: #f1f5f9 !important;
+}
+
+/* Inline border-left accent (e.g. trade-off box) */
+.dark .case-study-content [style*="border-left: 4px solid #667eea"] {
+  border-left-color: #93c5fd !important;
+}
+
+.dark .case-study-content [style*="color: #667eea"],
+.dark .case-study-content [style*="color:#667eea"] {
+  color: #93c5fd !important;
+}
+
+/* Learning card list bullets */
+.dark .case-study-content .learning-card li::before,
+.dark .case-study-content .roadmap-card li::before,
+.dark .case-study-content .trust-card li::before,
+.dark .case-study-content .arch-layer li::before {
+  color: #94a3b8 !important;
+}
+
+.dark .case-study-content .learning-card ul,
+.dark .case-study-content .roadmap-card ul,
+.dark .case-study-content .trust-card ul,
+.dark .case-study-content .arch-layer ul {
+  color: #cbd5e1 !important;
+}
+
+.dark .case-study-content em {
+  color: #e2e8f0 !important;
+}

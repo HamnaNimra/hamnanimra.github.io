@@ -1,5 +1,7 @@
-# Manual "Other Projects" — add entries as needed
+# Manual "Other Projects" — add entries as a YAML list below (keep [] if none).
+# Example:
 # - title: "Project Name"
 #   description: "Short description"
 #   url: "https://..."
 #   year: "2024"
+[]

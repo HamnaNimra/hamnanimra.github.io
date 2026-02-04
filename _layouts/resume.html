@@ -25,24 +25,15 @@ layout: null
   <header class="no-print site-header sticky top-0 z-50 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-700">
     <nav class="resume-nav flex items-center justify-between">
       <div class="flex items-center gap-6">
-        <a href="{{ '/' | relative_url }}" class="text-sm font-semibold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-purple transition-colors">← Home</a>
-        <a href="{{ '/work/' | relative_url }}" class="text-sm font-semibold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-purple transition-colors">Work</a>
+        <a href="{{ '/' | relative_url }}" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">← Home</a>
+        <a href="{{ '/work/' | relative_url }}" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">Work</a>
       </div>
-      <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener" class="text-sm font-semibold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-purple transition-colors">GitHub</a>
+      <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors">GitHub</a>
     </nav>
   </header>
 
   <div class="resume-container no-print-fun">
     {{ content }}
-    
-    <div class="no-print print-cta">
-      <button type="button" onclick="window.print()" class="print-button">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-        </svg>
-        Print to PDF
-      </button>
-    </div>
   </div>
 </body>
 </html>

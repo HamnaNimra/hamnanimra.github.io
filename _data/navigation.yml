@@ -1,0 +1,24 @@
+# Site navigation: top-level and nested items
+# External links use external: true; dropdowns use children:
+
+- title: About
+  url: "/#about"
+
+- title: Portfolio
+  url: "/work/"
+  children:
+    - title: Overview
+      url: "/work/"
+    - title: Case Studies
+      url: "/case-studies/"
+    # Individual case studies added in base.html from site.case_studies
+
+- title: Resume
+  url: "/resume/"
+
+- title: Photography
+  url: "/photography/"
+
+- title: GitHub
+  url: "https://github.com/HamnaNImra"
+  external: true

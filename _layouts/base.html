@@ -489,7 +489,7 @@
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
   {% endif %}
-  <link rel="stylesheet" href="{{ '/css/nav.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/nav.css' | absolute_url }}">
   {% seo %}
 </head>
 <body class="bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 min-h-screen flex flex-col transition-colors duration-200">
@@ -503,15 +503,15 @@
     })();
   </script>
 
-  <header class="no-print border-b border-neutral-200/50 dark:border-neutral-700/50 glass sticky top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md">
-    <nav class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between" aria-label="Main navigation">
-      <a href="{{ '/' | relative_url }}" class="font-display text-2xl font-bold text-neutral-900 dark:text-white hover:opacity-90 transition-opacity relative group">
+  <header class="no-print border-b border-neutral-200/50 dark:border-neutral-700/50 glass sticky top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md site-header">
+    <nav class="nav-bar max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4" aria-label="Main navigation">
+      <a href="{{ '/' | relative_url }}" class="flex-shrink-0 font-display text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white hover:opacity-90 transition-opacity relative group">
         <span class="gradient-text">Hamna Nimra</span>
         <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
 
-      <!-- Desktop: nested nav -->
-      <ul class="nav-desktop items-center gap-6">
+      <!-- Desktop: nested nav (hidden md:flex so menu shows even if nav.css fails to load) -->
+      <ul class="nav-desktop hidden md:flex items-center flex-shrink-0 gap-4 lg:gap-5">
         {% for item in site.data.navigation %}
           {% if item.children %}
             <li class="nav-item-with-children">
@@ -600,7 +600,7 @@
     </ul>
   </div>
 
-  <main class="flex-1 relative z-10">
+  <main class="flex-1 relative z-10 {% if page.layout == 'resume' %}bg-gradient-to-br from-neutral-50 via-white to-neutral-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 py-6{% endif %}">
     {{ content }}
   </main>
 

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="MicroHelp case study focused on hyperlocal community support and product strategy.">
+    <meta name="author" content="Hamna Nimra">
+    <meta name="theme-color" content="#A8E6CF">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MicroHelp | Product Case Study</title>
     <style>
@@ -24,6 +27,49 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .top-bar {
+            background: #ffffff;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .top-bar .container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 16px 24px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact a {
+            color: inherit;
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 3px solid rgba(0, 0, 0, 0.25);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         /* Hero Section */
@@ -658,9 +704,23 @@
                 font-size: 24px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <header class="top-bar">
+        <div class="container">
+            <a class="back-link" href="/html/">&larr; Back to Portfolio</a>
+        </div>
+    </header>
     <!-- Hero Section -->
     <div class="hero">
         <div class="container">
@@ -1178,7 +1238,7 @@
             <div class="cta-buttons">
                 <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-primary">Get in Touch</a>
             </div>
-            <p class="contact">📧 hamnanimramirza@outlook.com | 💼 linkedin.com/in/hamnanimra</p>
+            <p class="contact">📧 <a href="mailto:hamnanimramirza@outlook.com">hamnanimramirza@outlook.com</a> | 💼 <a href="https://linkedin.com/in/hamnanimra" target="_blank" rel="noopener noreferrer">linkedin.com/in/hamnanimra</a></p>
         </div>
     </section>
 </body>

@@ -3,6 +3,9 @@
 name: Sync GitHub Repos
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # Run weekly (Monday 00:00 UTC)
     - cron: '0 0 * * 1'
@@ -20,9 +23,9 @@ jobs:
       - name: Fetch public repos
         id: fetch
         env:
-          GITHUB_USER: HamnaNImra
+          GITHUB_USER: ${{ github.repository_owner }}
         run: |
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          curl -s \
             "https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated&type=owner" \
             | jq -c '[ .[] | {name, description, html_url, stargazers_count, forks_count, updated_at, language} ]' \
             > repos.json

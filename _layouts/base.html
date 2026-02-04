@@ -189,6 +189,11 @@
       letter-spacing: 0.01em;
     }
     
+    /* Ensure navigation links are visible in dark mode */
+    .dark header nav a.text-neutral-700 {
+      color: #ffffff !important;
+    }
+    
     /* Improve section headings */
     section h2 {
       font-size: 1.5rem;
@@ -381,6 +386,24 @@
       border-color: #4b5563;
     }
     
+    /* Ensure section headings and text are always above decorative elements */
+    section h2,
+    section h3,
+    section p,
+    section > div > h2,
+    section > div > h3,
+    section > div > p {
+      position: relative;
+      z-index: 10;
+    }
+    
+    /* Ensure card decorative blobs stay within cards and don't overlap section text */
+    .card-hover .absolute,
+    .fun-card .absolute {
+      z-index: 0 !important;
+      pointer-events: none;
+    }
+    
     /* Ensure sections have proper containment */
     section {
       contain: layout style paint;
@@ -441,18 +464,18 @@
         <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
       <ul class="flex items-center gap-6">
-        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
           About
         </a></li>
-        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
           Portfolio
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink to-fun-purple group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-accent-500 dark:hover:text-accent-400 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-500/10 dark:hover:bg-accent-500/10">
+        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-accent-500 dark:hover:text-accent-400 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-500/10 dark:hover:bg-accent-500/10">
           Resume
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-accent-500 to-fun-teal group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-purple dark:hover:text-fun-purple transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-purple/10 dark:hover:bg-fun-purple/10">
+        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-purple dark:hover:text-fun-purple transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-purple/10 dark:hover:bg-fun-purple/10">
           GitHub
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-purple to-fun-pink group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>

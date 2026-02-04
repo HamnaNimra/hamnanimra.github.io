@@ -19,15 +19,15 @@ description: Case studies, product documentation, and GitHub projects
     <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">Case Studies</h2>
     <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6">Product case studies demonstrating product thinking through implementation</p>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <a href="{{ '/case-studies/' | relative_url }}" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-8 card-hover relative overflow-hidden isolate">
+      <a href="{{ '/case-studies/' | relative_url }}" class="group flex flex-col bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-8 card-hover relative overflow-hidden isolate min-h-[200px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
-        <div class="relative z-10">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-4 flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+        <div class="relative z-10 flex flex-col flex-1 min-h-0">
+          <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-5 flex items-center justify-center text-white font-bold text-2xl shadow-lg" aria-hidden="true">
             📚
           </div>
-          <h3 class="font-display text-lg font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-fun-pink dark:group-hover:text-fun-purple transition-colors">View All Case Studies</h3>
-          <p class="text-sm text-neutral-600 dark:text-neutral-300">Explore detailed product case studies showcasing product thinking and implementation</p>
-          <div class="mt-4 flex items-center gap-2 text-sm font-bold text-fun-pink dark:text-fun-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <h3 class="font-display text-lg font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-fun-pink dark:group-hover:text-fun-purple transition-colors flex-shrink-0">View All Case Studies</h3>
+          <p class="text-sm text-neutral-600 dark:text-neutral-300 flex-1 min-h-0 leading-relaxed">Explore detailed product case studies and PM artifacts showcasing product thinking and implementation.</p>
+          <div class="mt-4 flex items-center gap-2 text-sm font-bold text-fun-pink dark:text-fun-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0">
             View case studies
             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
@@ -56,8 +56,8 @@ description: Case studies, product documentation, and GitHub projects
         </a>
         {% endfor %}
       {% else %}
-        <div class="col-span-3 text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-          <p class="text-neutral-500 dark:text-neutral-300">Product documentation coming soon...</p>
+        <div class="col-span-3 text-center py-8 rounded-xl border border-neutral-200 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-800">
+          <p class="text-neutral-700 dark:text-neutral-200 font-medium">Product documentation coming soon...</p>
         </div>
       {% endif %}
     </div>
@@ -100,8 +100,8 @@ description: Case studies, product documentation, and GitHub projects
       <a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-neutral-700 dark:text-neutral-300 hover:underline font-medium">View all repositories on GitHub →</a>
     </div>
     {% else %}
-    <div class="text-center py-8 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-      <p class="text-neutral-500 dark:text-neutral-300">GitHub projects will sync automatically via GitHub Action</p>
+    <div class="text-center py-8 rounded-xl border border-neutral-200 dark:border-neutral-600 bg-neutral-100 dark:bg-neutral-800">
+      <p class="text-neutral-700 dark:text-neutral-200 font-medium">GitHub projects will sync automatically via GitHub Action</p>
     </div>
     {% endif %}
   </section>

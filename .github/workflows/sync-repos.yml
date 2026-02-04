@@ -74,6 +74,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -100,10 +101,10 @@ jobs:
           # Push to the branch (force push to update)
           git push -f https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:${BRANCH_NAME}
           
-          # Check if PR already exists
+          # Check if PR already exists (head must be owner:branch per GitHub API)
           EXISTING_PR=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" \
             -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${GITHUB_REPOSITORY}:${BRANCH_NAME}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=open&head=${GITHUB_REPOSITORY_OWNER}:${BRANCH_NAME}" \
             | jq -r '.[0].number // empty')
           
           if [ -n "$EXISTING_PR" ]; then
@@ -111,22 +112,23 @@ jobs:
             echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${EXISTING_PR}"
             echo "PR can be merged manually. Since this is a data-only update, you can bypass the deployment requirement."
           else
-            # Create new PR
-            PR_RESPONSE=$(curl -X POST \
+            # Create new PR (head is owner:branch for API)
+            PR_HEAD="${GITHUB_REPOSITORY_OWNER}:${BRANCH_NAME}"
+            PR_RESPONSE=$(curl -s -X POST \
               -H "Authorization: token ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls \
-              -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${BRANCH_NAME}\",\"base\":\"main\",\"body\":\"🤖 Auto-sync of GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\\n\\n**Note:** This is a data-only update. You can merge this PR manually and bypass the deployment requirement if needed, as it only updates repository metadata.\"}")
+              -d "{\"title\":\"chore: sync github_projects.yml from API\",\"head\":\"${PR_HEAD}\",\"base\":\"main\",\"body\":\"🤖 Auto-sync of GitHub repositories data.\\n\\nThis PR updates the \`_data/github_projects.yml\` file with the latest public repositories from GitHub.\\n\\n**Note:** This is a data-only update. You can merge this PR manually and bypass the deployment requirement if needed, as it only updates repository metadata.\"}")
             
-            PR_NUMBER=$(echo $PR_RESPONSE | jq -r '.number // empty')
-            ERROR_MSG=$(echo $PR_RESPONSE | jq -r '.message // empty')
+            PR_NUMBER=$(echo "$PR_RESPONSE" | jq -r '.number // empty')
+            ERROR_MSG=$(echo "$PR_RESPONSE" | jq -r '.message // empty')
             
             if [ -n "$PR_NUMBER" ]; then
               echo "Created PR #${PR_NUMBER}"
               echo "PR URL: https://github.com/${GITHUB_REPOSITORY}/pull/${PR_NUMBER}"
               echo "PR can be merged manually. Since this is a data-only update, you can bypass the deployment requirement."
-            elif [[ "$ERROR_MSG" == *"already exists"* ]]; then
-              echo "PR already exists for this update"
+            elif [ -n "$ERROR_MSG" ] && [[ "$ERROR_MSG" == *"already exists"* ]]; then
+              echo "PR already exists for this branch; branch was updated. Open or merge the existing PR."
             else
               echo "Failed to create PR: $ERROR_MSG"
               echo "Response: $PR_RESPONSE"

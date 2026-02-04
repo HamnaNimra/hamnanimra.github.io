@@ -369,6 +369,18 @@
       backface-visibility: hidden;
     }
     
+    /* Empty-state / placeholder boxes: readable in light and dark mode */
+    .empty-state-box {
+      background: #f3f4f6;
+      color: #374151;
+      border-color: #e5e7eb;
+    }
+    .dark .empty-state-box {
+      background: #1f2937;
+      color: #e5e7eb;
+      border-color: #4b5563;
+    }
+    
     /* Ensure sections have proper containment */
     section {
       contain: layout style paint;

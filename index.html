@@ -32,9 +32,7 @@ description: Portfolio — Software Engineer & Product Thinking
         <span class="gradient-text block" style="animation-delay: 0.1s;">Nimra</span>
       </h1>
       <p class="text-xl sm:text-2xl md:text-3xl text-neutral-700 dark:text-neutral-200 mb-12 max-w-3xl mx-auto leading-relaxed font-medium animate-slide-up" style="animation-delay: 0.2s">
-        Building products through <span class="font-bold text-fun-pink dark:text-fun-pink">code</span> and <span class="font-bold text-accent-500 dark:text-accent-400">strategy</span>.
-        <br class="hidden sm:block">
-        <span class="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400">Transforming ideas into impactful solutions ✨</span>
+        Software engineer building products.
       </p>
       <div class="flex flex-wrap gap-5 justify-center animate-slide-up" style="animation-delay: 0.3s">
         <a href="/work/" class="group px-10 py-5 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 text-white rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 card-hover relative overflow-hidden">
@@ -74,7 +72,7 @@ description: Portfolio — Software Engineer & Product Thinking
           Portfolio
         </h2>
         <p class="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300 max-w-2xl mx-auto">
-          Product case studies demonstrating product thinking through implementation 🚀
+          Case studies and projects
         </p>
       </div>
       
@@ -107,55 +105,16 @@ description: Portfolio — Software Engineer & Product Thinking
         {% endfor %}
         
         {% if featured_case_studies.size == 0 %}
-        <!-- Fallback: Link to existing case studies -->
-        <a href="/case-studies/pit-strategy-case-study.html" class="group fun-card block bg-white dark:bg-neutral-800 rounded-3xl border-2 border-neutral-200 dark:border-neutral-700 p-8 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-500 transform hover:-translate-y-3 relative overflow-hidden shadow-xl hover:shadow-2xl">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-pink/20 via-fun-purple/20 to-accent-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fun-pink to-fun-purple mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg">1</div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-neutral-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-fun-pink group-hover:to-accent-500 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">Pit Strategy Optimizer</h3>
-            <p class="text-base text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">Data-driven decision support for Formula 1 pit stop strategy</p>
-            <div class="flex items-center gap-2 text-sm font-bold text-fun-pink dark:text-fun-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              View case study
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-        <a href="/case-studies/microhelp-case-study.html" class="group fun-card block bg-white dark:bg-neutral-800 rounded-3xl border-2 border-neutral-200 dark:border-neutral-700 p-8 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-500 transform hover:-translate-y-3 relative overflow-hidden shadow-xl hover:shadow-2xl">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent-400/20 via-fun-teal/20 to-fun-pink/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent-500 to-fun-teal mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg">2</div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-neutral-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-accent-500 group-hover:to-fun-teal group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">MicroHelp</h3>
-            <p class="text-base text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">Rebuilding community, one small favor at a time</p>
-            <div class="flex items-center gap-2 text-sm font-bold text-accent-500 dark:text-fun-teal opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              View case study
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-        <a href="/case-studies/autoperfpy-case-study.html" class="group fun-card block bg-white dark:bg-neutral-800 rounded-3xl border-2 border-neutral-200 dark:border-neutral-700 p-8 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-500 transform hover:-translate-y-3 relative overflow-hidden shadow-xl hover:shadow-2xl">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-fun-purple/20 via-fun-pink/20 to-fun-orange/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div class="relative z-10">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-fun-purple to-fun-orange mb-4 flex items-center justify-center text-white font-bold text-xl shadow-lg">3</div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-neutral-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-fun-purple group-hover:to-fun-orange group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">AutoPerfPy</h3>
-            <p class="text-base text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">Democratizing performance engineering for edge AI</p>
-            <div class="flex items-center gap-2 text-sm font-bold text-fun-purple dark:text-fun-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              View case study
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-              </svg>
-            </div>
-          </div>
-        </a>
+        <!-- Fallback: Show message if no case studies found -->
+        <div class="col-span-3 text-center py-16">
+          <p class="text-neutral-500 dark:text-neutral-400">Case studies will appear here once added to the collection.</p>
+        </div>
         {% endif %}
       </div>
       
       <div class="mt-12 text-center">
         <a href="/work/" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-fun-pink to-accent-500 text-white rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 card-hover">
-          View all portfolio
+          View all work
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
           </svg>
@@ -167,8 +126,8 @@ description: Portfolio — Software Engineer & Product Thinking
   <!-- Product Strategy Documents -->
   <section class="py-16 px-4 sm:px-6 bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-900 dark:to-neutral-800">
     <div class="max-w-5xl mx-auto">
-      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">Product Strategy Documents</h2>
-      <p class="text-neutral-600 dark:text-neutral-400 mb-8">PM artifacts and product thinking</p>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mb-2 text-neutral-900 dark:text-white">Product Documentation</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">Product management documents</p>
       
       <div class="grid md:grid-cols-2 gap-6">
         {% for doc in site.pm_docs limit: 4 %}
@@ -201,7 +160,7 @@ description: Portfolio — Software Engineer & Product Thinking
           <div class="absolute inset-0 bg-gradient-to-br from-accent-50 to-primary-50 dark:from-accent-900/10 dark:to-primary-900/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="relative z-10">
             <h3 class="font-display text-xl font-semibold mb-2 text-neutral-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">Photography</h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">Visual storytelling and creative work</p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">Photography work</p>
           </div>
         </a>
         
@@ -231,7 +190,7 @@ description: Portfolio — Software Engineer & Product Thinking
         <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-accent-500 via-fun-purple to-fun-pink bg-clip-text text-transparent">
           GitHub Projects
         </h2>
-        <p class="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">Open source contributions and code 🎯</p>
+        <p class="text-lg sm:text-xl text-neutral-700 dark:text-neutral-300">Open source projects</p>
       </div>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -271,8 +230,8 @@ description: Portfolio — Software Engineer & Product Thinking
         {% if site.data.github_projects.repositories.size == 0 %}
         <div class="col-span-3 text-center py-16">
           <div class="inline-block p-6 rounded-3xl bg-gradient-to-br from-accent-100/50 to-fun-pink/50 dark:from-accent-900/20 dark:to-fun-pink/20 border-2 border-dashed border-accent-300 dark:border-accent-700">
-            <p class="text-base font-semibold text-neutral-700 dark:text-neutral-300 mb-2">🚀 GitHub projects syncing...</p>
-            <p class="text-sm text-neutral-500 dark:text-neutral-400">Projects will appear here automatically via GitHub Action</p>
+            <p class="text-base font-semibold text-neutral-700 dark:text-neutral-300 mb-2">GitHub projects syncing</p>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400">Projects will appear here automatically</p>
           </div>
         </div>
         {% endif %}

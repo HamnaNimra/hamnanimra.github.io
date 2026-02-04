@@ -213,6 +213,10 @@
     p + p {
       margin-top: 1rem;
     }
+    .about-prose p {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+    }
     
     /* Improve list readability */
     ul, ol {
@@ -425,6 +429,9 @@
         <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
       <ul class="flex items-center gap-6">
+        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+          About
+        </a></li>
         <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-neutral-300 hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
           Portfolio
           <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink to-fun-purple group-hover:w-full transition-all duration-300 rounded-full"></span>

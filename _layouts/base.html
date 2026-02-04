@@ -189,9 +189,30 @@
       letter-spacing: 0.01em;
     }
     
-    /* Ensure navigation links are visible in dark mode */
-    .dark header nav a.text-neutral-700 {
-      color: #ffffff !important;
+    /* Ensure navigation links and buttons are visible in both modes */
+    nav a,
+    header a {
+      color: inherit;
+    }
+    
+    /* Prevent layout shifts - sections stay static */
+    section {
+      min-height: fit-content;
+      contain: layout style paint;
+      will-change: auto;
+    }
+    
+    /* Prevent transform animations that cause layout shifts */
+    section,
+    .group,
+    a[class*="block"] {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+    
+    /* But allow hover effects that don't shift layout */
+    .card-hover:hover {
+      transform: translateY(-4px) scale(1.01) !important;
     }
     
     /* Improve section headings */
@@ -464,20 +485,17 @@
         <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink via-fun-purple to-accent-500 group-hover:w-full transition-all duration-300 rounded-full"></span>
       </a>
       <ul class="flex items-center gap-6">
-        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+        <li><a href="{{ '/' | relative_url }}#about" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
           About
         </a></li>
-        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-pink dark:hover:text-fun-pink transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-pink/10 dark:hover:bg-fun-pink/10">
+        <li><a href="{{ '/work/' | relative_url }}" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
           Portfolio
-          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-pink to-fun-purple group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-accent-500 dark:hover:text-accent-400 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-500/10 dark:hover:bg-accent-500/10">
+        <li><a href="{{ '/resume/' | relative_url }}" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
           Resume
-          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-accent-500 to-fun-teal group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
-        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-neutral-700 dark:text-white hover:text-fun-purple dark:hover:text-fun-purple transition-colors relative group px-3 py-2 rounded-lg hover:bg-fun-purple/10 dark:hover:bg-fun-purple/10">
+        <li><a href="https://github.com/HamnaNImra" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors relative group px-3 py-2 rounded-lg hover:bg-accent-50 dark:hover:bg-accent-900/20">
           GitHub
-          <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-fun-purple to-fun-pink group-hover:w-full transition-all duration-300 rounded-full"></span>
         </a></li>
         <li>
           <button type="button" id="theme-toggle" class="p-2.5 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 hover:bg-gradient-to-br hover:from-fun-pink/10 hover:to-accent-500/10 dark:hover:from-fun-purple/10 dark:hover:to-fun-pink/10 hover:border-fun-pink dark:hover:border-fun-purple transition-all duration-300 transform hover:scale-110" aria-label="Toggle dark mode">

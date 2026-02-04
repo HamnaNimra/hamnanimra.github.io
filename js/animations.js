@@ -18,26 +18,10 @@
     });
   }, observerOptions);
 
-  // Animate elements on page load
+  // Disabled animations that cause layout shifts - sections stay static
   document.addEventListener('DOMContentLoaded', () => {
-    // Add fade-in class to cards and sections
-    const animatedElements = document.querySelectorAll('section, .group, a[class*="block"]');
-    animatedElements.forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-      observer.observe(el);
-    });
-
-    // Parallax effect for hero section
-    const hero = document.querySelector('section[class*="hero"], section:first-of-type');
-    if (hero) {
-      window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.5;
-        hero.style.transform = `translateY(${rate}px)`;
-      });
-    }
+    // Sections remain static - no animations that cause layout shifts
+    // Removed fade-in animations to prevent content jumping
 
     // Add hover effects to cards
     const cards = document.querySelectorAll('a[class*="block"], .group');

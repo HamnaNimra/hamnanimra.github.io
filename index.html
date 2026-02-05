@@ -224,7 +224,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       var carX = 72;
       var carW = 44;
       var carH = 28;
-      var jumpForce = -11;
+      var jumpForce = -14;
       var gravity = 0.6;
       var scrollSpeed = prefersReducedMotion ? 1.2 : 2.5;
       var bumpUntil = 0;
@@ -271,7 +271,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       function jump() {
         if (gameOver) return;
         if (carY >= -2 && carVy >= 0 && !(bumpUntil > 0)) {
-          carVy = prefersReducedMotion ? -8 : jumpForce;
+          carVy = prefersReducedMotion ? -10 : jumpForce;
         }
       }
 
@@ -412,23 +412,47 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           ctx.fill();
         });
 
-        // Car (rounded rect at carX, groundY - carH + carY)
-        var cy = groundY - carH + carY;
-        ctx.fillStyle = '#14b8a6';
-        var r = 6;
+        // Car: side-view (body, cabin, wheels)
+        var by = groundY + carY;  // base y (sits on ground, moves with jump)
+        var bx = carX;
+        var bw = carW;
+        var bodyH = 12;
+        var cabinH = 16;
+
+        // Wheels (two circles)
+        ctx.fillStyle = '#374151';
+        if (document.documentElement.classList.contains('dark')) ctx.fillStyle = '#1f2937';
         ctx.beginPath();
-        ctx.moveTo(carX + r, cy);
-        ctx.lineTo(carX + carW - r, cy);
-        ctx.arc(carX + carW - r, cy + r, r, -Math.PI / 2, 0);
-        ctx.lineTo(carX + carW, cy + carH - r);
-        ctx.arc(carX + carW - r, cy + carH - r, r, 0, Math.PI / 2);
-        ctx.lineTo(carX + r, cy + carH);
-        ctx.arc(carX + r, cy + carH - r, r, Math.PI / 2, Math.PI);
-        ctx.lineTo(carX, cy + r);
-        ctx.arc(carX + r, cy + r, r, Math.PI, (3 * Math.PI) / 2);
+        ctx.arc(bx + 14, by - 5, 6, 0, Math.PI * 2);
+        ctx.arc(bx + 30, by - 5, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Body (chassis)
+        ctx.fillStyle = '#14b8a6';
+        ctx.beginPath();
+        ctx.moveTo(bx + 4, by - bodyH + 4);
+        ctx.lineTo(bx + bw - 4, by - bodyH + 4);
+        ctx.lineTo(bx + bw - 2, by - 2);
+        ctx.lineTo(bx + 2, by - 2);
         ctx.closePath();
         ctx.fill();
-        ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+
+        // Cabin (roof / windshield)
+        ctx.fillStyle = '#0d9488';
+        if (document.documentElement.classList.contains('dark')) ctx.fillStyle = '#2dd4bf';
+        ctx.beginPath();
+        ctx.moveTo(bx + 14, by - bodyH);
+        ctx.lineTo(bx + 16, by - bodyH - cabinH + 2);
+        ctx.lineTo(bx + 32, by - bodyH - cabinH + 2);
+        ctx.lineTo(bx + 38, by - bodyH);
+        ctx.closePath();
+        ctx.fill();
+
+        // Cabin outline for definition
+        ctx.strokeStyle = 'rgba(0,0,0,0.1)';
         ctx.lineWidth = 1;
         ctx.stroke();
 

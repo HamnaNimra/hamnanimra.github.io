@@ -308,13 +308,14 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function hitboxObstacle(ob) {
         var screenX = ob.x - scroll;
-        // Cone is a triangle: use only the center-bottom so tip and sides don't trigger early
-        var marginW = ob.w * 0.38;
-        var marginH = ob.h * 0.4;
+        // Only count hit when car has clearly driven INTO the cone (right half of base)
+        var leftInset = ob.w * 0.55;
+        var rightInset = 2;
+        var topInset = ob.h * 0.35;
         return {
-          left: screenX + marginW,
-          right: screenX + ob.w - marginW,
-          top: groundY - ob.h + marginH,
+          left: screenX + leftInset,
+          right: screenX + ob.w - rightInset,
+          top: groundY - ob.h + topInset,
           bottom: groundY
         };
       }

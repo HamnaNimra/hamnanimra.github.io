@@ -85,6 +85,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         <p class="minicar-hint">Space or tap to jump. 3 hits = game over.</p>
         <div class="minicar-actions">
           <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
+          <button type="button" id="minicar-share" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share your score">Share score</button>
         </div>
       </div>
 
@@ -137,6 +138,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       outline: 2px solid #0ea5e9;
       outline-offset: 2px;
     }
+    .minicar-actions { margin-top: 0.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+    .minicar-btn-share { margin-left: 0; }
     .minicar-viewport-wrap {
       width: 100%;
       max-width: 100%;
@@ -170,7 +173,6 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       margin-bottom: 0.25rem;
     }
     .dark .minicar-hint { color: #9ca3af; }
-    .minicar-actions { margin-top: 0.25rem; }
     .minicar-teaser { margin-top: 0.5rem; }
     .minicar-btn-show {
       font-size: 0.8125rem;
@@ -281,9 +283,61 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         if (isOver) {
           statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.add('game-over');
+          var shareBtn = document.getElementById('minicar-share');
+          if (shareBtn) shareBtn.hidden = false;
         } else {
           statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.remove('game-over');
+          var shareBtn = document.getElementById('minicar-share');
+          if (shareBtn) shareBtn.hidden = true;
+        }
+      }
+
+      function shareScore() {
+        var shareText = 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.';
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        var fullText = url ? shareText + ' ' + url : shareText;
+        var shareBtn = document.getElementById('minicar-share');
+
+        if (navigator.share && typeof navigator.share === 'function') {
+          navigator.share({
+            title: 'Mini Car Dash',
+            text: shareText,
+            url: url || undefined
+          }).then(function () {
+            if (shareBtn) shareBtn.textContent = 'Shared!';
+            setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
+          }).catch(function () {
+            copyFallback();
+          });
+        } else {
+          copyFallback();
+        }
+
+        function copyFallback() {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(fullText).then(function () {
+              if (shareBtn) shareBtn.textContent = 'Copied!';
+              setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
+            }).catch(function () { copyLegacy(); });
+          } else {
+            copyLegacy();
+          }
+        }
+        function copyLegacy() {
+          var ta = document.createElement('textarea');
+          ta.value = fullText;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            if (shareBtn) shareBtn.textContent = 'Copied!';
+            setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
+          } catch (e) {}
+          document.body.removeChild(ta);
         }
       }
 
@@ -457,8 +511,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ctx.fillStyle = cabinGradient;
         ctx.beginPath();
         ctx.moveTo(bx + 16, by - bodyH);          // front of cabin
-        ctx.lineTo(bx + 18, by - bodyH - cabinH); // front slant
-        ctx.lineTo(bx + 30, by - bodyH - cabinH); // rear slant
+        ctx.lineTo(bx + 20, by - bodyH - cabinH); // front slant
+        ctx.lineTo(bx + 32, by - bodyH - cabinH); // rear slant
         ctx.lineTo(bx + 36, by - bodyH);          // rear
         ctx.closePath();
         ctx.fill();
@@ -499,6 +553,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         stop();
         reset();
         start();
+      });
+      document.getElementById('minicar-share').addEventListener('click', function () {
+        shareScore();
       });
       document.getElementById('minicar-close').addEventListener('click', function () {
         stop();

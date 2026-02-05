@@ -168,40 +168,6 @@
         ]);
       }
     });
-
-    // Scroll progress: chapter-style “how far through” indicator (throttled; bar always runs, CSS removes transition when reduced motion)
-    const progressBar = document.getElementById('scroll-progress-bar');
-    const progressText = document.getElementById('scroll-progress-text');
-    if (progressBar || progressText) {
-      const getMessage = (pct) => {
-        if (pct < 10) return "Welcome in 👋";
-        if (pct < 25) return "Getting to know me...";
-        if (pct < 40) return "You're " + Math.round(pct) + "% through my brain";
-        if (pct < 60) return "Halfway there!";
-        if (pct < 75) return "You're " + Math.round(pct) + "% through my brain";
-        if (pct < 90) return "The good stuff ✨";
-        return "You made it! 🎉";
-      };
-      let rafId = null;
-      let lastMsg = null;
-      const update = () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = scrollHeight <= 0 ? 0 : Math.min(100, (scrollTop / scrollHeight) * 100);
-        if (progressBar) progressBar.style.width = pct + "%";
-        const msg = getMessage(pct);
-        if (progressText && msg !== lastMsg) {
-          progressText.textContent = msg;
-          lastMsg = msg;
-        }
-        rafId = null;
-      };
-      const onScroll = () => {
-        if (rafId == null) rafId = requestAnimationFrame(update);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      update();
-    }
   });
 
   function showEasterEggToast(messages) {

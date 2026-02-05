@@ -836,6 +836,37 @@
   <script src="{{ '/js/animations.js' | relative_url }}"></script>
   <script>
     (function() {
+      var progressBar = document.getElementById('scroll-progress-bar');
+      var progressText = document.getElementById('scroll-progress-text');
+      if (progressBar || progressText) {
+        function getMsg(pct) {
+          if (pct < 10) return "Welcome in 👋";
+          if (pct < 25) return "Getting to know me...";
+          if (pct < 40) return "You're " + Math.round(pct) + "% through my brain";
+          if (pct < 60) return "Halfway there!";
+          if (pct < 75) return "You're " + Math.round(pct) + "% through my brain";
+          if (pct < 90) return "The good stuff ✨";
+          return "You made it! 🎉";
+        }
+        var rafId = null, lastMsg = "";
+        function updateProgress() {
+          var st = window.scrollY || document.documentElement.scrollTop;
+          var sh = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = sh <= 0 ? 0 : Math.min(100, (st / sh) * 100);
+          if (progressBar) progressBar.style.width = pct + "%";
+          var msg = getMsg(pct);
+          if (progressText && msg !== lastMsg) { progressText.textContent = msg; lastMsg = msg; }
+          rafId = null;
+        }
+        window.addEventListener("scroll", function() {
+          if (rafId == null) rafId = requestAnimationFrame(updateProgress);
+        }, { passive: true });
+        updateProgress();
+      }
+    })();
+  </script>
+  <script>
+    (function() {
       function applyTheme(isDark) {
         document.documentElement.classList.toggle('dark', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');

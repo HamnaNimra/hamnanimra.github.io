@@ -20,8 +20,8 @@
  *   .problem-card / .insight-box: 24px radius, 4px solid border, 8px/12px shadow
  *   .btn: 18px 42px padding, 50px radius, 18px/700
  *
- * Per-project only: hero gradient, hero::before content, .btn-primary/.btn-secondary colors,
- * section h2::after gradient, .problem-card nth-child border-color, .stat color, .footer-cta gradient.
+ * Shared palette (AutoPerfPy theme): #76B947 (green), #4A90E2 (blue), #9013FE (purple).
+ * All case studies use this palette for hero, buttons, section underline, cards, and footer CTA.
  */
 
 /* Shared focus style for case study content links (backup if inline styles omit it) */

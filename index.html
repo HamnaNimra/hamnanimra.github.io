@@ -296,7 +296,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function hitboxCar() {
         // Tight hitbox: only core of car counts (avoids early collisions)
-        var paddingX = carW * 0.32;
+        var paddingX = carW * 0.25; //for tighter hitbox value set to 0.32 for more forgiving hitbox
         var paddingY = carH * 0.35;
         return {
           left: carX + paddingX,
@@ -309,7 +309,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       function hitboxObstacle(ob) {
         var screenX = ob.x - scroll;
         // Only count hit when car has clearly driven INTO the cone (right half of base)
-        var leftInset = ob.w * 0.35;
+        var leftInset = ob.w * 0.55;
         var rightInset = 2;
         var topInset = ob.h * 0.35;
         return {

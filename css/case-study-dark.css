@@ -98,14 +98,6 @@
   color: #e2e8f0 !important;
 }
 
-/* Biggest Lesson box: keep text white in light and dark mode */
-.dark .case-study-content .biggest-lesson-box,
-.dark .case-study-content .biggest-lesson-box h3,
-.dark .case-study-content .biggest-lesson-box p,
-.dark .case-study-content .biggest-lesson-box em {
-  color: #ffffff !important;
-}
-
 /* Cards and boxes */
 .dark .case-study-content .container,
 .dark .case-study-content .problem-card,

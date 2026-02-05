@@ -169,10 +169,10 @@
       }
     });
 
-    // Scroll progress: chapter-style “how far through” indicator (throttled, respects reduced motion)
+    // Scroll progress: chapter-style “how far through” indicator (throttled; bar always runs, CSS removes transition when reduced motion)
     const progressBar = document.getElementById('scroll-progress-bar');
     const progressText = document.getElementById('scroll-progress-text');
-    if ((progressBar || progressText) && !prefersReducedMotion()) {
+    if (progressBar || progressText) {
       const getMessage = (pct) => {
         if (pct < 10) return "Welcome in 👋";
         if (pct < 25) return "Getting to know me...";

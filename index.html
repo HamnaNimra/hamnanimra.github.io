@@ -64,6 +64,374 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
     </div>
   </section>
 
+  <!-- Optional Mini Car Dash: side-scroller under About Me -->
+  <section id="minicar-dash-wrap" class="py-10 sm:py-14 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800" aria-label="Optional Mini Car Dash game">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base mb-6 leading-relaxed">
+        Feeling curious? Take a tiny spin.
+      </p>
+
+      <div id="minicar-dash" class="minicar-dash">
+        <div class="minicar-dash-header">
+          <span class="minicar-dash-title">Mini Car Dash</span>
+          <button type="button" id="minicar-close" class="minicar-btn-close" aria-label="Hide Mini Car Dash">Close</button>
+        </div>
+
+        <div class="minicar-viewport-wrap">
+          <canvas id="minicar-canvas" class="minicar-canvas" width="672" height="240" aria-label="Mini Car Dash game area. Space or tap to jump." tabindex="0"></canvas>
+        </div>
+
+        <p class="minicar-hint">Space or tap to jump.</p>
+        <div class="minicar-actions">
+          <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
+        </div>
+      </div>
+
+      <div id="minicar-teaser" class="minicar-teaser" hidden>
+        <button type="button" id="minicar-show" class="minicar-btn-show" aria-label="Show Mini Car Dash again">Mini Car Dash (show again)</button>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Mini Car Dash: calm, minimal side-scroller */
+    .minicar-dash {
+      border: 1px solid rgb(229 231 235);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: rgb(249 250 251 / 0.8);
+    }
+    .dark .minicar-dash {
+      border-color: rgb(55 65 81);
+      background: rgb(31 41 55 / 0.5);
+    }
+    .minicar-dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .minicar-dash-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    .dark .minicar-dash-title { color: #e5e7eb; }
+    .minicar-btn-close,
+    .minicar-btn-reset {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .dark .minicar-btn-close, .dark .minicar-btn-reset { color: #9ca3af; }
+    .minicar-btn-close:hover, .minicar-btn-reset:hover { color: #111827; text-decoration: none; }
+    .dark .minicar-btn-close:hover, .dark .minicar-btn-reset:hover { color: #f3f4f6; }
+    .minicar-btn-close:focus-visible, .minicar-btn-reset:focus-visible {
+      outline: 2px solid #0ea5e9;
+      outline-offset: 2px;
+    }
+    .minicar-viewport-wrap {
+      width: 100%;
+      max-width: 100%;
+      height: 240px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: #f3f4f6;
+    }
+    .dark .minicar-viewport-wrap { background: #374151; }
+    .minicar-canvas {
+      display: block;
+      width: 100%;
+      height: 240px;
+      max-width: 100%;
+    }
+    .minicar-canvas:focus-visible { outline: 2px solid #0ea5e9; outline-offset: 2px; }
+    .minicar-hint {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .dark .minicar-hint { color: #9ca3af; }
+    .minicar-actions { margin-top: 0.25rem; }
+    .minicar-teaser { margin-top: 0.5rem; }
+    .minicar-btn-show {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .dark .minicar-btn-show { color: #9ca3af; }
+    .minicar-btn-show:hover { color: #111827; text-decoration: none; }
+    .dark .minicar-btn-show:hover { color: #f3f4f6; }
+    .minicar-btn-show:focus-visible { outline: 2px solid #0ea5e9; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      .minicar-dash * { transition: none !important; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      'use strict';
+      // Mini Car Dash: endless side-scroller. Space or tap to jump. Obstacles = bump & continue; collectibles = visual only.
+
+      var canvas = document.getElementById('minicar-canvas');
+      if (!canvas) return;
+
+      var ctx = canvas.getContext('2d');
+      var wrap = canvas.parentElement;
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Resize canvas to container width, fixed height 240px
+      function resize() {
+        var w = wrap ? wrap.clientWidth : 672;
+        if (w <= 0) w = 672;
+        canvas.width = w;
+        canvas.height = 240;
+      }
+      resize();
+      if (wrap && typeof window !== 'undefined') {
+        window.addEventListener('resize', resize);
+      }
+
+      // Game state
+      var scroll = 0;
+      var carY = 0;
+      var carVy = 0;
+      var groundY = 180;
+      var carX = 72;
+      var carW = 44;
+      var carH = 28;
+      var jumpForce = -11;
+      var gravity = 0.6;
+      var scrollSpeed = prefersReducedMotion ? 1.2 : 2.5;
+      var bumpUntil = 0;
+      var obstacles = [];
+      var collectibles = [];
+      var nextSpawnAt = 0;
+      var running = false;
+      var rafId = null;
+
+      // Spawn obstacles (cones) and collectibles (coins) at intervals; endless scroll
+      function spawnNext() {
+        var spacing = prefersReducedMotion ? 280 : 220;
+        if (scroll < nextSpawnAt) return;
+        nextSpawnAt = scroll + spacing + Math.random() * 120;
+        if (Math.random() < 0.45) {
+          obstacles.push({ x: scroll + canvas.width + 60, w: 24, h: 32 });
+        } else {
+          collectibles.push({ x: scroll + canvas.width + 80, r: 10 });
+        }
+      }
+
+      function hitboxCar() {
+        return { left: carX + 4, right: carX + carW - 4, top: groundY - carH + carY + 4, bottom: groundY + carY - 4 };
+      }
+
+      function hitboxObstacle(ob) {
+        var screenX = ob.x - scroll;
+        return { left: screenX, right: screenX + ob.w, top: groundY - ob.h, bottom: groundY };
+      }
+
+      function hitboxCollectible(c) {
+        var screenX = c.x - scroll;
+        return { left: screenX - c.r, right: screenX + c.r, top: groundY - c.r * 2, bottom: groundY };
+      }
+
+      function overlap(a, b) {
+        return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      }
+
+      function jump() {
+        if (carY >= -2 && carVy >= 0 && !(bumpUntil > 0)) {
+          carVy = prefersReducedMotion ? -8 : jumpForce;
+        }
+      }
+
+      function reset() {
+        scroll = 0;
+        carY = 0;
+        carVy = 0;
+        bumpUntil = 0;
+        obstacles = [];
+        collectibles = [];
+        nextSpawnAt = 0;
+      }
+
+      function loop() {
+        if (!running || !ctx) return;
+        var now = Date.now();
+
+        if (bumpUntil > 0 && now < bumpUntil) {
+          rafId = requestAnimationFrame(loop);
+          return;
+        }
+        if (bumpUntil > 0 && now >= bumpUntil) bumpUntil = 0;
+
+        scroll += scrollSpeed;
+        spawnNext();
+
+        // Gravity and jump
+        carVy += gravity;
+        carY += carVy;
+        if (carY >= 0) {
+          carY = 0;
+          carVy = 0;
+        }
+
+        var carBox = hitboxCar();
+
+        // Obstacle collision: bump and brief pause
+        for (var i = obstacles.length - 1; i >= 0; i--) {
+          var ob = obstacles[i];
+          if (ob.x - scroll < -ob.w) {
+            obstacles.splice(i, 1);
+            continue;
+          }
+          if (overlap(carBox, hitboxObstacle(ob))) {
+            bumpUntil = now + (prefersReducedMotion ? 200 : 400);
+            obstacles.splice(i, 1);
+          }
+        }
+
+        // Collectible overlap: remove only (visual fun)
+        for (var j = collectibles.length - 1; j >= 0; j--) {
+          var c = collectibles[j];
+          if (c.x - scroll < -20) {
+            collectibles.splice(j, 1);
+            continue;
+          }
+          if (overlap(carBox, hitboxCollectible(c))) collectibles.splice(j, 1);
+        }
+
+        // Draw
+        var w = canvas.width;
+        var h = canvas.height;
+        ctx.fillStyle = '#f3f4f6';
+        ctx.fillRect(0, 0, w, h);
+        if (document.documentElement.classList.contains('dark')) {
+          ctx.fillStyle = '#374151';
+          ctx.fillRect(0, 0, w, h);
+        }
+
+        // Road strip
+        ctx.fillStyle = '#e5e7eb';
+        if (document.documentElement.classList.contains('dark')) ctx.fillStyle = '#4b5563';
+        ctx.fillRect(0, groundY, w + 100, h - groundY);
+
+        // Dashed center line
+        ctx.strokeStyle = '#9ca3af';
+        ctx.setLineDash([12, 14]);
+        ctx.lineWidth = 2;
+        var dashOffset = scroll % 26;
+        ctx.beginPath();
+        for (var x = -dashOffset; x < w + 50; x += 26) ctx.moveTo(x, groundY + 24), ctx.lineTo(x + 12, groundY + 24);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Obstacles (cones: triangles)
+        ctx.fillStyle = '#6b7280';
+        if (document.documentElement.classList.contains('dark')) ctx.fillStyle = '#9ca3af';
+        obstacles.forEach(function (ob) {
+          var sx = ob.x - scroll;
+          if (sx > w + 20) return;
+          ctx.beginPath();
+          ctx.moveTo(sx + ob.w / 2, groundY - ob.h);
+          ctx.lineTo(sx + ob.w, groundY);
+          ctx.lineTo(sx, groundY);
+          ctx.closePath();
+          ctx.fill();
+        });
+
+        // Collectibles (small circles)
+        ctx.fillStyle = '#eab308';
+        collectibles.forEach(function (c) {
+          var sx = c.x - scroll;
+          if (sx < -20 || sx > w + 20) return;
+          ctx.beginPath();
+          ctx.arc(sx, groundY - c.r, c.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Car (rounded rect at carX, groundY - carH + carY)
+        var cy = groundY - carH + carY;
+        ctx.fillStyle = '#14b8a6';
+        var r = 6;
+        ctx.beginPath();
+        ctx.moveTo(carX + r, cy);
+        ctx.lineTo(carX + carW - r, cy);
+        ctx.arc(carX + carW - r, cy + r, r, -Math.PI / 2, 0);
+        ctx.lineTo(carX + carW, cy + carH - r);
+        ctx.arc(carX + carW - r, cy + carH - r, r, 0, Math.PI / 2);
+        ctx.lineTo(carX + r, cy + carH);
+        ctx.arc(carX + r, cy + carH - r, r, Math.PI / 2, Math.PI);
+        ctx.lineTo(carX, cy + r);
+        ctx.arc(carX + r, cy + r, r, Math.PI, (3 * Math.PI) / 2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.08)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        loop();
+      }
+
+      function stop() {
+        running = false;
+        if (rafId != null) cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+
+      canvas.addEventListener('click', function (e) {
+        e.preventDefault();
+        jump();
+      });
+      canvas.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          jump();
+        }
+      });
+
+      document.getElementById('minicar-reset').addEventListener('click', function () {
+        stop();
+        reset();
+        start();
+      });
+      document.getElementById('minicar-close').addEventListener('click', function () {
+        stop();
+        document.getElementById('minicar-dash').hidden = true;
+        document.getElementById('minicar-teaser').hidden = false;
+        document.getElementById('minicar-show').focus();
+      });
+      document.getElementById('minicar-show').addEventListener('click', function () {
+        document.getElementById('minicar-dash').hidden = false;
+        document.getElementById('minicar-teaser').hidden = true;
+        reset();
+        start();
+        canvas.focus();
+      });
+
+      start();
+    })();
+  </script>
+
   <!-- Featured Portfolio -->
   <section class="py-20 px-4 sm:px-6 gradient-bg-2 relative isolate scroll-reveal">
     <div class="max-w-6xl mx-auto">

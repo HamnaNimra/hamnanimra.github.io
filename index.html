@@ -284,9 +284,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       // Spawn obstacles (cones) and collectibles (coins) at intervals; endless scroll
       function spawnNext() {
-        var spacing = prefersReducedMotion ? 280 : 220;
+        var spacing = prefersReducedMotion ? 320 : 260;
         if (scroll < nextSpawnAt) return;
-        nextSpawnAt = scroll + spacing + Math.random() * 120;
+        nextSpawnAt = scroll + spacing + Math.random() * 100;
         if (Math.random() < 0.45) {
           obstacles.push({ x: scroll + canvas.width + 60, w: 24, h: 32 });
         } else {
@@ -295,36 +295,38 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function hitboxCar() {
-        const paddingX = carW * 0.1; // 10% padding on sides
-        const paddingY = carH * 0.2; // 20% padding on top/bottom
-        return { 
-          left: carX + paddingX, 
-          right: carX + carW - paddingX, 
-          top: groundY - carH + carY + paddingY, 
-          bottom: groundY + carY - paddingY 
+        // Tighter hitbox so only clear overlap with visible car counts
+        var paddingX = carW * 0.2;
+        var paddingY = carH * 0.25;
+        return {
+          left: carX + paddingX,
+          right: carX + carW - paddingX,
+          top: groundY - carH + carY + paddingY,
+          bottom: groundY + carY - paddingY
         };
       }
-
 
       function hitboxObstacle(ob) {
-        const screenX = ob.x - scroll;
-        const offsetTop = 2; // fine-tune to make collisions feel fair
-        return { 
-            left: screenX, 
-            right: screenX + ob.w, 
-            top: groundY - ob.h + offsetTop, 
-            bottom: groundY 
+        var screenX = ob.x - scroll;
+        // Cone is triangular: use center portion so we don't hit "air" on the sides
+        var marginW = ob.w * 0.25;
+        var marginH = ob.h * 0.25;
+        return {
+          left: screenX + marginW,
+          right: screenX + ob.w - marginW,
+          top: groundY - ob.h + marginH,
+          bottom: groundY
         };
       }
 
-
       function hitboxCollectible(c) {
-        const screenX = c.x - scroll;
+        var screenX = c.x - scroll;
+        // Match the drawn circle: center (sx, groundY - c.r), radius c.r
         return {
-            left: screenX - c.r * 0.8,   // slightly smaller than radius
-            right: screenX + c.r * 0.8,
-            top: groundY - c.r * 1.8,    // align with coin circle
-            bottom: groundY
+          left: screenX - c.r * 0.7,
+          right: screenX + c.r * 0.7,
+          top: groundY - c.r * 2 + c.r * 0.3,
+          bottom: groundY - c.r * 0.3
         };
       }
 

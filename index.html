@@ -414,52 +414,52 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           ctx.fill();
         });
 
-        // Car: side-view (body, cabin, wheels)
-        var by = groundY + carY;  // base y
+        // Car: sporty side-view
+        var by = groundY + carY;  
         var bx = carX;
         var bw = carW;
-        var bodyH = 12;
-        var cabinH = 16;
+        var bodyH = 10;      // lower body for sporty stance
+        var cabinH = 14;
 
-        // Wheels with slight shadow
+        // Wheels - bigger and slightly forward/backward offset
         ctx.fillStyle = document.documentElement.classList.contains('dark') ? '#1f2937' : '#374151';
         ctx.beginPath();
-        ctx.arc(bx + 14, by - 5, 6, 0, Math.PI * 2);
-        ctx.arc(bx + 30, by - 5, 6, 0, Math.PI * 2);
+        ctx.arc(bx + 12, by - 4, 7, 0, Math.PI * 2); // front wheel
+        ctx.arc(bx + 34, by - 4, 7, 0, Math.PI * 2); // rear wheel
         ctx.fill();
 
-        // Wheel rims (subtle inner circle)
-        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        // Wheel rims (subtle highlight)
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
         ctx.beginPath();
-        ctx.arc(bx + 14, by - 5, 2.5, 0, Math.PI * 2);
-        ctx.arc(bx + 30, by - 5, 2.5, 0, Math.PI * 2);
+        ctx.arc(bx + 12, by - 4, 3, 0, Math.PI * 2);
+        ctx.arc(bx + 34, by - 4, 3, 0, Math.PI * 2);
         ctx.fill();
 
-        // Body with rounded corners and gradient
+        // Body - sleek, low, with slight curve at front and rear
         var bodyGradient = ctx.createLinearGradient(bx, by - bodyH, bx, by);
-        bodyGradient.addColorStop(0, '#14b8a6');
-        bodyGradient.addColorStop(1, '#0f766e');
+        bodyGradient.addColorStop(0, '#22d3ee'); // brighter teal
+        bodyGradient.addColorStop(1, '#0f766e'); // darker teal
         ctx.fillStyle = bodyGradient;
         ctx.beginPath();
-        ctx.moveTo(bx + 4, by - bodyH + 4);
-        ctx.quadraticCurveTo(bx + 4, by - bodyH - 2, bx + 8, by - bodyH - 2);
-        ctx.lineTo(bx + bw - 8, by - bodyH - 2);
-        ctx.quadraticCurveTo(bx + bw - 4, by - bodyH - 2, bx + bw - 4, by - bodyH + 4);
+        ctx.moveTo(bx + 4, by - bodyH + 2);
+        ctx.quadraticCurveTo(bx + 6, by - bodyH - 4, bx + 14, by - bodyH - 4); // front curve
+        ctx.lineTo(bx + bw - 14, by - bodyH - 4); 
+        ctx.quadraticCurveTo(bx + bw - 6, by - bodyH - 4, bx + bw - 4, by - bodyH + 2); // rear curve
         ctx.lineTo(bx + bw - 2, by - 2);
         ctx.lineTo(bx + 2, by - 2);
         ctx.closePath();
         ctx.fill();
 
-        // Cabin with slight slant and gradient
+        // Cabin - sharper, slanted for sporty look
         var cabinGradient = ctx.createLinearGradient(bx, by - bodyH - cabinH, bx, by - bodyH);
         cabinGradient.addColorStop(0, document.documentElement.classList.contains('dark') ? '#2dd4bf' : '#0d9488');
         cabinGradient.addColorStop(1, '#047857');
         ctx.fillStyle = cabinGradient;
         ctx.beginPath();
-        ctx.moveTo(bx + 14, by - bodyH);
-        ctx.lineTo(bx + 16, by - bodyH - cabinH + 2);
-        ctx.lineTo(bx + 32, by - bodyH - cabinH + 2);
-        ctx.lineTo(bx + 38, by - bodyH);
+        ctx.moveTo(bx + 16, by - bodyH);          // front of cabin
+        ctx.lineTo(bx + 18, by - bodyH - cabinH); // front slant
+        ctx.lineTo(bx + 30, by - bodyH - cabinH); // rear slant
+        ctx.lineTo(bx + 36, by - bodyH);          // rear
         ctx.closePath();
         ctx.fill();
 
@@ -469,6 +469,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ctx.stroke();
 
         rafId = requestAnimationFrame(loop);
+
       }
 
       function start() {

@@ -295,18 +295,39 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function hitboxCar() {
-        return { left: carX + 4, right: carX + carW - 4, top: groundY - carH + carY + 4, bottom: groundY + carY - 4 };
+        const paddingX = carW * 0.1; // 10% padding on sides
+        const paddingY = carH * 0.2; // 20% padding on top/bottom
+        return { 
+          left: carX + paddingX, 
+          right: carX + carW - paddingX, 
+          top: groundY - carH + carY + paddingY, 
+          bottom: groundY + carY - paddingY 
+        };
       }
+
 
       function hitboxObstacle(ob) {
-        var screenX = ob.x - scroll;
-        return { left: screenX, right: screenX + ob.w, top: groundY - ob.h, bottom: groundY };
+        const screenX = ob.x - scroll;
+        const offsetTop = 2; // fine-tune to make collisions feel fair
+        return { 
+            left: screenX, 
+            right: screenX + ob.w, 
+            top: groundY - ob.h + offsetTop, 
+            bottom: groundY 
+        };
       }
 
+
       function hitboxCollectible(c) {
-        var screenX = c.x - scroll;
-        return { left: screenX - c.r, right: screenX + c.r, top: groundY - c.r * 2, bottom: groundY };
+        const screenX = c.x - scroll;
+        return {
+            left: screenX - c.r * 0.8,   // slightly smaller than radius
+            right: screenX + c.r * 0.8,
+            top: groundY - c.r * 1.8,    // align with coin circle
+            bottom: groundY
+        };
       }
+
 
       function overlap(a, b) {
         return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;

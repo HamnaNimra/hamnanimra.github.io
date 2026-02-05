@@ -1,0 +1,36 @@
+/**
+ * Case study theme – shared tokens for _case_studies/*.html
+ * Keep these in sync across autoperfpy, microhelp, pit-strategy (and any new case studies).
+ *
+ * Light theme:
+ *   Body:       #fafafa background, #1a1a1a text
+ *   Sections:   even #ffffff, odd #fafafa
+ *   Borders:    #1a1a1a, card borders use project accent
+ *   Muted:      #555, #666
+ *
+ * Typography:
+ *   Section h2: 56px / 900 / -2px letter-spacing, underline via ::after (project gradient)
+ *   Section subtitle: 24px, #666
+ *   Problem card h3: 26px, 800
+ *   Problem card p: 16px, #555, line-height 1.8
+ *
+ * Structure:
+ *   .container: max-width 1200px, padding 0 24px
+ *   section: padding 100px 0
+ *   .problem-card / .insight-box: 24px radius, 4px solid border, 8px/12px shadow
+ *   .btn: 18px 42px padding, 50px radius, 18px/700
+ *
+ * Per-project only: hero gradient, hero::before content, .btn-primary/.btn-secondary colors,
+ * section h2::after gradient, .problem-card nth-child border-color, .stat color, .footer-cta gradient.
+ */
+
+/* Shared focus style for case study content links (backup if inline styles omit it) */
+.case-study-content a:focus-visible {
+  outline: 3px solid rgba(0, 0, 0, 0.25);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dark .case-study-content a:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.4);
+}

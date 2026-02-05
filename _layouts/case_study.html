@@ -12,5 +12,7 @@ layout: base
 <div class="case-study-content">
   {{ content }}
 </div>
+<!-- Shared case study theme tokens and focus style -->
+<link rel="stylesheet" href="{{ '/css/case-study-base.css' | relative_url }}">
 <!-- Dark mode overrides: load after case study content's own styles -->
 <link rel="stylesheet" href="{{ '/css/case-study-dark.css' | relative_url }}">

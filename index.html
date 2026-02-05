@@ -152,17 +152,14 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
     .minicar-btn-share { margin-left: 0; }
     .minicar-share-wrap { position: relative; display: inline-block; }
     .minicar-share-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 4px;
+      position: fixed;
       min-width: 180px;
       padding: 0.25rem 0;
       background: #fff;
       border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      z-index: 1000;
+      z-index: 99999;
     }
     .dark .minicar-share-menu {
       background: #374151;
@@ -744,23 +741,39 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       });
       var shareBtn = document.getElementById('minicar-share');
       var shareMenu = document.getElementById('minicar-share-menu');
+      function positionShareMenu() {
+        var rect = shareBtn.getBoundingClientRect();
+        shareMenu.style.top = (rect.bottom + 4) + 'px';
+        shareMenu.style.left = rect.left + 'px';
+      }
+      function closeShareMenu() {
+        shareMenu.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+      }
       shareBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         var open = shareMenu.hidden;
-        shareMenu.hidden = !open;
-        shareBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          positionShareMenu();
+          shareMenu.hidden = false;
+          shareBtn.setAttribute('aria-expanded', 'true');
+        } else {
+          closeShareMenu();
+        }
       });
       document.addEventListener('click', function () {
-        shareMenu.hidden = true;
-        shareBtn.setAttribute('aria-expanded', 'false');
+        closeShareMenu();
+      });
+      window.addEventListener('scroll', closeShareMenu, true);
+      window.addEventListener('resize', function () {
+        if (!shareMenu.hidden) positionShareMenu();
       });
       shareMenu.addEventListener('click', function (e) {
         e.stopPropagation();
         var option = e.target.closest('.minicar-share-option');
         if (!option) return;
         var action = option.getAttribute('data-action');
-        shareMenu.hidden = true;
-        shareBtn.setAttribute('aria-expanded', 'false');
+        closeShareMenu();
         if (action === 'link') shareLinkOrImage('link', option);
         else if (action === 'image') shareLinkOrImage('image', option);
         else if (action === 'instagram') shareToInstagram(option);

@@ -64,6 +64,285 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
     </div>
   </section>
 
+  <!-- Optional micro-game: one-move tradeoff (Speed, Quality, Cost) -->
+  <section id="tradeoff-game-wrap" class="py-10 sm:py-14 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800" aria-label="Optional tradeoff game">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base mb-6 leading-relaxed">
+        Here's a tiny way to play with patterns and tradeoffs — totally optional, but it gives a peek into how I think.
+      </p>
+
+      <div id="tradeoff-game" class="tradeoff-game">
+        <div class="tradeoff-game-header">
+          <span class="tradeoff-game-title">One-move tradeoff</span>
+          <button type="button" id="tradeoff-game-close" class="tradeoff-game-close" aria-label="Hide tradeoff game">Close</button>
+        </div>
+
+        <div class="tradeoff-game-body">
+          <label for="tradeoff-slider" class="tradeoff-label">Adjust tradeoff: more speed vs more quality and lower cost</label>
+          <input type="range" id="tradeoff-slider" class="tradeoff-slider" min="0" max="100" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Balanced">
+
+          <div class="tradeoff-qualities" role="group" aria-label="System qualities">
+            <div class="tradeoff-quality">
+              <span class="tradeoff-quality-name">Speed</span>
+              <span id="tradeoff-speed" class="tradeoff-quality-value" data-level="medium">Medium</span>
+            </div>
+            <div class="tradeoff-quality">
+              <span class="tradeoff-quality-name">Quality</span>
+              <span id="tradeoff-quality" class="tradeoff-quality-value" data-level="medium">Medium</span>
+            </div>
+            <div class="tradeoff-quality">
+              <span class="tradeoff-quality-name">Cost</span>
+              <span id="tradeoff-cost" class="tradeoff-quality-value" data-level="medium">Medium</span>
+            </div>
+          </div>
+
+          <p id="tradeoff-feedback" class="tradeoff-feedback" aria-live="polite" aria-atomic="true">
+            Balancing all three often means no single dimension wins.
+          </p>
+
+          <div class="tradeoff-actions">
+            <button type="button" id="tradeoff-reset" class="tradeoff-reset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="tradeoff-game-teaser" class="tradeoff-game-teaser" hidden>
+        <button type="button" id="tradeoff-game-show" class="tradeoff-game-show" aria-label="Show tradeoff game again">Tradeoff game (show again)</button>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Tradeoff game: calm, minimal, no flashy motion */
+    .tradeoff-game {
+      border: 1px solid var(--tw-border-opacity, 1);
+      border-color: rgb(229 231 235 / var(--tw-border-opacity));
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      background: rgb(249 250 251 / 0.6);
+    }
+    .dark .tradeoff-game {
+      border-color: rgb(55 65 81 / var(--tw-border-opacity));
+      background: rgb(31 41 55 / 0.4);
+    }
+    .tradeoff-game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .tradeoff-game-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    .dark .tradeoff-game-title { color: #e5e7eb; }
+    .tradeoff-game-close {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .dark .tradeoff-game-close { color: #9ca3af; }
+    .tradeoff-game-close:hover { color: #111827; text-decoration: none; }
+    .dark .tradeoff-game-close:hover { color: #f3f4f6; }
+    .tradeoff-game-close:focus-visible {
+      outline: 2px solid #0ea5e9;
+      outline-offset: 2px;
+    }
+    .tradeoff-label {
+      display: block;
+      font-size: 0.8125rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+    .dark .tradeoff-label { color: #9ca3af; }
+    .tradeoff-slider {
+      width: 100%;
+      height: 6px;
+      margin-bottom: 1rem;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #e5e7eb;
+      border-radius: 3px;
+    }
+    .dark .tradeoff-slider { background: #4b5563; }
+    .tradeoff-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #0ea5e9;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .dark .tradeoff-slider::-webkit-slider-thumb { border-color: #1f2937; }
+    .tradeoff-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #0ea5e9;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .tradeoff-slider:focus-visible { outline: none; }
+    .tradeoff-slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px #0ea5e9; }
+    .tradeoff-slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px #0ea5e9; }
+    .tradeoff-qualities {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .tradeoff-quality {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .tradeoff-quality-name { color: #6b7280; }
+    .dark .tradeoff-quality-name { color: #9ca3af; }
+    .tradeoff-quality-value {
+      font-weight: 500;
+      color: #374151;
+    }
+    .dark .tradeoff-quality-value { color: #e5e7eb; }
+    .tradeoff-quality-value[data-level="low"] { color: #6b7280; }
+    .dark .tradeoff-quality-value[data-level="low"] { color: #9ca3af; }
+    .tradeoff-quality-value[data-level="high"] { color: #047857; }
+    .dark .tradeoff-quality-value[data-level="high"] { color: #34d399; }
+    .tradeoff-feedback {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: #4b5563;
+      margin-bottom: 1rem;
+      min-height: 2.5rem;
+    }
+    .dark .tradeoff-feedback { color: #d1d5db; }
+    .tradeoff-actions { margin-top: 0.5rem; }
+    .tradeoff-reset {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .dark .tradeoff-reset { color: #9ca3af; }
+    .tradeoff-reset:hover { color: #111827; text-decoration: none; }
+    .dark .tradeoff-reset:hover { color: #f3f4f6; }
+    .tradeoff-reset:focus-visible {
+      outline: 2px solid #0ea5e9;
+      outline-offset: 2px;
+    }
+    .tradeoff-game-teaser { margin-top: 0.5rem; }
+    .tradeoff-game-show {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .dark .tradeoff-game-show { color: #9ca3af; }
+    .tradeoff-game-show:hover { color: #111827; text-decoration: none; }
+    .dark .tradeoff-game-show:hover { color: #f3f4f6; }
+    .tradeoff-game-show:focus-visible {
+      outline: 2px solid #0ea5e9;
+      outline-offset: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tradeoff-game * { transition: none !important; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var slider = document.getElementById('tradeoff-slider');
+      var speedEl = document.getElementById('tradeoff-speed');
+      var qualityEl = document.getElementById('tradeoff-quality');
+      var costEl = document.getElementById('tradeoff-cost');
+      var feedbackEl = document.getElementById('tradeoff-feedback');
+      var resetBtn = document.getElementById('tradeoff-reset');
+      var gameEl = document.getElementById('tradeoff-game');
+      var teaserEl = document.getElementById('tradeoff-game-teaser');
+      var closeBtn = document.getElementById('tradeoff-game-close');
+      var showBtn = document.getElementById('tradeoff-game-show');
+
+      var messages = {
+        low: 'Favoring quality and lower cost usually means more time and care.',
+        mid: 'Balancing all three often means no single dimension wins.',
+        high: 'Prioritizing speed often means higher cost and tighter constraints on quality.'
+      };
+
+      function levelFromValue(v) {
+        if (v <= 33) return 'low';
+        if (v <= 66) return 'medium';
+        return 'high';
+      }
+
+      function updateFromSlider() {
+        var v = parseInt(slider.value, 10);
+        var speedLevel = levelFromValue(v);
+        var qualityLevel = levelFromValue(100 - v);
+        var costLevel = levelFromValue(v);
+
+        speedEl.textContent = speedLevel === 'low' ? 'Low' : speedLevel === 'medium' ? 'Medium' : 'High';
+        speedEl.setAttribute('data-level', speedLevel);
+        qualityEl.textContent = qualityLevel === 'low' ? 'Low' : qualityLevel === 'medium' ? 'Medium' : 'High';
+        qualityEl.setAttribute('data-level', qualityLevel);
+        costEl.textContent = costLevel === 'low' ? 'Low' : costLevel === 'medium' ? 'Medium' : 'High';
+        costEl.setAttribute('data-level', costLevel);
+
+        var msgKey = v <= 33 ? 'low' : v <= 66 ? 'mid' : 'high';
+        feedbackEl.textContent = messages[msgKey];
+
+        var ariaText = v <= 33 ? 'Quality and cost favored' : v <= 66 ? 'Balanced' : 'Speed favored';
+        slider.setAttribute('aria-valuenow', v);
+        slider.setAttribute('aria-valuetext', ariaText);
+      }
+
+      function reset() {
+        slider.value = 50;
+        updateFromSlider();
+      }
+
+      function hideGame() {
+        gameEl.hidden = true;
+        teaserEl.hidden = false;
+        if (showBtn) showBtn.focus();
+      }
+
+      function showGame() {
+        gameEl.hidden = false;
+        teaserEl.hidden = true;
+        if (closeBtn) closeBtn.focus();
+      }
+
+      if (slider) {
+        slider.addEventListener('input', updateFromSlider);
+        slider.addEventListener('change', updateFromSlider);
+      }
+      if (resetBtn) resetBtn.addEventListener('click', reset);
+      if (closeBtn) closeBtn.addEventListener('click', hideGame);
+      if (showBtn) showBtn.addEventListener('click', showGame);
+    })();
+  </script>
+
   <!-- Featured Portfolio -->
   <section class="py-20 px-4 sm:px-6 gradient-bg-2 relative isolate scroll-reveal">
     <div class="max-w-6xl mx-auto">

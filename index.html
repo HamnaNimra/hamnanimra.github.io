@@ -81,7 +81,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           <canvas id="minicar-canvas" class="minicar-canvas" width="672" height="240" aria-label="Mini Car Dash game area. Space or tap to jump." tabindex="0"></canvas>
         </div>
 
-        <p id="minicar-status" class="minicar-status" aria-live="polite">Score: 0  Best: 0</p>
+        <p id="minicar-status" class="minicar-status" aria-live="polite">Score: 0  Best: 0  Hits: 0/3</p>
         <p class="minicar-hint">Space or tap to jump. 3 hits = game over.</p>
         <div class="minicar-actions">
           <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
@@ -277,11 +277,12 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function updateStatus(isOver) {
         if (!statusEl) return;
+        var hitsText = 'Hits: ' + hits + '/3';
         if (isOver) {
-          statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore;
+          statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.add('game-over');
         } else {
-          statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore;
+          statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.remove('game-over');
         }
       }
@@ -340,6 +341,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           if (overlap(carBox, hitboxObstacle(ob))) {
             obstacles.splice(i, 1);
             hits++;
+            updateStatus(false);
             if (hits >= 3) {
               endGame();
               return;

@@ -292,19 +292,6 @@
   color: #e2e8f0 !important;
 }
 
-/* Purple gradient callout (e.g. Biggest Lesson): keep or force text white */
-.dark .case-study-content [style*="linear-gradient(135deg, #667eea"],
-.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] {
-  color: #f1f5f9 !important;
-}
-
-.dark .case-study-content [style*="linear-gradient(135deg, #667eea"] h3,
-.dark .case-study-content [style*="linear-gradient(135deg, #667eea"] p,
-.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] h3,
-.dark .case-study-content [style*="linear-gradient(135deg, #764ba2"] p {
-  color: #f1f5f9 !important;
-}
-
 /* Inline border-left accent (e.g. trade-off box) */
 .dark .case-study-content [style*="border-left: 4px solid #667eea"] {
   border-left-color: #93c5fd !important;

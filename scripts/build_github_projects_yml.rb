@@ -5,13 +5,20 @@
 require "json"
 require "yaml"
 
+CANONICAL_GITHUB_OWNER = "HamnaNimra"
+
 repos = JSON.load(File.read("repos.json"))
 out = {
   "repositories" => repos.map do |r|
+    # Normalize GitHub URL to canonical owner handle
+    html_url = r["html_url"].to_s
+    if html_url.include?("github.com/") && html_url !~ %r{github\.com/#{Regexp.escape(CANONICAL_GITHUB_OWNER)}/}
+      html_url = html_url.sub(%r{github\.com/[^/]+/}, "github.com/#{CANONICAL_GITHUB_OWNER}/")
+    end
     {
       "name" => r["name"],
       "description" => (r["description"] || "").to_s,
-      "html_url" => r["html_url"],
+      "html_url" => html_url,
       "stargazers_count" => r["stargazers_count"],
       "forks_count" => r["forks_count"],
       "updated_at" => r["updated_at"],

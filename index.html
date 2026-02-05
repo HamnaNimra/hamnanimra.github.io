@@ -505,11 +505,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.fillStyle = '#374151';
         ictx.fillText('Hey, check out my score! I played this game 🏎️', 60, 305);
         if (url) {
-          ictx.font = '16px "Inter", system-ui, sans-serif';
-          ictx.fillStyle = '#4b5563';
-          ictx.fillText('Play the game — link embedded below:', 60, 335);
           var linkX = 60;
-          var linkY = 358;
+          var linkY = 332;
+          ictx.font = '16px "Inter", system-ui, sans-serif';
           var urlWidth = ictx.measureText(url).width;
           var linkW = Math.min(iw - 120, Math.max(400, urlWidth + 32));
           var linkH = urlWidth > linkW - 28 ? 52 : 36;

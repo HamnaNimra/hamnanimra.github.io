@@ -86,6 +86,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         <div class="minicar-actions">
           <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
           <button type="button" id="minicar-share" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share your score">Share score</button>
+          <button type="button" id="minicar-share-image" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share score as an image">Share score image</button>
+          <button type="button" id="minicar-share-instagram" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share to Instagram">Share to Instagram</button>
+          <button type="button" id="minicar-share-tiktok" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share to TikTok">Share to TikTok</button>
         </div>
       </div>
 
@@ -284,13 +287,51 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.add('game-over');
           var shareBtn = document.getElementById('minicar-share');
+          var instagramBtn = document.getElementById('minicar-share-instagram');
+          var tiktokBtn = document.getElementById('minicar-share-tiktok');
+          var imageBtn = document.getElementById('minicar-share-image');
           if (shareBtn) shareBtn.hidden = false;
+          if (instagramBtn) instagramBtn.hidden = false;
+          if (tiktokBtn) tiktokBtn.hidden = false;
+          if (imageBtn) imageBtn.hidden = false;
         } else {
           statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.remove('game-over');
           var shareBtn = document.getElementById('minicar-share');
+          var instagramBtn = document.getElementById('minicar-share-instagram');
+          var tiktokBtn = document.getElementById('minicar-share-tiktok');
+          var imageBtn = document.getElementById('minicar-share-image');
           if (shareBtn) shareBtn.hidden = true;
+          if (instagramBtn) instagramBtn.hidden = true;
+          if (tiktokBtn) tiktokBtn.hidden = true;
+          if (imageBtn) imageBtn.hidden = true;
         }
+      }
+
+      function copyToClipboard(text, btn, originalText) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            if (btn) btn.textContent = 'Copied!';
+            setTimeout(function () { if (btn) btn.textContent = originalText; }, 2000);
+          }).catch(function () { copyLegacy(text, btn, originalText); });
+        } else {
+          copyLegacy(text, btn, originalText);
+        }
+      }
+      function copyLegacy(text, btn, originalText) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          if (btn) btn.textContent = 'Copied!';
+          setTimeout(function () { if (btn) btn.textContent = originalText; }, 2000);
+        } catch (e) {}
+        document.body.removeChild(ta);
       }
 
       function shareScore() {
@@ -308,37 +349,132 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
             if (shareBtn) shareBtn.textContent = 'Shared!';
             setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
           }).catch(function () {
-            copyFallback();
+            copyToClipboard(fullText, shareBtn, 'Share score');
           });
         } else {
-          copyFallback();
+          copyToClipboard(fullText, shareBtn, 'Share score');
+        }
+      }
+
+      function shareToInstagram() {
+        var instagramText = '🏎️ Just scored ' + score + ' in Mini Car Dash!\n\nBest score: ' + highScore + '\n\nPlay it here: ' + (typeof location !== 'undefined' && location.href ? location.href : '');
+        var instagramBtn = document.getElementById('minicar-share-instagram');
+        copyToClipboard(instagramText, instagramBtn, 'Share to Instagram');
+      }
+
+      function shareToTikTok() {
+        var tiktokText = '🏎️ Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮\n\nTry it yourself! ' + (typeof location !== 'undefined' && location.href ? location.href : '');
+        var tiktokBtn = document.getElementById('minicar-share-tiktok');
+        copyToClipboard(tiktokText, tiktokBtn, 'Share to TikTok');
+      }
+
+      function shareScoreImage() {
+        var imageBtn = document.getElementById('minicar-share-image');
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        var caption = 'Mini Car Dash score: ' + score + ' (best: ' + highScore + ').';
+
+        // Create an offscreen canvas for the score image
+        var imgCanvas = document.createElement('canvas');
+        var iw = 800;
+        var ih = 450;
+        imgCanvas.width = iw;
+        imgCanvas.height = ih;
+        var ictx = imgCanvas.getContext('2d');
+
+        // Background
+        ictx.fillStyle = '#f3f4f6';
+        ictx.fillRect(0, 0, iw, ih);
+
+        // Simple gradient strip at top
+        var grad = ictx.createLinearGradient(0, 0, iw, 0);
+        grad.addColorStop(0, '#0ea5e9');
+        grad.addColorStop(1, '#14b8a6');
+        ictx.fillStyle = grad;
+        ictx.fillRect(0, 0, iw, 90);
+
+        // Title
+        ictx.fillStyle = '#ffffff';
+        ictx.font = 'bold 40px \"Inter\", system-ui, sans-serif';
+        ictx.textAlign = 'left';
+        ictx.textBaseline = 'middle';
+        ictx.fillText('Mini Car Dash', 40, 45);
+
+        // Score block
+        ictx.fillStyle = '#111827';
+        ictx.font = '28px \"Inter\", system-ui, sans-serif';
+        ictx.textAlign = 'left';
+        ictx.fillText('Score: ' + score, 60, 170);
+        ictx.fillText('Best: ' + highScore, 60, 215);
+        ictx.fillText('Hits: ' + hits + '/3', 60, 260);
+
+        // Small hint line
+        ictx.font = '18px \"Inter\", system-ui, sans-serif';
+        ictx.fillStyle = '#4b5563';
+        ictx.fillText('🏎️ Tap to play at:', 60, 315);
+        ictx.fillStyle = '#2563eb';
+        if (url) {
+          var displayUrl = url.replace(/^https?:\/\//, '');
+          ictx.fillText(displayUrl, 60, 345);
         }
 
-        function copyFallback() {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(fullText).then(function () {
-              if (shareBtn) shareBtn.textContent = 'Copied!';
-              setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
-            }).catch(function () { copyLegacy(); });
-          } else {
-            copyLegacy();
-          }
-        }
-        function copyLegacy() {
-          var ta = document.createElement('textarea');
-          ta.value = fullText;
-          ta.setAttribute('readonly', '');
-          ta.style.position = 'fixed';
-          ta.style.left = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
+        // Decorative road at bottom
+        ictx.fillStyle = '#e5e7eb';
+        ictx.fillRect(0, ih - 80, iw, 80);
+        ictx.strokeStyle = '#9ca3af';
+        ictx.setLineDash([18, 16]);
+        ictx.lineWidth = 3;
+        ictx.beginPath();
+        ictx.moveTo(0, ih - 40);
+        ictx.lineTo(iw, ih - 40);
+        ictx.stroke();
+        ictx.setLineDash([]);
+
+        // Tiny car emoji on the road
+        ictx.font = '48px serif';
+        ictx.textAlign = 'center';
+        ictx.textBaseline = 'middle';
+        ictx.fillText('🏎️', iw - 120, ih - 50);
+
+        imgCanvas.toBlob(function (blob) {
+          if (!blob) return;
+          var file = null;
           try {
-            document.execCommand('copy');
-            if (shareBtn) shareBtn.textContent = 'Copied!';
-            setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
-          } catch (e) {}
-          document.body.removeChild(ta);
-        }
+            file = new File([blob], 'mini-car-dash-score.png', { type: 'image/png' });
+          } catch (e) {
+            // Older browsers may not support File constructor; we'll still use blob for download.
+          }
+
+          function downloadFallback() {
+            var link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'mini-car-dash-score.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+            if (imageBtn) {
+              imageBtn.textContent = 'Saved image';
+              setTimeout(function () { imageBtn.textContent = 'Share score image'; }, 2000);
+            }
+          }
+
+          if (navigator.canShare && file && navigator.canShare({ files: [file] }) && navigator.share) {
+            navigator.share({
+              title: 'Mini Car Dash score',
+              text: caption,
+              files: [file]
+            }).then(function () {
+              if (imageBtn) {
+                imageBtn.textContent = 'Shared image!';
+                setTimeout(function () { imageBtn.textContent = 'Share score image'; }, 2000);
+              }
+            }).catch(function () {
+              downloadFallback();
+            });
+          } else {
+            downloadFallback();
+          }
+        }, 'image/png');
       }
 
       function endGame() {
@@ -526,6 +662,15 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       });
       document.getElementById('minicar-share').addEventListener('click', function () {
         shareScore();
+      });
+      document.getElementById('minicar-share-image').addEventListener('click', function () {
+        shareScoreImage();
+      });
+      document.getElementById('minicar-share-instagram').addEventListener('click', function () {
+        shareToInstagram();
+      });
+      document.getElementById('minicar-share-tiktok').addEventListener('click', function () {
+        shareToTikTok();
       });
       document.getElementById('minicar-close').addEventListener('click', function () {
         stop();

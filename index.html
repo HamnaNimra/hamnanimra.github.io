@@ -309,7 +309,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       function hitboxObstacle(ob) {
         var screenX = ob.x - scroll;
         // Only count hit when car has clearly driven INTO the cone (right half of base)
-        var leftInset = ob.w * 0.55;
+        var leftInset = ob.w * 0.35;
         var rightInset = 2;
         var topInset = ob.h * 0.35;
         return {
@@ -322,13 +322,13 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function hitboxCollectible(c) {
         var screenX = c.x - scroll;
-        // Small center of coin so you have to clearly pass through it
-        var inset = 0.55;
+        // bigger center of coin so you pass through it for points
+        var inset = 0.95; // 95% of the radius
         return {
           left: screenX - c.r * inset,
           right: screenX + c.r * inset,
-          top: groundY - c.r * 2 + c.r * (1 - inset),
-          bottom: groundY - c.r * (1 - inset)
+          top: groundY - c.r * 2 + c.r * (1 - inset), // align with coin circle
+          bottom: groundY - c.r * (1 - inset) // align with coin circle
         };
       }
 
@@ -338,8 +338,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function jump() {
-        if (gameOver) return;
-        if (carY >= -2 && carVy >= 0 && !(bumpUntil > 0)) {
+        if (gameOver) return; // prevent jumping after game over
+        if (carY >= -2 && carVy >= 0 && !(bumpUntil > 0)) { 
           carVy = prefersReducedMotion ? -10 : jumpForce;
         }
       }
@@ -528,7 +528,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.fillText('Hits: ' + hits + '/3', 60, 260);
         ictx.font = '20px "Inter", system-ui, sans-serif';
         ictx.fillStyle = '#374151';
-        ictx.fillText('Hey, check out my score! I played this game 🏎️', 60, 305);
+        ictx.fillText('Hey! I played Mini Car Dash & scored ' + ' (best: ' + highScore + '). 🏎️', 60, 305);
         if (url) {
           var linkX = 60;
           var linkY = 332;

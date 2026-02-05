@@ -88,7 +88,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           <div class="minicar-share-wrap">
             <button type="button" id="minicar-share" class="minicar-btn-reset minicar-btn-share" aria-label="Share your score" aria-haspopup="true" aria-expanded="false">Share</button>
             <div id="minicar-share-menu" class="minicar-share-menu" role="menu" aria-label="Share options" hidden>
-              <button type="button" class="minicar-share-option" role="menuitem" data-action="copy">Copy score text</button>
+              <button type="button" class="minicar-share-option" role="menuitem" data-action="link">Copy link</button>
+              <button type="button" class="minicar-share-option" role="menuitem" data-action="image">Copy image</button>
               <button type="button" class="minicar-share-option" role="menuitem" data-action="instagram">Share to Instagram</button>
               <button type="button" class="minicar-share-option" role="menuitem" data-action="tiktok">Share to TikTok</button>
             </div>
@@ -386,21 +387,88 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function shareToInstagram(feedbackEl) {
-        var instagramText = '🏎️ Just scored ' + score + ' in Mini Car Dash!\n\nBest score: ' + highScore + '\n\nPlay it here: ' + (typeof location !== 'undefined' && location.href ? location.href : '');
-        copyToClipboard(instagramText, feedbackEl || null, 'Share to Instagram');
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        if (navigator.share && typeof navigator.share === 'function') {
+          navigator.share({
+            title: 'Mini Car Dash',
+            text: 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.',
+            url: url
+          }).then(function () {
+            if (feedbackEl) { feedbackEl.textContent = 'Shared!'; setTimeout(function () { feedbackEl.textContent = 'Share to Instagram'; }, 2000); }
+          }).catch(function () {
+            fallbackCopyInstagram(feedbackEl);
+          });
+        } else {
+          fallbackCopyInstagram(feedbackEl);
+        }
+      }
+      function fallbackCopyInstagram(feedbackEl) {
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        var shareText = 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.\n\nPlay here: ' + url;
+        copyToClipboard(shareText, feedbackEl || null, 'Share to Instagram');
       }
 
       function shareToTikTok(feedbackEl) {
-        var tiktokText = '🏎️ Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮\n\nTry it yourself! ' + (typeof location !== 'undefined' && location.href ? location.href : '');
-        copyToClipboard(tiktokText, feedbackEl || null, 'Share to TikTok');
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        if (navigator.share && typeof navigator.share === 'function') {
+          navigator.share({
+            title: 'Mini Car Dash',
+            text: 'Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮',
+            url: url
+          }).then(function () {
+            if (feedbackEl) { feedbackEl.textContent = 'Shared!'; setTimeout(function () { feedbackEl.textContent = 'Share to TikTok'; }, 2000); }
+          }).catch(function () {
+            fallbackCopyTikTok(feedbackEl);
+          });
+        } else {
+          fallbackCopyTikTok(feedbackEl);
+        }
+      }
+      function fallbackCopyTikTok(feedbackEl) {
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        var shareText = 'Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮\n\nTry it yourself: ' + url;
+        copyToClipboard(shareText, feedbackEl || null, 'Share to TikTok');
       }
 
-      function shareScoreImage() {
-        var imageBtn = document.getElementById('minicar-share-image');
-        var url = typeof location !== 'undefined' && location.href ? location.href : '';
-        var caption = 'Mini Car Dash score: ' + score + ' (best: ' + highScore + ').';
+      function shareLinkOrImage(copyType, feedbackEl) {
+        if (copyType === 'link') {
+          var url = typeof location !== 'undefined' && location.href ? location.href : '';
+          copyToClipboard(url, feedbackEl || null, 'Copy link');
+        } else if (copyType === 'image') {
+          generateScoreImageBlob(function (blob) {
+            if (!blob) return;
+            if (navigator.clipboard && navigator.clipboard.write) {
+              var item = new ClipboardItem({ 'image/png': blob });
+              navigator.clipboard.write([item]).then(function () {
+                if (feedbackEl) {
+                  feedbackEl.textContent = 'Image copied!';
+                  setTimeout(function () { feedbackEl.textContent = 'Copy image'; }, 2000);
+                }
+              }).catch(function () {
+                downloadScoreImage(blob, feedbackEl);
+              });
+            } else {
+              downloadScoreImage(blob, feedbackEl);
+            }
+          });
+        }
+      }
+      function downloadScoreImage(blob, feedbackEl, restoreText) {
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'mini-car-dash-score.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+        if (feedbackEl) {
+          feedbackEl.textContent = 'Saved image';
+          setTimeout(function () { feedbackEl.textContent = restoreText || 'Copy image'; }, 2000);
+        }
+      }
 
-        // Create an offscreen canvas for the score image
+      function generateScoreImageBlob(callback) {
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
         var imgCanvas = document.createElement('canvas');
         var iw = 800;
         var ih = 450;
@@ -408,34 +476,24 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         imgCanvas.height = ih;
         var ictx = imgCanvas.getContext('2d');
 
-        // Background
         ictx.fillStyle = '#f3f4f6';
         ictx.fillRect(0, 0, iw, ih);
-
-        // Simple gradient strip at top
         var grad = ictx.createLinearGradient(0, 0, iw, 0);
         grad.addColorStop(0, '#0ea5e9');
         grad.addColorStop(1, '#14b8a6');
         ictx.fillStyle = grad;
         ictx.fillRect(0, 0, iw, 90);
-
-        // Title
         ictx.fillStyle = '#ffffff';
-        ictx.font = 'bold 40px \"Inter\", system-ui, sans-serif';
+        ictx.font = 'bold 40px "Inter", system-ui, sans-serif';
         ictx.textAlign = 'left';
         ictx.textBaseline = 'middle';
         ictx.fillText('Mini Car Dash', 40, 45);
-
-        // Score block
         ictx.fillStyle = '#111827';
-        ictx.font = '28px \"Inter\", system-ui, sans-serif';
-        ictx.textAlign = 'left';
+        ictx.font = '28px "Inter", system-ui, sans-serif';
         ictx.fillText('Score: ' + score, 60, 170);
         ictx.fillText('Best: ' + highScore, 60, 215);
         ictx.fillText('Hits: ' + hits + '/3', 60, 260);
-
-        // Small hint line
-        ictx.font = '18px \"Inter\", system-ui, sans-serif';
+        ictx.font = '18px "Inter", system-ui, sans-serif';
         ictx.fillStyle = '#4b5563';
         ictx.fillText('🏎️ Tap to play at:', 60, 315);
         ictx.fillStyle = '#2563eb';
@@ -443,8 +501,6 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           var displayUrl = url.replace(/^https?:\/\//, '');
           ictx.fillText(displayUrl, 60, 345);
         }
-
-        // Decorative road at bottom
         ictx.fillStyle = '#e5e7eb';
         ictx.fillRect(0, ih - 80, iw, 80);
         ictx.strokeStyle = '#9ca3af';
@@ -455,36 +511,30 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.lineTo(iw, ih - 40);
         ictx.stroke();
         ictx.setLineDash([]);
-
-        // Tiny car emoji on the road
-        ictx.font = '48px serif';
+        var carX = iw - 120;
+        var carY = ih - 50;
+        var carH = 48;
+        ictx.save();
+        ictx.translate(carX, carY);
+        ictx.scale(-1, 1);
+        ictx.font = carH + 'px serif';
         ictx.textAlign = 'center';
         ictx.textBaseline = 'middle';
-        ictx.fillText('🏎️', iw - 120, ih - 50);
+        ictx.fillText('🏎️', 0, 0);
+        ictx.restore();
 
-        imgCanvas.toBlob(function (blob) {
+        imgCanvas.toBlob(callback, 'image/png');
+      }
+
+      function shareScoreImage() {
+        var imageBtn = document.getElementById('minicar-share-image');
+        var caption = 'Mini Car Dash score: ' + score + ' (best: ' + highScore + ').';
+        generateScoreImageBlob(function (blob) {
           if (!blob) return;
           var file = null;
           try {
             file = new File([blob], 'mini-car-dash-score.png', { type: 'image/png' });
-          } catch (e) {
-            // Older browsers may not support File constructor; we'll still use blob for download.
-          }
-
-          function downloadFallback() {
-            var link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'mini-car-dash-score.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(link.href);
-            if (imageBtn) {
-              imageBtn.textContent = 'Saved image';
-              setTimeout(function () { imageBtn.textContent = 'Share score image'; }, 2000);
-            }
-          }
-
+          } catch (e) {}
           if (navigator.canShare && file && navigator.canShare({ files: [file] }) && navigator.share) {
             navigator.share({
               title: 'Mini Car Dash score',
@@ -496,13 +546,14 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
                 setTimeout(function () { imageBtn.textContent = 'Share score image'; }, 2000);
               }
             }).catch(function () {
-              downloadFallback();
+                downloadScoreImage(blob, imageBtn, 'Share score image');
             });
           } else {
-            downloadFallback();
+            downloadScoreImage(blob, imageBtn, 'Share score image');
           }
-        }, 'image/png');
+        });
       }
+
 
       function endGame() {
         gameOver = true;
@@ -706,7 +757,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         var action = option.getAttribute('data-action');
         shareMenu.hidden = true;
         shareBtn.setAttribute('aria-expanded', 'false');
-        if (action === 'copy') shareScore(option);
+        if (action === 'link') shareLinkOrImage('link', option);
+        else if (action === 'image') shareLinkOrImage('image', option);
         else if (action === 'instagram') shareToInstagram(option);
         else if (action === 'tiktok') shareToTikTok(option);
       });

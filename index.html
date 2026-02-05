@@ -65,7 +65,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
   </section>
 
   <!-- Optional Mini Car Dash: side-scroller under About Me -->
-  <section id="minicar-dash-wrap" class="py-10 sm:py-14 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800" aria-label="Optional Mini Car Dash game">
+  <section id="minicar-dash-wrap" class="minicar-section py-10 sm:py-14 px-4 sm:px-6 bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800" aria-label="Optional Mini Car Dash game">
     <div class="max-w-2xl mx-auto">
       <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base mb-6 leading-relaxed">
         Feeling curious? Take a tiny spin.
@@ -106,6 +106,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
   <style>
     /* Mini Car Dash: calm, minimal side-scroller */
+    .minicar-section { position: relative; z-index: 20; }
     .minicar-dash {
       border: 1px solid rgb(229 231 235);
       border-radius: 0.75rem;
@@ -161,7 +162,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      z-index: 10;
+      z-index: 1000;
     }
     .dark .minicar-share-menu {
       background: #374151;

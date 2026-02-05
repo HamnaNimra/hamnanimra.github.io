@@ -387,9 +387,12 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       function shareToInstagram(feedbackEl) {
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
         if (navigator.share && typeof navigator.share === 'function') {
+          var shareText = url
+            ? 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + '). Play the game here: ' + url
+            : 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ').';
           navigator.share({
             title: 'Mini Car Dash',
-            text: 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.',
+            text: shareText,
             url: url
           }).then(function () {
             if (feedbackEl) { feedbackEl.textContent = 'Shared!'; setTimeout(function () { feedbackEl.textContent = 'Share to Instagram'; }, 2000); }
@@ -402,16 +405,21 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
       function fallbackCopyInstagram(feedbackEl) {
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
-        var shareText = 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.\n\nPlay here: ' + url;
+        var shareText = url
+          ? 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + '). Play the game here: ' + url
+          : 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ').';
         copyToClipboard(shareText, feedbackEl || null, 'Share to Instagram');
       }
 
       function shareToTikTok(feedbackEl) {
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
+        var shareText = url
+          ? 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ') 🎮 Play the game here: ' + url
+          : 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ') 🎮';
         if (navigator.share && typeof navigator.share === 'function') {
           navigator.share({
             title: 'Mini Car Dash',
-            text: 'Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮',
+            text: shareText,
             url: url
           }).then(function () {
             if (feedbackEl) { feedbackEl.textContent = 'Shared!'; setTimeout(function () { feedbackEl.textContent = 'Share to TikTok'; }, 2000); }
@@ -424,7 +432,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
       function fallbackCopyTikTok(feedbackEl) {
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
-        var shareText = 'Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮\n\nTry it yourself: ' + url;
+        var shareText = url
+          ? 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ') 🎮 Play the game here: ' + url
+          : 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ') 🎮';
         copyToClipboard(shareText, feedbackEl || null, 'Share to TikTok');
       }
 
@@ -491,13 +501,17 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.fillText('Score: ' + score, 60, 170);
         ictx.fillText('Best: ' + highScore, 60, 215);
         ictx.fillText('Hits: ' + hits + '/3', 60, 260);
+        ictx.font = '20px "Inter", system-ui, sans-serif';
+        ictx.fillStyle = '#374151';
+        ictx.fillText('Hey, check out my score! I played this game 🏎️', 60, 305);
         ictx.font = '18px "Inter", system-ui, sans-serif';
         ictx.fillStyle = '#4b5563';
-        ictx.fillText('🏎️ Tap to play at:', 60, 315);
+        ictx.fillText('Play the game here:', 60, 335);
         ictx.fillStyle = '#2563eb';
         if (url) {
           var displayUrl = url.replace(/^https?:\/\//, '');
-          ictx.fillText(displayUrl, 60, 345);
+          ictx.font = '18px "Inter", system-ui, sans-serif';
+          ictx.fillText(displayUrl, 60, 365);
         }
         ictx.fillStyle = '#e5e7eb';
         ictx.fillRect(0, ih - 80, iw, 80);
@@ -527,8 +541,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       function shareScoreImage() {
         var imageBtn = document.getElementById('minicar-share-image');
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
-        var caption = 'Mini Car Dash score: ' + score + ' (best: ' + highScore + ').';
-        var textWithLink = url ? caption + ' Play here: ' + url : caption;
+        var textWithLink = url
+          ? 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + '). Play the game here: ' + url
+          : 'Hey, check out my score! I played Mini Car Dash and got ' + score + ' (best: ' + highScore + ').';
         generateScoreImageBlob(function (blob) {
           if (!blob) return;
           var file = null;

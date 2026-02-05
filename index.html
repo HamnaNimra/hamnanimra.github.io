@@ -529,7 +529,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function shareScoreImage() {
         var imageBtn = document.getElementById('minicar-share-image');
+        var url = typeof location !== 'undefined' && location.href ? location.href : '';
         var caption = 'Mini Car Dash score: ' + score + ' (best: ' + highScore + ').';
+        var textWithLink = url ? caption + ' Play here: ' + url : caption;
         generateScoreImageBlob(function (blob) {
           if (!blob) return;
           var file = null;
@@ -539,7 +541,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           if (navigator.canShare && file && navigator.canShare({ files: [file] }) && navigator.share) {
             navigator.share({
               title: 'Mini Car Dash score',
-              text: caption,
+              text: textWithLink,
+              url: url || undefined,
               files: [file]
             }).then(function () {
               if (imageBtn) {

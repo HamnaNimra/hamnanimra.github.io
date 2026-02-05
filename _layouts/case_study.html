@@ -1,11 +1,14 @@
 ---
 layout: base
 ---
-<div class="no-print border-b border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-    <a href="{{ '/work/' | relative_url }}" class="text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline transition-colors">&larr; Back to Work</a>
+<nav class="case-study-back no-print border-b border-neutral-200/50 dark:border-neutral-700/50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm" aria-label="Breadcrumb">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center min-h-[3.25rem]">
+    <a href="{{ '/work/' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 transition-colors group">
+      <svg class="w-4 h-4 shrink-0 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      Back to Portfolio
+    </a>
   </div>
-</div>
+</nav>
 <div class="case-study-content">
   {{ content }}
 </div>

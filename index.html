@@ -504,14 +504,48 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.font = '20px "Inter", system-ui, sans-serif';
         ictx.fillStyle = '#374151';
         ictx.fillText('Hey, check out my score! I played this game 🏎️', 60, 305);
-        ictx.font = '18px "Inter", system-ui, sans-serif';
-        ictx.fillStyle = '#4b5563';
-        ictx.fillText('Play the game here:', 60, 335);
-        ictx.fillStyle = '#2563eb';
         if (url) {
-          var displayUrl = url.replace(/^https?:\/\//, '');
-          ictx.font = '18px "Inter", system-ui, sans-serif';
-          ictx.fillText(displayUrl, 60, 365);
+          ictx.font = '16px "Inter", system-ui, sans-serif';
+          ictx.fillStyle = '#4b5563';
+          ictx.fillText('Play the game — link embedded below:', 60, 335);
+          var linkX = 60;
+          var linkY = 358;
+          var urlWidth = ictx.measureText(url).width;
+          var linkW = Math.min(iw - 120, Math.max(400, urlWidth + 32));
+          var linkH = urlWidth > linkW - 28 ? 52 : 36;
+          ictx.fillStyle = '#dbeafe';
+          ictx.strokeStyle = '#2563eb';
+          ictx.lineWidth = 1.5;
+          var r = 8;
+          ictx.beginPath();
+          ictx.moveTo(linkX + r, linkY);
+          ictx.lineTo(linkX + linkW - r, linkY);
+          ictx.quadraticCurveTo(linkX + linkW, linkY, linkX + linkW, linkY + r);
+          ictx.lineTo(linkX + linkW, linkY + linkH - r);
+          ictx.quadraticCurveTo(linkX + linkW, linkY + linkH, linkX + linkW - r, linkY + linkH);
+          ictx.lineTo(linkX + r, linkY + linkH);
+          ictx.quadraticCurveTo(linkX, linkY + linkH, linkX, linkY + linkH - r);
+          ictx.lineTo(linkX, linkY + r);
+          ictx.quadraticCurveTo(linkX, linkY, linkX + r, linkY);
+          ictx.closePath();
+          ictx.fill();
+          ictx.stroke();
+          ictx.fillStyle = '#1d4ed8';
+          ictx.textAlign = 'left';
+          ictx.textBaseline = 'middle';
+          var padding = 14;
+          var maxW = linkW - padding * 2;
+          if (urlWidth <= maxW) {
+            ictx.fillText(url, linkX + padding, linkY + linkH / 2);
+          } else {
+            ictx.font = '14px "Inter", system-ui, sans-serif';
+            var m = ictx.measureText(url);
+            var charsPerLine = Math.max(20, Math.floor(url.length * maxW / m.width));
+            var line1 = url.slice(0, charsPerLine);
+            var line2 = url.slice(charsPerLine);
+            ictx.fillText(line1, linkX + padding, linkY + 14);
+            ictx.fillText(line2, linkX + padding, linkY + linkH - 12);
+          }
         }
         ictx.fillStyle = '#e5e7eb';
         ictx.fillRect(0, ih - 80, iw, 80);

@@ -569,7 +569,44 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         ictx.fillText('🏎️', 0, 0);
         ictx.restore();
 
-        imgCanvas.toBlob(callback, 'image/png');
+        if (url) {
+          var qrImg = new Image();
+          qrImg.crossOrigin = 'anonymous';
+          qrImg.onload = function () {
+            var qrSize = 130;
+            var qrX = iw - qrSize - 50;
+            var qrY = 60;
+            ictx.fillStyle = '#fff';
+            ictx.strokeStyle = '#e5e7eb';
+            ictx.lineWidth = 2;
+            var qrR = 6;
+            var qrBoxW = qrSize + 8;
+            var qrBoxH = qrSize + 28;
+            ictx.beginPath();
+            ictx.moveTo(qrX - 4 + qrR, qrY - 4);
+            ictx.lineTo(qrX - 4 + qrBoxW - qrR, qrY - 4);
+            ictx.quadraticCurveTo(qrX - 4 + qrBoxW, qrY - 4, qrX - 4 + qrBoxW, qrY - 4 + qrR);
+            ictx.lineTo(qrX - 4 + qrBoxW, qrY - 4 + qrBoxH - qrR);
+            ictx.quadraticCurveTo(qrX - 4 + qrBoxW, qrY - 4 + qrBoxH, qrX - 4 + qrBoxW - qrR, qrY - 4 + qrBoxH);
+            ictx.lineTo(qrX - 4 + qrR, qrY - 4 + qrBoxH);
+            ictx.quadraticCurveTo(qrX - 4, qrY - 4 + qrBoxH, qrX - 4, qrY - 4 + qrBoxH - qrR);
+            ictx.lineTo(qrX - 4, qrY - 4 + qrR);
+            ictx.quadraticCurveTo(qrX - 4, qrY - 4, qrX - 4 + qrR, qrY - 4);
+            ictx.closePath();
+            ictx.fill();
+            ictx.stroke();
+            ictx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+            ictx.fillStyle = '#374151';
+            ictx.font = '14px "Inter", system-ui, sans-serif';
+            ictx.textAlign = 'center';
+            ictx.fillText('Scan to play', qrX + qrSize / 2, qrY + qrSize + 18);
+            imgCanvas.toBlob(callback, 'image/png');
+          };
+          qrImg.onerror = function () { imgCanvas.toBlob(callback, 'image/png'); };
+          qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=' + encodeURIComponent(url);
+        } else {
+          imgCanvas.toBlob(callback, 'image/png');
+        }
       }
 
       function shareScoreImage() {

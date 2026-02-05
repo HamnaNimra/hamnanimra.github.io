@@ -85,10 +85,15 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         <p class="minicar-hint">Space or tap to jump. 3 hits = game over.</p>
         <div class="minicar-actions">
           <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
-          <button type="button" id="minicar-share" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share your score">Share score</button>
+          <div class="minicar-share-wrap">
+            <button type="button" id="minicar-share" class="minicar-btn-reset minicar-btn-share" aria-label="Share your score" aria-haspopup="true" aria-expanded="false">Share</button>
+            <div id="minicar-share-menu" class="minicar-share-menu" role="menu" aria-label="Share options" hidden>
+              <button type="button" class="minicar-share-option" role="menuitem" data-action="copy">Copy score text</button>
+              <button type="button" class="minicar-share-option" role="menuitem" data-action="instagram">Share to Instagram</button>
+              <button type="button" class="minicar-share-option" role="menuitem" data-action="tiktok">Share to TikTok</button>
+            </div>
+          </div>
           <button type="button" id="minicar-share-image" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share score as an image">Share score image</button>
-          <button type="button" id="minicar-share-instagram" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share to Instagram">Share to Instagram</button>
-          <button type="button" id="minicar-share-tiktok" class="minicar-btn-reset minicar-btn-share" hidden aria-label="Share to TikTok">Share to TikTok</button>
         </div>
       </div>
 
@@ -143,6 +148,41 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
     }
     .minicar-actions { margin-top: 0.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
     .minicar-btn-share { margin-left: 0; }
+    .minicar-share-wrap { position: relative; display: inline-block; }
+    .minicar-share-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 4px;
+      min-width: 180px;
+      padding: 0.25rem 0;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      z-index: 10;
+    }
+    .dark .minicar-share-menu {
+      background: #374151;
+      border-color: #4b5563;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .minicar-share-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-size: 0.8125rem;
+      color: #374151;
+      background: none;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .dark .minicar-share-option { color: #e5e7eb; }
+    .minicar-share-option:hover { background: #f3f4f6; color: #111827; }
+    .dark .minicar-share-option:hover { background: #4b5563; color: #fff; }
+    .minicar-share-option:focus-visible { outline: 2px solid #0ea5e9; outline-offset: -2px; }
     .minicar-viewport-wrap {
       width: 100%;
       max-width: 100%;
@@ -286,24 +326,12 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         if (isOver) {
           statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.add('game-over');
-          var shareBtn = document.getElementById('minicar-share');
-          var instagramBtn = document.getElementById('minicar-share-instagram');
-          var tiktokBtn = document.getElementById('minicar-share-tiktok');
           var imageBtn = document.getElementById('minicar-share-image');
-          if (shareBtn) shareBtn.hidden = false;
-          if (instagramBtn) instagramBtn.hidden = false;
-          if (tiktokBtn) tiktokBtn.hidden = false;
           if (imageBtn) imageBtn.hidden = false;
         } else {
           statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore + '  ' + hitsText;
           statusEl.classList.remove('game-over');
-          var shareBtn = document.getElementById('minicar-share');
-          var instagramBtn = document.getElementById('minicar-share-instagram');
-          var tiktokBtn = document.getElementById('minicar-share-tiktok');
           var imageBtn = document.getElementById('minicar-share-image');
-          if (shareBtn) shareBtn.hidden = true;
-          if (instagramBtn) instagramBtn.hidden = true;
-          if (tiktokBtn) tiktokBtn.hidden = true;
           if (imageBtn) imageBtn.hidden = true;
         }
       }
@@ -334,38 +362,37 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         document.body.removeChild(ta);
       }
 
-      function shareScore() {
+      function shareScore(feedbackEl) {
         var shareText = 'I scored ' + score + ' in Mini Car Dash! Best: ' + highScore + '.';
         var url = typeof location !== 'undefined' && location.href ? location.href : '';
         var fullText = url ? shareText + ' ' + url : shareText;
-        var shareBtn = document.getElementById('minicar-share');
+        var feedbackBtn = feedbackEl || document.getElementById('minicar-share');
+        var copyLabel = feedbackEl && feedbackEl.getAttribute('data-action') === 'copy' ? 'Copy score text' : 'Share';
 
-        if (navigator.share && typeof navigator.share === 'function') {
+        if (navigator.share && typeof navigator.share === 'function' && !feedbackEl) {
           navigator.share({
             title: 'Mini Car Dash',
             text: shareText,
             url: url || undefined
           }).then(function () {
-            if (shareBtn) shareBtn.textContent = 'Shared!';
-            setTimeout(function () { if (shareBtn) shareBtn.textContent = 'Share score'; }, 2000);
+            if (feedbackBtn) feedbackBtn.textContent = 'Shared!';
+            setTimeout(function () { if (feedbackBtn) feedbackBtn.textContent = copyLabel; }, 2000);
           }).catch(function () {
-            copyToClipboard(fullText, shareBtn, 'Share score');
+            copyToClipboard(fullText, feedbackBtn, copyLabel);
           });
         } else {
-          copyToClipboard(fullText, shareBtn, 'Share score');
+          copyToClipboard(fullText, feedbackBtn, copyLabel);
         }
       }
 
-      function shareToInstagram() {
+      function shareToInstagram(feedbackEl) {
         var instagramText = '🏎️ Just scored ' + score + ' in Mini Car Dash!\n\nBest score: ' + highScore + '\n\nPlay it here: ' + (typeof location !== 'undefined' && location.href ? location.href : '');
-        var instagramBtn = document.getElementById('minicar-share-instagram');
-        copyToClipboard(instagramText, instagramBtn, 'Share to Instagram');
+        copyToClipboard(instagramText, feedbackEl || null, 'Share to Instagram');
       }
 
-      function shareToTikTok() {
+      function shareToTikTok(feedbackEl) {
         var tiktokText = '🏎️ Mini Car Dash score: ' + score + '! Best: ' + highScore + ' 🎮\n\nTry it yourself! ' + (typeof location !== 'undefined' && location.href ? location.href : '');
-        var tiktokBtn = document.getElementById('minicar-share-tiktok');
-        copyToClipboard(tiktokText, tiktokBtn, 'Share to TikTok');
+        copyToClipboard(tiktokText, feedbackEl || null, 'Share to TikTok');
       }
 
       function shareScoreImage() {
@@ -660,17 +687,31 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         reset();
         start();
       });
-      document.getElementById('minicar-share').addEventListener('click', function () {
-        shareScore();
+      var shareBtn = document.getElementById('minicar-share');
+      var shareMenu = document.getElementById('minicar-share-menu');
+      shareBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = shareMenu.hidden;
+        shareMenu.hidden = !open;
+        shareBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function () {
+        shareMenu.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+      });
+      shareMenu.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var option = e.target.closest('.minicar-share-option');
+        if (!option) return;
+        var action = option.getAttribute('data-action');
+        shareMenu.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+        if (action === 'copy') shareScore(option);
+        else if (action === 'instagram') shareToInstagram(option);
+        else if (action === 'tiktok') shareToTikTok(option);
       });
       document.getElementById('minicar-share-image').addEventListener('click', function () {
         shareScoreImage();
-      });
-      document.getElementById('minicar-share-instagram').addEventListener('click', function () {
-        shareToInstagram();
-      });
-      document.getElementById('minicar-share-tiktok').addEventListener('click', function () {
-        shareToTikTok();
       });
       document.getElementById('minicar-close').addEventListener('click', function () {
         stop();

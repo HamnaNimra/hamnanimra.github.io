@@ -295,9 +295,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function hitboxCar() {
-        // Tighter hitbox so only clear overlap with visible car counts
-        var paddingX = carW * 0.2;
-        var paddingY = carH * 0.25;
+        // Tight hitbox: only core of car counts (avoids early collisions)
+        var paddingX = carW * 0.32;
+        var paddingY = carH * 0.35;
         return {
           left: carX + paddingX,
           right: carX + carW - paddingX,
@@ -308,9 +308,9 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function hitboxObstacle(ob) {
         var screenX = ob.x - scroll;
-        // Cone is triangular: use center portion so we don't hit "air" on the sides
-        var marginW = ob.w * 0.25;
-        var marginH = ob.h * 0.25;
+        // Cone is a triangle: use only the center-bottom so tip and sides don't trigger early
+        var marginW = ob.w * 0.38;
+        var marginH = ob.h * 0.4;
         return {
           left: screenX + marginW,
           right: screenX + ob.w - marginW,
@@ -321,12 +321,13 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
       function hitboxCollectible(c) {
         var screenX = c.x - scroll;
-        // Match the drawn circle: center (sx, groundY - c.r), radius c.r
+        // Small center of coin so you have to clearly pass through it
+        var inset = 0.55;
         return {
-          left: screenX - c.r * 0.7,
-          right: screenX + c.r * 0.7,
-          top: groundY - c.r * 2 + c.r * 0.3,
-          bottom: groundY - c.r * 0.3
+          left: screenX - c.r * inset,
+          right: screenX + c.r * inset,
+          top: groundY - c.r * 2 + c.r * (1 - inset),
+          bottom: groundY - c.r * (1 - inset)
         };
       }
 

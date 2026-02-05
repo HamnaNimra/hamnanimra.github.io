@@ -632,6 +632,54 @@
       transition: opacity 0.25s ease;
     }
 
+    /* Scroll progress: chapter-style reading indicator (no-print, hidden when reduced motion) */
+    .scroll-progress-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      z-index: 60;
+      background: rgba(0, 0, 0, 0.06);
+      pointer-events: none;
+    }
+    .dark .scroll-progress-wrap {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .scroll-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ec4899, #a855f7, #0ea5e9);
+      border-radius: 0 2px 2px 0;
+      transition: width 0.15s ease-out;
+    }
+    .dark .scroll-progress-bar {
+      background: linear-gradient(90deg, #f472b6, #c084fc, #38bdf8);
+    }
+    .scroll-progress-text {
+      position: fixed;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 59;
+      font-size: 11px;
+      font-weight: 500;
+      color: #6b7280;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .dark .scroll-progress-text {
+      color: #9ca3af;
+    }
+    @media (max-width: 640px) {
+      .scroll-progress-text { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-progress-wrap { display: none !important; }
+      .scroll-progress-text { display: none !important; }
+    }
+    .no-print.scroll-progress-wrap,
+    .no-print.scroll-progress-text { }
   </style>
   {% if page.layout == 'resume' %}
   <link rel="stylesheet" href="{{ '/css/resume-print.css' | relative_url }}">
@@ -649,6 +697,12 @@
       document.documentElement.classList.toggle('dark', theme === 'dark');
     })();
   </script>
+
+  <!-- Scroll progress: chapter-style “how far through” indicator (hidden in print and when reduced motion) -->
+  <div id="scroll-progress-wrap" class="no-print scroll-progress-wrap" aria-hidden="true">
+    <div id="scroll-progress-bar" class="scroll-progress-bar" role="presentation"></div>
+  </div>
+  <div id="scroll-progress-text" class="no-print scroll-progress-text" aria-live="polite" aria-atomic="true"></div>
 
   <header class="no-print border-b border-neutral-200/50 dark:border-neutral-700/50 glass sticky top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md site-header">
     <nav class="nav-bar max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4" aria-label="Main navigation">

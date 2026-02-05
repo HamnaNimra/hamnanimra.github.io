@@ -81,7 +81,8 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
           <canvas id="minicar-canvas" class="minicar-canvas" width="672" height="240" aria-label="Mini Car Dash game area. Space or tap to jump." tabindex="0"></canvas>
         </div>
 
-        <p class="minicar-hint">Space or tap to jump.</p>
+        <p id="minicar-status" class="minicar-status" aria-live="polite">Score: 0  Best: 0</p>
+        <p class="minicar-hint">Space or tap to jump. 3 hits = game over.</p>
         <div class="minicar-actions">
           <button type="button" id="minicar-reset" class="minicar-btn-reset">Reset</button>
         </div>
@@ -152,10 +153,20 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       max-width: 100%;
     }
     .minicar-canvas:focus-visible { outline: 2px solid #0ea5e9; outline-offset: 2px; }
+    .minicar-status {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #374151;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
+    .dark .minicar-status { color: #e5e7eb; }
+    .minicar-status.game-over { color: #b91c1c; }
+    .dark .minicar-status.game-over { color: #f87171; }
     .minicar-hint {
       font-size: 0.75rem;
       color: #6b7280;
-      margin-top: 0.5rem;
+      margin-top: 0.25rem;
       margin-bottom: 0.25rem;
     }
     .dark .minicar-hint { color: #9ca3af; }
@@ -183,13 +194,14 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
   <script>
     (function () {
       'use strict';
-      // Mini Car Dash: endless side-scroller. Space or tap to jump. Obstacles = bump & continue; collectibles = visual only.
+      // Mini Car Dash: 3 hits = game over. Coins add to score; session high score shown after game over.
 
       var canvas = document.getElementById('minicar-canvas');
       if (!canvas) return;
 
       var ctx = canvas.getContext('2d');
       var wrap = canvas.parentElement;
+      var statusEl = document.getElementById('minicar-status');
       var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Resize canvas to container width, fixed height 240px
@@ -221,6 +233,10 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       var nextSpawnAt = 0;
       var running = false;
       var rafId = null;
+      var hits = 0;
+      var score = 0;
+      var highScore = 0;  // session only
+      var gameOver = false;
 
       // Spawn obstacles (cones) and collectibles (coins) at intervals; endless scroll
       function spawnNext() {
@@ -253,9 +269,28 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
       }
 
       function jump() {
+        if (gameOver) return;
         if (carY >= -2 && carVy >= 0 && !(bumpUntil > 0)) {
           carVy = prefersReducedMotion ? -8 : jumpForce;
         }
+      }
+
+      function updateStatus(isOver) {
+        if (!statusEl) return;
+        if (isOver) {
+          statusEl.textContent = 'Game over. Score: ' + score + '  Best: ' + highScore;
+          statusEl.classList.add('game-over');
+        } else {
+          statusEl.textContent = 'Score: ' + score + '  Best: ' + highScore;
+          statusEl.classList.remove('game-over');
+        }
+      }
+
+      function endGame() {
+        gameOver = true;
+        if (score > highScore) highScore = score;
+        stop();
+        updateStatus(true);
       }
 
       function reset() {
@@ -266,10 +301,14 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         obstacles = [];
         collectibles = [];
         nextSpawnAt = 0;
+        hits = 0;
+        score = 0;
+        gameOver = false;
+        updateStatus(false);
       }
 
       function loop() {
-        if (!running || !ctx) return;
+        if (!running || !ctx || gameOver) return;
         var now = Date.now();
 
         if (bumpUntil > 0 && now < bumpUntil) {
@@ -291,7 +330,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
 
         var carBox = hitboxCar();
 
-        // Obstacle collision: bump and brief pause
+        // Obstacle collision: bump and brief pause; 3 hits = game over
         for (var i = obstacles.length - 1; i >= 0; i--) {
           var ob = obstacles[i];
           if (ob.x - scroll < -ob.w) {
@@ -299,19 +338,29 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
             continue;
           }
           if (overlap(carBox, hitboxObstacle(ob))) {
-            bumpUntil = now + (prefersReducedMotion ? 200 : 400);
             obstacles.splice(i, 1);
+            hits++;
+            if (hits >= 3) {
+              endGame();
+              return;
+            }
+            bumpUntil = now + (prefersReducedMotion ? 200 : 400);
           }
         }
 
-        // Collectible overlap: remove only (visual fun)
+        // Collectible: add to score and update high score
         for (var j = collectibles.length - 1; j >= 0; j--) {
           var c = collectibles[j];
           if (c.x - scroll < -20) {
             collectibles.splice(j, 1);
             continue;
           }
-          if (overlap(carBox, hitboxCollectible(c))) collectibles.splice(j, 1);
+          if (overlap(carBox, hitboxCollectible(c))) {
+            collectibles.splice(j, 1);
+            score++;
+            if (score > highScore) highScore = score;
+            updateStatus(false);
+          }
         }
 
         // Draw
@@ -428,6 +477,7 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
         canvas.focus();
       });
 
+      updateStatus(false);
       start();
     })();
   </script>

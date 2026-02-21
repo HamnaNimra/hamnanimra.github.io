@@ -44,9 +44,9 @@ case_studies = [
         "meta": "Product Case Study · February 2026",
     },
     {
-        "source": "case-studies/autoperfpy-case-study.html",
-        "output": "_case_studies/autoperfpy.html",
-        "title": "AutoPerfPy",
+        "source": "case-studies/trackiq-case-study.html",
+        "output": "_case_studies/trackiq.html",
+        "title": "TrackIQ",
         "subtitle": "Democratizing performance engineering for edge AI",
         "featured": True,
         "meta": "Product Case Study · February 2026",

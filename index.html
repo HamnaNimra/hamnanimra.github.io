@@ -1026,69 +1026,18 @@ description: Hamna Nimra — Software engineer, explorer, maker. Digital garden 
   </section>
   {% endif %}
 
-  <!-- GitHub Projects -->
   <section class="py-20 px-4 sm:px-6 gradient-bg-1 relative isolate scroll-reveal">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text-animate bg-gradient-to-r from-accent-500 via-fun-purple to-fun-pink bg-clip-text text-transparent bg-[length:200%_auto]">
-          GitHub Projects ⭐
-        </h2>
-        <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300">Open source projects</p>
-      </div>
-      
-      {% assign repos = site.data.github_projects.repositories | where_exp: "item", "item.name != 'hamnanimra.github.io'" %}
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for repo in repos limit: 6 %}
-        <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group fun-card block bg-white dark:bg-neutral-800 rounded-2xl border-2 border-neutral-200 dark:border-neutral-700 p-6 hover:border-accent-400 dark:hover:border-accent-500 transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden shadow-lg hover:shadow-2xl isolate">
-          <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-accent-400/20 to-fun-teal/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
-          <div class="relative z-10">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-fun-teal flex items-center justify-center shadow-lg">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C17.14 18.197 20 14.442 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <h3 class="font-semibold text-base text-neutral-900 dark:text-white group-hover:text-accent-500 dark:group-hover:text-accent-400 transition-colors">
-                {{ repo.name }}
-              </h3>
-            </div>
-            {% if repo.description %}
-            <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-4 line-clamp-2 leading-relaxed">{{ repo.description }}</p>
-            {% endif %}
-            <div class="flex gap-3 items-center flex-wrap">
-              {% if repo.stargazers_count > 0 %}
-              <span class="flex items-center gap-1 px-3 py-1 rounded-full bg-fun-yellow/10 text-fun-yellow text-xs font-semibold">
-                ⭐ {{ repo.stargazers_count }}
-              </span>
-              {% endif %}
-              {% if repo.language %}
-              <span class="px-3 py-1 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 text-xs font-semibold">
-                {{ repo.language }}
-              </span>
-              {% endif %}
-            </div>
-          </div>
-        </a>
-        {% endfor %}
-        
-        {% if repos.size == 0 %}
-        <div class="col-span-3 text-center py-16">
-          <div class="inline-block p-6 rounded-3xl bg-gradient-to-br from-accent-100/50 to-fun-pink/50 dark:from-accent-900/20 dark:to-fun-pink/20 border-2 border-dashed border-accent-300 dark:border-accent-700">
-            <p class="text-base font-semibold text-neutral-700 dark:text-neutral-300 mb-2">GitHub projects syncing</p>
-            <p class="text-sm text-neutral-500 dark:text-neutral-300">Projects will appear here automatically</p>
-          </div>
-        </div>
-        {% endif %}
-      </div>
-      
-      <div class="mt-12 text-center">
-        <a href="https://github.com/HamnaNimra" target="_blank" rel="noopener noreferrer" class="cta-primary cta-fun inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
-          View on GitHub
-          <svg class="w-5 h-5 cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-        </a>
-      </div>
+      {% include github-projects-section.html
+        section_class="relative isolate"
+        header_wrap_class="relative z-10 text-center"
+        heading_class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-3 gradient-text-animate bg-gradient-to-r from-accent-500 via-fun-purple to-fun-pink bg-clip-text text-transparent bg-[length:200%_auto]"
+        subtitle_class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 mb-12"
+        cta_class="cta-primary cta-fun inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
+        cta_text="View on GitHub"
+        limit=6
+        empty_subtitle="Projects will appear here automatically"
+      %}
     </div>
   </section>
 </div>

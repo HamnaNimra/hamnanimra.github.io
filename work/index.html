@@ -248,55 +248,7 @@ description: Case studies, product documentation, and GitHub projects
     </div>
   </section>
 
-  <!-- GitHub Projects -->
-  <section class="mb-16 relative isolate">
-    <div class="relative z-10">
-      <h2 class="font-display text-xl font-semibold mb-4 text-neutral-900 dark:text-white">GitHub Projects ⭐</h2>
-      <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-6 relative z-10">Open source contributions and repositories</p>
-    </div>
-    {% assign repos = site.data.github_projects.repositories | where_exp: "item", "item.name != 'hamnanimra.github.io'" %}
-    {% if repos.size > 0 %}
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-      {% for repo in repos limit: 9 %}
-      {% assign repo_display_name = repo.name %}
-      {% if repo.name == 'trackiq' %}
-        {% assign repo_display_name = 'TrackIQ' %}
-      {% endif %}
-      <a href="{{ repo.html_url }}" target="_blank" rel="noopener noreferrer" class="group block bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6 card-hover relative overflow-hidden isolate">
-        <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-accent-100/30 to-fun-teal/30 dark:from-accent-900/10 dark:to-fun-teal/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-2">
-            <svg class="w-5 h-5 text-neutral-400 dark:text-neutral-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C17.14 18.197 20 14.442 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
-            </svg>
-            <h3 class="font-semibold text-base text-neutral-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
-              {{ repo_display_name }}
-            </h3>
-          </div>
-          {% if repo.description %}
-          <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-3 line-clamp-2 leading-relaxed">{{ repo.description }}</p>
-          {% endif %}
-          <div class="flex gap-4 text-xs">
-            {% if repo.stargazers_count > 0 %}
-            <span class="flex items-center gap-1 text-neutral-600 dark:text-neutral-400">⭐ {{ repo.stargazers_count }}</span>
-            {% endif %}
-            {% if repo.language %}
-            <span class="px-2 py-1 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 font-medium">{{ repo.language }}</span>
-            {% endif %}
-          </div>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-    <div class="mt-6 text-center">
-      <a href="https://github.com/HamnaNimra" target="_blank" rel="noopener noreferrer" class="text-accent-700 dark:text-accent-300 hover:text-accent-800 dark:hover:text-accent-200 hover:underline font-medium transition-colors">View all repositories on GitHub →</a>
-    </div>
-    {% else %}
-    <div class="text-center py-10 rounded-xl border-2 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800/90">
-      <p class="text-neutral-800 dark:text-neutral-100 font-semibold text-base">GitHub projects will sync automatically via GitHub Action</p>
-    </div>
-    {% endif %}
-  </section>
+  {% include github-projects-section.html %}
 
   {% assign other_projects = site.data.other_projects | default: "" %}
   {% if other_projects.size > 0 %}

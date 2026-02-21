@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrackIQ | Product Case Study</title>
-    <style>
-        * {
+---
+layout: case_study
+title: TrackIQ
+subtitle: Performance validation platform for edge and distributed AI
+featured: true
+meta: Product Case Study · February 2026
+---
+<style>
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -37,7 +38,7 @@
         }
 
         .hero::before {
-            content: '⚡';
+            content: 'âš¡';
             position: absolute;
             font-size: 300px;
             opacity: 0.05;
@@ -443,7 +444,7 @@
         }
 
         .arch-layer li::before {
-            content: '▸';
+            content: 'â–¸';
             position: absolute;
             left: 0;
             color: #4A90E2;
@@ -611,7 +612,7 @@
         }
 
         .learning-card li::before {
-            content: '✓';
+            content: 'âœ“';
             position: absolute;
             left: 0;
             color: #76B947;
@@ -777,10 +778,9 @@
                 font-size: 24px;
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Hero Section -->
+</style>
+
+<!-- Hero Section -->
     <div class="hero">
         <div class="container">
             <h1>TrackIQ</h1>
@@ -815,7 +815,7 @@
                     </div>
                     <div class="problem-card">
                         <h3>Most Tools Are Either Too Heavy or Too Manual</h3>
-                        <p>The options usually fall into two extremes: powerful frameworks that are hard to adopt, or low-level tools that need lots of glue code. Teams get stuck choosing between complexity and fragility. What’s missing is a practical middle ground that works in real CI/CD workflows.</p>
+                        <p>The options usually fall into two extremes: powerful frameworks that are hard to adopt, or low-level tools that need lots of glue code. Teams get stuck choosing between complexity and fragility. Whatâ€™s missing is a practical middle ground that works in real CI/CD workflows.</p>
                     </div>
                 </div>
             </div>
@@ -942,15 +942,15 @@
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Market Opportunity</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
                     <div>
-                        <strong style="display: block; margin-bottom: 8px; color: #76B947;">📊 Market Size</strong>
+                        <strong style="display: block; margin-bottom: 8px; color: #76B947;">ðŸ“Š Market Size</strong>
                         <p style="color: #555;">NVIDIA edge AI market: $10B+ (automotive, robotics, retail, healthcare)</p>
                     </div>
                     <div>
-                        <strong style="display: block; margin-bottom: 8px; color: #4A90E2;">👥 Total Addressable Users</strong>
+                        <strong style="display: block; margin-bottom: 8px; color: #4A90E2;">ðŸ‘¥ Total Addressable Users</strong>
                         <p style="color: #555;">50,000+ Jetson/DRIVE developers (based on NVIDIA GTC attendance, forum activity)</p>
                     </div>
                     <div>
-                        <strong style="display: block; margin-bottom: 8px; color: #9013FE;">🎯 Immediate Target</strong>
+                        <strong style="display: block; margin-bottom: 8px; color: #9013FE;">ðŸŽ¯ Immediate Target</strong>
                         <p style="color: #555;">10,000+ performance engineers and MLOps teams at automotive OEMs and tier-1 suppliers</p>
                     </div>
                 </div>
@@ -978,32 +978,32 @@
             
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                    <div class="feature-icon">âš¡</div>
                     <h3>Automated Benchmarking</h3>
                     <p>One command runs benchmarks across all devices (GPU, CPU, Jetson), all precisions (FP32, FP16, INT8), all batch sizes. No manual scripting.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🚨</div>
+                    <div class="feature-icon">ðŸš¨</div>
                     <h3>Regression Detection</h3>
                     <p>Configurable thresholds per metric. Fails CI/CD if P99 latency >10% or throughput <5%. Catches regressions before production.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🚗</div>
+                    <div class="feature-icon">ðŸš—</div>
                     <h3>Automotive Profiles</h3>
-                    <p>Pre-built profiles enforce ADAS safety requirements: P99 <33.3ms, 50W power budget, 80�C thermal limit. Validates compliance automatically.</p>
+                    <p>Pre-built profiles enforce ADAS safety requirements: P99 <33.3ms, 50W power budget, 80ï¿½C thermal limit. Validates compliance automatically.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <div class="feature-icon">ðŸ“Š</div>
                     <h3>Interactive Reports</h3>
                     <p>HTML/PDF reports with Plotly visualizations. Light/dark themes. Auto-runs benchmarks if no data provided. Share with stakeholders instantly.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔬</div>
+                    <div class="feature-icon">ðŸ”¬</div>
                     <h3>Advanced Analytics</h3>
                     <p>DNN pipeline layer-by-layer analysis. Tegrastats thermal monitoring. Efficiency metrics (perf/watt). Identify bottlenecks in minutes.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🧩</div>
+                    <div class="feature-icon">ðŸ§©</div>
                     <h3>Extensible Architecture</h3>
                     <p>Two-layer design: reusable core library (trackiq_core) + application layer (autoperfpy). Use as CLI or Python library.</p>
                 </div>
@@ -1074,18 +1074,18 @@
                 <h3 style="font-size: 28px; margin-bottom: 32px;">P0 - Must Have (MVP)</h3>
                 <div class="problem-grid">
                     <div class="problem-card">
-                        <h3>✅ Auto-Benchmarking</h3>
+                        <h3>âœ… Auto-Benchmarking</h3>
                         <p><strong>User Story:</strong> "As a performance engineer, I need to run benchmarks across all available devices with one command, so I can quickly identify performance regressions."</p>
                         <p><strong>Acceptance:</strong> autoperfpy run --auto detects GPUs/CPU, runs 5+ configs in <2 min</p>
                     </div>
                     <div class="problem-card">
-                        <h3>✅ Regression Detection</h3>
+                        <h3>âœ… Regression Detection</h3>
                         <p><strong>User Story:</strong> "As an MLOps engineer, I need automated regression detection in CI/CD, so I catch performance drops before production."</p>
                         <p><strong>Acceptance:</strong> autoperfpy compare exits non-zero if P99 >10% regression</p>
                     </div>
                     <div class="problem-card">
-                        <h3>✅ Automotive Profiles</h3>
-                        <p><strong>User Story:</strong> "As an automotive engineer, I need to validate ADAS latency requirements (P99 <33.3ms, 50W, 80�C), so I meet safety certifications."</p>
+                        <h3>âœ… Automotive Profiles</h3>
+                        <p><strong>User Story:</strong> "As an automotive engineer, I need to validate ADAS latency requirements (P99 <33.3ms, 50W, 80ï¿½C), so I meet safety certifications."</p>
                         <p><strong>Acceptance:</strong> --profile automotive_safety enforces constraints, fails if violated</p>
                     </div>
                 </div>
@@ -1095,17 +1095,17 @@
                 <h3 style="font-size: 28px; margin-bottom: 32px;">P1 - Should Have (Differentiation)</h3>
                 <div class="problem-grid">
                     <div class="problem-card">
-                        <h3>✅ Interactive Reports</h3>
+                        <h3>âœ… Interactive Reports</h3>
                         <p><strong>User Story:</strong> "As a technical lead, I need interactive HTML reports with Plotly charts, so I can share results with stakeholders."</p>
                         <p><strong>Status:</strong> Implemented with dark/light themes</p>
                     </div>
                     <div class="problem-card">
-                        <h3>✅ DNN Pipeline Analysis</h3>
+                        <h3>âœ… DNN Pipeline Analysis</h3>
                         <p><strong>User Story:</strong> "As a platform engineer, I need DNN pipeline layer-by-layer analysis, so I can identify bottleneck layers."</p>
                         <p><strong>Status:</strong> Implemented with top-N layer ranking</p>
                     </div>
                     <div class="problem-card">
-                        <h3>✅ Streamlit Dashboard</h3>
+                        <h3>âœ… Streamlit Dashboard</h3>
                         <p><strong>User Story:</strong> "As a data scientist, I need an interactive UI to explore results without CLI, so I can iterate faster."</p>
                         <p><strong>Status:</strong> Implemented with benchmark execution from browser</p>
                     </div>
@@ -1116,17 +1116,17 @@
                 <h3 style="font-size: 28px; margin-bottom: 32px;">P2 - Nice to Have (Future)</h3>
                 <div class="problem-grid">
                     <div class="problem-card">
-                        <h3>🔲 LLM Metrics</h3>
+                        <h3>ðŸ”² LLM Metrics</h3>
                         <p><strong>User Story:</strong> "As a data scientist, I need LLM-specific metrics (TTFT, tokens/sec), so I optimize transformer models."</p>
                         <p><strong>Status:</strong> Partially implemented, needs KV cache monitoring (v0.3.0)</p>
                     </div>
                     <div class="problem-card">
-                        <h3>🔲 Multi-Run Trends</h3>
+                        <h3>ðŸ”² Multi-Run Trends</h3>
                         <p><strong>User Story:</strong> "As a manager, I need multi-run trend analysis, so I track performance over time."</p>
                         <p><strong>Status:</strong> Planned for v0.3.0 with time-series charts</p>
                     </div>
                     <div class="problem-card">
-                        <h3>🔲 Real-Time API</h3>
+                        <h3>ðŸ”² Real-Time API</h3>
                         <p><strong>User Story:</strong> "As a platform team, I need REST API for real-time monitoring, so I integrate with dashboards."</p>
                         <p><strong>Status:</strong> v1.0.0 feature, requires significant backend work</p>
                     </div>
@@ -1148,42 +1148,42 @@
                     <tbody>
                         <tr>
                             <td>Auto-benchmarking</td>
-                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>â­â­â­â­â­</td>
                             <td>3 weeks</td>
                             <td>Critical path blocker removal</td>
                             <td class="chosen">P0</td>
                         </tr>
                         <tr>
                             <td>Regression detection</td>
-                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>â­â­â­â­â­</td>
                             <td>2 weeks</td>
                             <td>CI/CD integration = adoption</td>
                             <td class="chosen">P0</td>
                         </tr>
                         <tr>
                             <td>Automotive profiles</td>
-                            <td>⭐⭐⭐⭐</td>
+                            <td>â­â­â­â­</td>
                             <td>1 week</td>
                             <td>Unique differentiator</td>
                             <td class="chosen">P0</td>
                         </tr>
                         <tr>
                             <td>HTML reports</td>
-                            <td>⭐⭐⭐⭐</td>
+                            <td>â­â­â­â­</td>
                             <td>2 weeks</td>
                             <td>Shareability -> virality</td>
                             <td class="chosen">P1</td>
                         </tr>
                         <tr>
                             <td>Streamlit UI</td>
-                            <td>⭐⭐⭐</td>
+                            <td>â­â­â­</td>
                             <td>1 week</td>
                             <td>Lower barrier to entry</td>
                             <td class="chosen">P1</td>
                         </tr>
                         <tr>
                             <td>Multi-run trends</td>
-                            <td>⭐⭐⭐</td>
+                            <td>â­â­â­</td>
                             <td>3 weeks</td>
                             <td>Nice-to-have, not urgent</td>
                             <td class="rejected">P2</td>
@@ -1293,30 +1293,30 @@
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">The Metrics That Actually Matter</h3>
                 <div class="problem-grid" style="margin-top: 32px;">
                     <div class="problem-card">
-                        <h3>📊 Adoption Metrics</h3>
+                        <h3>ðŸ“Š Adoption Metrics</h3>
                         <ul style="list-style: none; padding-left: 0;">
-                            <li style="padding: 8px 0; color: #555;">▸ GitHub stars/forks (virality signal)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ PyPI downloads (actual usage)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Issues/PRs (community engagement)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ CLI vs Library usage split</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ GitHub stars/forks (virality signal)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ PyPI downloads (actual usage)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Issues/PRs (community engagement)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ CLI vs Library usage split</li>
                         </ul>
                     </div>
                     <div class="problem-card">
-                        <h3>⚡ Performance Metrics</h3>
+                        <h3>âš¡ Performance Metrics</h3>
                         <ul style="list-style: none; padding-left: 0;">
-                            <li style="padding: 8px 0; color: #555;">▸ Time to run full benchmark suite</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Regression detection accuracy</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Model R² scores (>0.85 target)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ CI/CD integration success rate</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Time to run full benchmark suite</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Regression detection accuracy</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Model RÂ² scores (>0.85 target)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ CI/CD integration success rate</li>
                         </ul>
                     </div>
                     <div class="problem-card">
-                        <h3>📈 Product-Market Fit</h3>
+                        <h3>ðŸ“ˆ Product-Market Fit</h3>
                         <ul style="list-style: none; padding-left: 0;">
-                            <li style="padding: 8px 0; color: #555;">▸ User testimonials/case studies</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Enterprise adoption (OEMs, tier-1s)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Feature requests (unmet needs)</li>
-                            <li style="padding: 8px 0; color: #555;">▸ Retention: weekly active users</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ User testimonials/case studies</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Enterprise adoption (OEMs, tier-1s)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Feature requests (unmet needs)</li>
+                            <li style="padding: 8px 0; color: #555;">â–¸ Retention: weekly active users</li>
                         </ul>
                     </div>
                 </div>
@@ -1364,7 +1364,7 @@
             
             <div class="learning-grid">
                 <div class="learning-card">
-                    <h3>✅ What Worked</h3>
+                    <h3>âœ… What Worked</h3>
                     <ul>
                         <li>Two-layer architecture (enabled library + CLI use cases)</li>
                         <li>Documentation-first approach (README, CONCEPTS, examples)</li>
@@ -1407,19 +1407,19 @@
             
             <div class="problem-grid">
                 <div class="problem-card">
-                    <h3>🎯 Phase 1: Developer Community</h3>
+                    <h3>ðŸŽ¯ Phase 1: Developer Community</h3>
                     <p><strong>Target:</strong> Developer forums (edge AI, MLOps), Reddit (r/MachineLearning, r/embedded, r/LocalLLaMA), Hacker News, Twitter (#EdgeAI, #LLMs)</p>
                     <p><strong>Tactics:</strong> Technical blog posts, "Show HN" launch, demo videos, GitHub README optimization for SEO, showcase automotive + LLM use cases</p>
                     <p><strong>Goal:</strong> 100 GitHub stars, 500 PyPI downloads, 10 issues/PRs in first month, feedback from multiple domains</p>
                 </div>
                 <div class="problem-card">
-                    <h3>📣 Phase 2: Platform Ecosystem</h3>
+                    <h3>ðŸ“£ Phase 2: Platform Ecosystem</h3>
                     <p><strong>Target:</strong> NVIDIA Developer Program, edge AI conferences (Embedded Vision Summit, tinyML), LLM inference communities, medical AI forums</p>
                     <p><strong>Tactics:</strong> Conference demos, domain-specific tutorials (automotive benchmarking, LLM TTFT optimization, medical imaging latency), integration guides</p>
                     <p><strong>Goal:</strong> Featured in platform newsletters, 3+ case studies across domains, community contributions</p>
                 </div>
                 <div class="problem-card">
-                    <h3>🚗 Phase 3: Enterprise Domains</h3>
+                    <h3>ðŸš— Phase 3: Enterprise Domains</h3>
                     <p><strong>Target:</strong> Automotive OEMs, healthcare AI companies, LLM inference providers, industrial IoT teams, robotics companies</p>
                     <p><strong>Tactics:</strong> Direct outreach to performance engineering teams, domain-specific case studies, pilot programs, consulting partnerships</p>
                     <p><strong>Goal:</strong> 5+ enterprise users across verticals, testimonials, potential support/consulting revenue, domain-specific feature requests</p>
@@ -1449,19 +1449,19 @@
                 <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">While TrackIQ is open-source, there are several monetization paths once adoption is proven across domains:</p>
                 <ul style="list-style: none; padding-left: 0; margin-top: 24px;">
                     <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
-                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">💼</span>
+                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">ðŸ’¼</span>
                         <strong>Domain-Specific Consulting:</strong> Custom profiles for automotive safety, healthcare compliance, LLM optimization. On-site training, priority support SLAs.
                     </li>
                     <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
-                        <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900; font-size: 18px;">☁️</span>
+                        <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900; font-size: 18px;">â˜ï¸</span>
                         <strong>SaaS Dashboard:</strong> Hosted version with team collaboration, multi-domain benchmarking, historical trending, compliance reporting (FDA, ISO 26262, etc.)
                     </li>
                     <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
-                        <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900; font-size: 18px;">🔌</span>
+                        <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900; font-size: 18px;">ðŸ”Œ</span>
                         <strong>Platform Partnerships:</strong> Integration with CI/CD platforms (Jenkins, GitLab, GitHub Actions), LLM serving frameworks (vLLM, TensorRT-LLM), medical AI platforms
                     </li>
                     <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
-                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">📚</span>
+                        <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">ðŸ“š</span>
                         <strong>Training & Certification:</strong> "Performance Engineering for Edge AI" courses covering automotive, healthcare, LLM domains. Industry-specific certification programs.
                     </li>
                 </ul>
@@ -1481,27 +1481,27 @@
                     <h3>Core Features</h3>
                     <ul style="list-style: none; padding-left: 0;">
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Canonical schema + shared `trackiq_core` foundation
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Three tool workflows: `autoperfpy`, `minicluster`, `trackiq-compare`
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Regression detection with configurable thresholds
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Automotive profiles (ADAS requirements)
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Interactive HTML/PDF reports
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
+                            <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">âœ“</span>
                             Comprehensive tests and documentation across tools
                         </li>
                     </ul>
@@ -1571,8 +1571,6 @@
                 <a href="https://github.com/HamnaNimra/trackiq" class="btn btn-primary" target="_blank">View on GitHub</a>
                 <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-secondary">Get in Touch</a>
             </div>
-            <p class="contact">📧 <a href="mailto:hamnanimramirza@outlook.com">hamnanimramirza@outlook.com</a></p>
+            <p class="contact">ðŸ“§ <a href="mailto:hamnanimramirza@outlook.com">hamnanimramirza@outlook.com</a></p>
         </div>
     </section>
-</body>
-</html>

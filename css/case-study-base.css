@@ -1,6 +1,6 @@
 /**
  * Case study theme – shared tokens for _case_studies/*.html
- * Keep these in sync across autoperfpy, microhelp, pit-strategy (and any new case studies).
+ * Keep these in sync across trackiq, microhelp, pit-strategy (and any new case studies).
  *
  * Light theme:
  *   Body:       #fafafa background, #1a1a1a text
@@ -20,7 +20,7 @@
  *   .problem-card / .insight-box: 24px radius, 4px solid border, 8px/12px shadow
  *   .btn: 18px 42px padding, 50px radius, 18px/700
  *
- * Shared palette (AutoPerfPy theme): #76B947 (green), #4A90E2 (blue), #9013FE (purple).
+ * Shared palette (TrackIQ theme): #76B947 (green), #4A90E2 (blue), #9013FE (purple).
  * All case studies use this palette for hero, buttons, section underline, cards, and footer CTA.
  */
 
@@ -35,7 +35,7 @@
   outline-color: rgba(255, 255, 255, 0.4);
 }
 
-/* ——— Buttons: single source of truth (AutoPerfPy style) ——— */
+/* ——— Buttons: single source of truth (TrackIQ style) ——— */
 .case-study-content .cta-buttons {
   display: flex;
   gap: 20px;

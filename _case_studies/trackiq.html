@@ -1,13 +1,11 @@
----
-layout: case_study
-title: AutoPerfPy
-subtitle: Democratizing performance engineering for edge AI
-featured: true
-meta: Product Case Study · February 2026
----
-
-<style>
-* {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackIQ | Product Case Study</title>
+    <style>
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -26,49 +24,6 @@ meta: Product Case Study · February 2026
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
-        }
-
-        a {
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .top-bar {
-            background: #ffffff;
-            border-bottom: 1px solid #e6e6e6;
-        }
-
-        .top-bar .container {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 16px 24px;
-        }
-
-        .back-link {
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #1a1a1a;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .contact a {
-            color: inherit;
-            text-decoration: underline;
-        }
-
-        a:focus-visible {
-            outline: 3px solid rgba(0, 0, 0, 0.25);
-            outline-offset: 2px;
-            border-radius: 4px;
         }
 
         /* Hero Section */
@@ -523,7 +478,7 @@ meta: Product Case Study · February 2026
         .metric-card:nth-child(1) { background: #76B947; color: white; }
         .metric-card:nth-child(2) { background: #4A90E2; color: white; }
         .metric-card:nth-child(3) { background: #9013FE; color: white; }
-        .metric-card:nth-child(4) { background: #74115e; color: white; }
+        .metric-card:nth-child(4) { background: #76B947; color: white; }
 
         .metric-card:hover {
             transform: translateY(-10px) rotate(3deg);
@@ -531,7 +486,7 @@ meta: Product Case Study · February 2026
         }
 
         .metric-card .number {
-            font-size: 65px;
+            font-size: 72px;
             font-weight: 900;
             margin-bottom: 12px;
             position: relative;
@@ -665,7 +620,7 @@ meta: Product Case Study · February 2026
         }
 
         .learning-card:last-child li::before {
-            content: '→';
+            content: '->';
             color: #9013FE;
         }
 
@@ -803,10 +758,6 @@ meta: Product Case Study · February 2026
 
             .tradeoff-table {
                 font-size: 13px;
-                display: block;
-                overflow-x: auto;
-                width: 100%;
-                -webkit-overflow-scrolling: touch;
             }
 
             .tradeoff-table th,
@@ -826,30 +777,22 @@ meta: Product Case Study · February 2026
                 font-size: 24px;
             }
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-</style>
-
-<!-- Hero Section -->
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
     <div class="hero">
         <div class="container">
-            <h1>AutoPerfPy</h1>
-            <p class="subtitle">Democratizing performance engineering for edge AI</p>
+            <h1>TrackIQ</h1>
+            <p class="subtitle">Performance validation platform for edge and distributed AI</p>
             <div class="meta">
-                <span>🛠️ Product Case Study</span>
-                <span>👤 Hamna Nimra</span>
-                <span>📅 February 2026</span>
+                <span>Product Case Study</span>
+                <span>Hamna Nimra</span>
+                <span>February 2026</span>
             </div>
             <div class="cta-buttons">
-                <a href="https://github.com/HamnaNimra/AutoPerfPy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-secondary">Get in Touch</a>
+                <a href="https://github.com/HamnaNimra/trackiq" class="btn btn-primary" target="_blank">View on GitHub</a>
+                <a href="/cdn-cgi/l/email-protection#4921282427282720243b2824203b332809263c3d25262622672a2624" class="btn btn-secondary">Get in Touch</a>
             </div>
         </div>
     </div>
@@ -858,39 +801,39 @@ meta: Product Case Study · February 2026
     <section class="insight">
         <div class="container">
             <h2>Why I Built This</h2>
-            <p class="section-subtitle">The real problem behind performance validation for edge AI</p>
+            <p class="section-subtitle">The real problem behind performance validation for edge and distributed AI</p>
 
             <div style="margin-top: 64px;">
                 <div class="problem-grid">
                     <div class="problem-card">
-                        <h3>Performance Was Always an Afterthought</h3>
-                        <p>In autonomous driving systems, 5G infrastructure, and edge AI deployments, a common pattern emerges: teams build amazing models, deploy them, then discover performance issues weeks later. By then, it's too late—debugging happens in production instead of catching regressions in CI/CD.</p>
+                        <h3>Everyone Measures Performance Differently</h3>
+                        <p>We kept running into the same frustrating loop: one team benchmarks inference, another validates training, someone else compares baselines, and none of the outputs line up. People spend hours translating results instead of fixing real issues. When the numbers don't speak the same language, regressions turn into debates and slip past CI/CD.</p>
                     </div>
                     <div class="problem-card">
-                        <h3>Everyone Reinvents the Wheel</h3>
-                        <p>Every project, same story: someone writes custom scripts to parse logs, calculate percentiles, compare baselines. No reusable toolkit. No systematic approach. Teams waste 5-10 hours per week on manual performance analysis that should be automated.</p>
+                        <h3>We Keep Rebuilding the Same Scripts</h3>
+                        <p>Every new project starts with good intentions, then someone ends up writing one-off scripts to parse logs, compute percentiles, and compare runs. A few weeks later, a different team does it all again. That repetition quietly burns 5-10 hours a week that should go into improving models and systems.</p>
                     </div>
                     <div class="problem-card">
-                        <h3>The Tools That Exist Don't Fit</h3>
-                        <p>MLPerf is too complex for everyday use. Profiling tools are GUI-only and don't automate. Low-level APIs require expert knowledge. There's a massive gap between "quick script" and "enterprise monitoring platform"—nothing production-ready for teams who just need reliable performance validation.</p>
+                        <h3>Most Tools Are Either Too Heavy or Too Manual</h3>
+                        <p>The options usually fall into two extremes: powerful frameworks that are hard to adopt, or low-level tools that need lots of glue code. Teams get stuck choosing between complexity and fragility. What’s missing is a practical middle ground that works in real CI/CD workflows.</p>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">The Vision: Beyond Just Automotive</h3>
-                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">AutoPerfPy started with automotive because that's where the pain is most acute—ADAS systems where P99 latency <33ms isn't a nice-to-have, it's a safety requirement. But the fundamental problem is way bigger than cars.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">TrackIQ started with automotive and edge inference because latency and reliability failures are visible immediately. The core problem is broader: teams need one consistent performance validation workflow across inference, distributed training, and cross-platform comparison.</p>
                 <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>LLM inference on edge devices:</strong> Healthcare AI chatbots running on hospital infrastructure need to be fast AND consistent. You can't have P99 latency spikes when a doctor is waiting for a diagnosis suggestion.</p>
                 <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>Medical imaging:</strong> Cancer detection models running on edge devices in clinics need rigorous performance validation. Lives depend on these systems being both accurate and fast.</p>
-                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>Industrial IoT:</strong> Predictive maintenance models on factory floors, quality inspection systems, robotics—all need the same thing: automated performance validation with regression detection.</p>
-                <p style="color: #555; line-height: 1.8; font-size: 16px;">AutoPerfPy is my attempt to build the tool I wish existed: production-ready, domain-agnostic performance engineering for edge AI. Start with automotive rigor, extend to LLM benchmarking, scale to any latency-critical edge deployment.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>Industrial IoT:</strong> Predictive maintenance models on factory floors, quality inspection systems, robotics-all need the same thing: automated performance validation with regression detection.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;">TrackIQ is the system I wanted as an engineer: a shared core contract, tool-specific runners, and reproducible reports that are comparable across hardware and workloads.</p>
             </div>
 
             <div style="margin-top: 48px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(144, 19, 254, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #4A90E2; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">What I'm Actually Solving</h3>
                 <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>The Core Problem:</strong> Performance validation on edge devices is manual, inconsistent, and lacks systematic rigor. Teams waste 5-10 hours per week running custom scripts. Regressions slip through to production. There's no "pytest for performance engineering."</p>
-                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>My Solution:</strong> AutoPerfPy is a production-ready toolkit that automates benchmarking, detects regressions in CI/CD, and validates domain-specific requirements (automotive safety, LLM TTFT, medical imaging latency). Think "GitHub Actions for Edge AI Performance."</p>
-                <p style="color: #555; line-height: 1.8; font-size: 16px;"><strong>Long-term Vision:</strong> Build the de facto standard for performance engineering across edge AI. Start with NVIDIA platforms (80% market share), expand to domain-specific profiles (automotive, healthcare, LLM), eventually support all accelerators. Make performance validation as routine as unit testing.</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;"><strong>My Solution:</strong> TrackIQ is a production-ready validation platform with a canonical result schema (`TrackiqResult`), shared comparison/reporting infrastructure (`trackiq_core`), and focused tools for inference (`autoperfpy`), distributed training (`minicluster`), and result comparison (`trackiq-compare`).</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px;"><strong>Long-term Vision:</strong> Make performance validation as routine as unit testing across platforms (NVIDIA, AMD, Intel, Apple Silicon, CPU) and workflows (inference, training, baseline comparison, and health monitoring).</p>
             </div>
         </div>
     </section>
@@ -952,8 +895,8 @@ meta: Product Case Study · February 2026
             <p class="section-subtitle">Why existing solutions don't solve this problem</p>
             
             <div class="insight-box">
-                <p class="quote">"MLPerf is cloud-focused, Nsight is GUI-only, TensorRT is too low-level. There's a $0 → $50K gap in edge AI performance tools."</p>
-                <p class="attribution">The AutoPerfPy positioning</p>
+                <p class="quote">"MLPerf is cloud-focused, Nsight is GUI-only, TensorRT is too low-level. There's a $0 -> $50K gap in edge AI performance tools."</p>
+                <p class="attribution">The TrackIQ positioning</p>
             </div>
 
             <div style="margin-top: 64px;">
@@ -963,7 +906,7 @@ meta: Product Case Study · February 2026
                             <th>Solution</th>
                             <th>Strengths</th>
                             <th>Weaknesses</th>
-                            <th>AutoPerfPy Advantage</th>
+                            <th>TrackIQ Advantage</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1019,12 +962,12 @@ meta: Product Case Study · February 2026
     <section class="solution">
         <div class="container">
             <h2>Product Vision & Strategy</h2>
-            <p class="section-subtitle">"GitHub Actions for Edge AI Performance"</p>
+            <p class="section-subtitle">Shared validation layer for inference, training, and cross-platform comparison</p>
             
             <div style="background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(144, 19, 254, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #1a1a1a; box-shadow: 8px 8px 0px rgba(0,0,0,0.1); margin-bottom: 64px;">
                 <h3 style="font-size: 32px; margin-bottom: 24px; font-weight: 800;">North Star Metric</h3>
                 <div style="text-align: center; margin: 32px 0;">
-                    <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 16px;">Time from model change → validated performance results</div>
+                    <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 16px;">Time from model change -> validated performance results</div>
                     <p style="font-size: 24px; color: #555; margin-bottom: 12px;"><strong>Target: 5 minutes</strong></p>
                     <p style="font-size: 18px; color: #666;">(vs. 2-3 days industry average)</p>
                 </div>
@@ -1047,7 +990,7 @@ meta: Product Case Study · February 2026
                 <div class="feature-card">
                     <div class="feature-icon">🚗</div>
                     <h3>Automotive Profiles</h3>
-                    <p>Pre-built profiles enforce ADAS safety requirements: P99 <33.3ms, 50W power budget, 80°C thermal limit. Validates compliance automatically.</p>
+                    <p>Pre-built profiles enforce ADAS safety requirements: P99 <33.3ms, 50W power budget, 80�C thermal limit. Validates compliance automatically.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
@@ -1072,42 +1015,36 @@ meta: Product Case Study · February 2026
     <section class="architecture">
         <div class="container">
             <h2>Technical Architecture</h2>
-            <p class="section-subtitle">Two-layer design enables flexibility and reusability</p>
+            <p class="section-subtitle">Shared core + specialized tools enables flexibility and scale</p>
             
             <div class="arch-diagram">
                 <div class="arch-layer">
-                    <h4>📦 Application Layer: autoperfpy</h4>
-                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> User-facing tools, automotive profiles, specialized analyzers</p>
+                    <h4>Tool Apps: autoperfpy, minicluster, trackiq-compare</h4>
+                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> Focused user workflows built on one shared core</p>
                     <ul>
-                        <li>CLI interface (click)</li>
-                        <li>Streamlit dashboard</li>
-                        <li>DNN pipeline analyzer</li>
-                        <li>Tegrastats analyzer</li>
-                        <li>Automotive profiles</li>
-                        <li>HTML/PDF reports</li>
-                        <li>Monitoring tools</li>
-                        <li>Benchmark implementations</li>
+                        <li><strong>autoperfpy:</strong> edge inference benchmarking, analysis, and reporting</li>
+                        <li><strong>minicluster:</strong> distributed training validation with live health monitoring</li>
+                        <li><strong>trackiq-compare:</strong> cross-result and baseline comparison reports</li>
+                        <li>Tool-owned Streamlit apps + unified launcher</li>
+                        <li>Consistent `TrackiqResult` output across all tools</li>
                     </ul>
                 </div>
                 <div class="arch-layer">
-                    <h4>⚙️ Core Library: trackiq_core</h4>
-                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> Reusable components for programmatic use</p>
+                    <h4>Core Library: trackiq_core</h4>
+                    <p style="margin-bottom: 16px;"><strong>Purpose:</strong> Shared schema, platform integrations, and reusable UI components</p>
                     <ul>
-                        <li>Data collectors (NVML, psutil, synthetic)</li>
-                        <li>Benchmark runners</li>
-                        <li>Config management</li>
-                        <li>Data schemas</li>
-                        <li>Regression detection</li>
-                        <li>Comparison logic</li>
-                        <li>Core analyzers</li>
-                        <li>Utility functions</li>
+                        <li>Canonical schema (`TrackiqResult`) + serializer/validator</li>
+                        <li>Power profiler (ROCm SMI, tegrastats, simulation fallback)</li>
+                        <li>Hardware detection (NVIDIA, AMD, Intel, Apple Silicon, CPU)</li>
+                        <li>Baseline management and report generation</li>
+                        <li>Library-first UI layer (`TrackiqDashboard` + components)</li>
                     </ul>
                 </div>
             </div>
 
             <div style="margin-top: 48px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #9013FE; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Why This Architecture Matters</h3>
-                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">This two-layer design isn't just good engineering—it's strategic product thinking. Here's why:</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">This architecture is now a true platform pattern: one stable core contract, multiple specialized tools, and shared UI/reporting primitives.</p>
                 <div class="problem-grid" style="margin-top: 32px;">
                     <div class="problem-card">
                         <h3>Flexibility</h3>
@@ -1148,7 +1085,7 @@ meta: Product Case Study · February 2026
                     </div>
                     <div class="problem-card">
                         <h3>✅ Automotive Profiles</h3>
-                        <p><strong>User Story:</strong> "As an automotive engineer, I need to validate ADAS latency requirements (P99 <33.3ms, 50W, 80°C), so I meet safety certifications."</p>
+                        <p><strong>User Story:</strong> "As an automotive engineer, I need to validate ADAS latency requirements (P99 <33.3ms, 50W, 80�C), so I meet safety certifications."</p>
                         <p><strong>Acceptance:</strong> --profile automotive_safety enforces constraints, fails if violated</p>
                     </div>
                 </div>
@@ -1234,7 +1171,7 @@ meta: Product Case Study · February 2026
                             <td>HTML reports</td>
                             <td>⭐⭐⭐⭐</td>
                             <td>2 weeks</td>
-                            <td>Shareability → virality</td>
+                            <td>Shareability -> virality</td>
                             <td class="chosen">P1</td>
                         </tr>
                         <tr>
@@ -1344,7 +1281,7 @@ meta: Product Case Study · February 2026
                 </div>
                 <div class="metric-card">
                     <div class="number">5 min</div>
-                    <div class="label">Target: Change → Validated Results</div>
+                    <div class="label">Target: Change -> Validated Results</div>
                 </div>
                 <div class="metric-card">
                     <div class="number">100%</div>
@@ -1408,12 +1345,12 @@ meta: Product Case Study · February 2026
                     <p>Built trackiq_core: collectors (NVML, psutil, synthetic), benchmark runners, config management, regression detection. Chose interpretable models over complexity for trust and explainability. Wrote comprehensive unit tests (pytest). Documented assumptions and design decisions. Focused on automotive use case first (strictest requirements = good baseline).</p>
                 </div>
                 <div class="timeline-item">
-                    <h3>Month 3: Application Layer</h3>
-                    <p>Built autoperfpy CLI (click framework), Streamlit dashboard, domain-specific profiles (automotive safety, edge max performance, low power). Added DNN pipeline analyzer for layer-by-layer bottleneck identification, Tegrastats analyzer for thermal monitoring, HTML/PDF report generators with Plotly visualizations. Started designing LLM-specific metrics (TTFT, tokens/sec).</p>
+                    <h3>Month 3: Tool Expansion</h3>
+                    <p>Expanded from a single app into a multi-tool system: `autoperfpy` for inference benchmarking, `minicluster` for distributed training validation, and `trackiq-compare` for canonical result comparisons. Standardized outputs via `TrackiqResult` and added HTML/terminal reporting paths.</p>
                 </div>
                 <div class="timeline-item">
-                    <h3>Month 4: Polish & Documentation</h3>
-                    <p>Wrote comprehensive README (7,000+ words), CONCEPTS.md (performance engineering principles), CHANGELOG.md, TODO.md for future healthcare and LLM extensions. Created 7 working examples demonstrating different use cases. Built 42+ tests for production readiness. Exported sample outputs. Created case study for PM portfolio. Published to GitHub with roadmap for multi-domain expansion.</p>
+                    <h3>Month 4: Platformization</h3>
+                    <p>Built shared UI components in `trackiq_core.ui`, added tool-owned dashboards plus unified launcher, integrated power profiling and multi-platform hardware support, and introduced live MiniCluster health monitoring with checkpoint + anomaly reporting.</p>
                 </div>
             </div>
         </div>
@@ -1440,7 +1377,7 @@ meta: Product Case Study · February 2026
                     </ul>
                 </div>
                 <div class="learning-card">
-                    <h3>→ What I'd Change</h3>
+                    <h3>-> What I'd Change</h3>
                     <ul>
                         <li>Talk to domain experts earlier (validate automotive/healthcare/LLM profile assumptions)</li>
                         <li>Build Streamlit UI sooner (visual demos help explain value faster)</li>
@@ -1448,15 +1385,15 @@ meta: Product Case Study · February 2026
                         <li>Set up user feedback loop earlier (metrics aren't everything, need qualitative)</li>
                         <li>Create video demos (code alone doesn't sell to non-technical stakeholders)</li>
                         <li>Build multi-run trends sooner (users asked for this immediately)</li>
-                        <li>Focus more on go-to-market (great product ≠ automatic adoption)</li>
+                        <li>Focus more on go-to-market (great product != automatic adoption)</li>
                         <li>Start LLM-specific features earlier (TTFT, KV cache) given growing market</li>
                     </ul>
                 </div>
             </div>
-            <div style="margin-top: 64px; background: #ffffff; padding: 48px; border-radius: 24px; border: 4px solid #8b3097; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
-                <div class="insight-box" style="margin-top: 64px;">
+
+            <div style="margin-top: 64px; background: linear-gradient(135deg, #4A90E2, #9013FE); padding: 48px; border-radius: 24px; color: white; text-align: center; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 32px; margin-bottom: 16px; font-weight: 900;">Biggest Lesson</h3>
-                <p style="font-size: 20px; line-height: 1.8; opacity: 0.95;">PM work is 80% communication, 20% building. Too much time optimizing the technical implementation and not enough explaining <em>why AutoPerfPy matters</em> across different domains. The most technically impressive feature is worthless if automotive engineers, ML researchers, and healthcare AI teams don't understand how it solves their specific pain points.</p>
+                <p style="font-size: 20px; line-height: 1.8; opacity: 0.95;">PM work is 80% communication, 20% building. Too much time optimizing technical implementation and not enough explaining <em>why TrackIQ matters</em> across different domains. The most technically impressive feature is worthless if engineers cannot map it to their actual validation pain points.</p>
                 <p style="font-size: 18px; line-height: 1.8; opacity: 0.9; margin-top: 24px;">Next time: Build domain-specific pitch decks alongside the code (automotive version, LLM version, healthcare version). Validate messaging with target users in each vertical. Document trade-offs as decisions are made, not after the fact. Test cross-domain applicability earlier.</p>
             </div>
         </div>
@@ -1502,14 +1439,14 @@ meta: Product Case Study · February 2026
                     </div>
                     <div class="problem-card">
                         <h3>Viral Loops</h3>
-                        <p>CI/CD integration = team adoption (1 user → entire team). HTML reports = shareable artifacts. Cross-domain success stories = market expansion. GitHub exposure = organic discovery.</p>
+                        <p>CI/CD integration = team adoption (1 user -> entire team). HTML reports = shareable artifacts. Cross-domain success stories = market expansion. GitHub exposure = organic discovery.</p>
                     </div>
                 </div>
             </div>
 
             <div style="margin-top: 64px; background: linear-gradient(135deg, rgba(118, 185, 71, 0.1), rgba(74, 144, 226, 0.1)); padding: 48px; border-radius: 24px; border: 4px solid #76B947; box-shadow: 8px 8px 0px rgba(0,0,0,0.1);">
                 <h3 style="font-size: 28px; margin-bottom: 24px; font-weight: 800;">Monetization Path (Long-Term)</h3>
-                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">While AutoPerfPy is open-source, there are several monetization paths once adoption is proven across domains:</p>
+                <p style="color: #555; line-height: 1.8; font-size: 16px; margin-bottom: 16px;">While TrackIQ is open-source, there are several monetization paths once adoption is proven across domains:</p>
                 <ul style="list-style: none; padding-left: 0; margin-top: 24px;">
                     <li style="padding: 12px 0; color: #555; padding-left: 32px; position: relative;">
                         <span style="position: absolute; left: 0; color: #76B947; font-weight: 900; font-size: 18px;">💼</span>
@@ -1536,20 +1473,20 @@ meta: Product Case Study · February 2026
     <section class="problem">
         <div class="container">
             <h2>Product Roadmap</h2>
-            <p class="section-subtitle">From v0.2.0 to production scale</p>
+            <p class="section-subtitle">From foundational tooling to a multi-platform validation platform</p>
             
             <div class="problem-grid">
                 <div class="problem-card">
-                    <div style="background: #76B947; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">✅ V0.2.0 - SHIPPED</div>
+                    <div style="background: #76B947; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">Shipped</div>
                     <h3>Core Features</h3>
                     <ul style="list-style: none; padding-left: 0;">
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
                             <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
-                            Two-layer architecture (trackiq_core + autoperfpy)
+                            Canonical schema + shared `trackiq_core` foundation
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
                             <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
-                            Auto-benchmarking across devices/precisions
+                            Three tool workflows: `autoperfpy`, `minicluster`, `trackiq-compare`
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
                             <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
@@ -1565,58 +1502,58 @@ meta: Product Case Study · February 2026
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
                             <span style="position: absolute; left: 0; color: #76B947; font-weight: 900;">✓</span>
-                            42+ tests, comprehensive documentation
+                            Comprehensive tests and documentation across tools
                         </li>
                     </ul>
                 </div>
                 <div class="problem-card">
-                    <div style="background: #4A90E2; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">🚧 V0.3.0 - Next 3 Months</div>
+                    <div style="background: #4A90E2; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">In Progress</div>
                     <h3>UX & Analytics</h3>
                     <ul style="list-style: none; padding-left: 0;">
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
-                            Multi-run trend analysis (time-series charts)
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">-></span>
+                            MiniCluster live health monitor + anomaly detector/reporter
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
-                            LLM-specific metrics (TTFT, KV cache monitoring)
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">-></span>
+                            Power profiling and efficiency metrics fully standardized
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
-                            Enhanced Streamlit UI (multi-device comparison)
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">-></span>
+                            Shared UI layer with tool-owned dashboards and unified launcher
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">-></span>
                             Additional precisions (BF16, INT4)
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">→</span>
+                            <span style="position: absolute; left: 0; color: #4A90E2; font-weight: 900;">-></span>
                             User feedback collection system
                         </li>
                     </ul>
                 </div>
                 <div class="problem-card">
-                    <div style="background: #9013FE; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">📅 V1.0.0 - Next 6-12 Months</div>
+                    <div style="background: #9013FE; color: white; display: inline-block; padding: 6px 16px; border-radius: 50px; font-size: 14px; font-weight: 900; margin-bottom: 16px;">Next</div>
                     <h3>Production Scale</h3>
                     <ul style="list-style: none; padding-left: 0;">
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
-                            REST API for real-time monitoring
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">-></span>
+                            Deeper hardware integrations and production telemetry hooks
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">-></span>
                             CI/CD platform integrations (Jenkins, GitLab, GitHub Actions)
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
-                            Multi-accelerator support (AMD, Intel, Qualcomm)
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">-></span>
+                            Qualcomm integration path and broader device telemetry support
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">-></span>
                             SaaS dashboard (hosted version with team collab)
                         </li>
                         <li style="padding: 8px 0; color: #555; padding-left: 24px; position: relative;">
-                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">→</span>
+                            <span style="position: absolute; left: 0; color: #9013FE; font-weight: 900;">-></span>
                             Enterprise support & consulting offerings
                         </li>
                     </ul>
@@ -1625,15 +1562,17 @@ meta: Product Case Study · February 2026
         </div>
     </section>
 
-    <!-- Footer CTA -->
+<!-- Footer CTA -->
     <section class="footer-cta">
         <div class="container">
             <h2>Let's Discuss This Product</h2>
             <p>I'm happy to talk about the architecture, product decisions, go-to-market strategy, or anything else</p>
             <div class="cta-buttons">
-                <a href="https://github.com/HamnaNimra/AutoPerfPy" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                <a href="https://github.com/HamnaNimra/trackiq" class="btn btn-primary" target="_blank">View on GitHub</a>
                 <a href="mailto:hamnanimramirza@outlook.com" class="btn btn-secondary">Get in Touch</a>
             </div>
-            <p class="contact">📧 <a href="mailto:hamnanimramirza@outlook.com">hamnanimramirza@outlook.com</a> | 💼 <a href="https://linkedin.com/in/hamnanimra" target="_blank" rel="noopener noreferrer">linkedin.com/in/hamnanimra</a></p>
+            <p class="contact">📧 <a href="mailto:hamnanimramirza@outlook.com">hamnanimramirza@outlook.com</a></p>
         </div>
     </section>
+</body>
+</html>

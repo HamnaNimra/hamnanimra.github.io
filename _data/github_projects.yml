@@ -17,9 +17,9 @@ repositories:
   forks_count: 0
   updated_at: '2026-02-05T00:23:44Z'
   language: C++
-- name: AutoPerfPy
+- name: trackiq
   description: 'Python Automotive benchmark '
-  html_url: https://github.com/HamnaNimra/AutoPerfPy
+  html_url: https://github.com/HamnaNimra/trackiq
   stargazers_count: 0
   forks_count: 0
   updated_at: '2026-02-04T15:43:33Z'
